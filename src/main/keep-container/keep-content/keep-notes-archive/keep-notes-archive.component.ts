@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NoteService} from '../../../Service/note.service';
-import {defaultIfEmpty, map, Observable} from 'rxjs';
+import {defaultIfEmpty, map, Observable, of, switchMap} from 'rxjs';
 import {Note} from "../../../Data Types/Note";
 
 
@@ -22,10 +22,11 @@ export class KeepNotesArchiveComponent implements OnInit {
 
   showDropdownMenu: boolean = false;
 
-  toggleDropdownMenu() {
-    this.showDropdownMenu = !this.showDropdownMenu;
-  }
 
+  toggleDropdownMenu(note: Note) {
+    // Toggle the showDropdown property for the clicked note
+    note.showDropdown = !note.showDropdown;
+  }
   hasNotes() {
 
     return this.notes$.pipe(
@@ -36,7 +37,25 @@ export class KeepNotesArchiveComponent implements OnInit {
 
   }
 
-  UnArchiveNote(title: string) {
-    // Implement your archiving logic here using the NoteService
+  UnArchiveNote(id: number) {
+
+    this.notes$ = of(this.noteService.unArchiveNote(id)).pipe(
+      switchMap((currentNotes) => {
+        return this.noteService.getNotes();
+      })
+    );
   }
+  checkArchive(): Observable<boolean> {
+    return this.notes$.pipe(
+      map((notes) => notes.some((note) => note.isArchived))
+    );
+  }
+
+  deleteNote(id: number) {
+    this.noteService.deleteNote(id).subscribe((updatedNotes) => {
+      this.notes$ = of(updatedNotes);
+    });
+  }
+
+
 }

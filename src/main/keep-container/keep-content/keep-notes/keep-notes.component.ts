@@ -2,6 +2,7 @@ import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 
 import {NoteService} from '../../../Service/note.service';
 import {Note} from "../../../Data Types/Note";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-keep-notes',
@@ -10,14 +11,28 @@ import {Note} from "../../../Data Types/Note";
 })
 export class KeepNotesComponent implements OnInit {
   notes: Note[] = [];
-  showDropdownMenu: boolean = false;
+  // showDropdownMenu: boolean = false;
   isArchiveNotesPresent: boolean = false;
+  selectedNote: Note |null = null; // Initialize as null
+
   constructor(private noteService: NoteService, private elementRef: ElementRef) {
   }
-
-  toggleDropdownMenu() {
-    this.showDropdownMenu = !this.showDropdownMenu;
+  selectNoteForEditing(note: Note) {
+    this.selectedNote = note;
   }
+
+  saveNoteChanges() {
+
+    this.selectedNote=this.noteService.updateNote(this.selectedNote);
+
+  }
+closeEditor()
+{
+  this.saveNoteChanges();
+  this.selectedNote=null;
+
+}
+
 
   hasNotes() {
 
@@ -36,20 +51,32 @@ export class KeepNotesComponent implements OnInit {
   onDocumentClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
 
-      this.showDropdownMenu = false;
-
+      this.notes.forEach((note) => {
+          note.showDropdown = false;
+        }
+      );
 
     }
-
   }
 
-  archiveNote(title: string) {
-    this.notes = this.noteService.archiveNote(title);
+  toggleDropdownMenu(note: Note) {
+    // Toggle the showDropdown property for the clicked note
+    note.showDropdown = !note.showDropdown;
+  }
+  archiveNote(id: number) {
+    this.notes = this.noteService.archiveNote(id);
   }
 
   isArchiveNotes() {
-    this.isArchiveNotesPresent = this.notes.some((note) => note.isArchived);
+    this.isArchiveNotesPresent = this.notes.every((note) => note.isArchived);
     return this.isArchiveNotesPresent;
   }
+
+  deleteNote(id: number) {
+    this.noteService.deleteNote(id).subscribe(updatedNotes => {
+      this.notes = updatedNotes;
+    });
+  }
+
 
 }

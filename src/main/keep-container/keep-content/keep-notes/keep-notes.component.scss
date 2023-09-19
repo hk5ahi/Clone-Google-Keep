@@ -22,8 +22,11 @@
 
 }
 
-.note .icons, .note .check-circle {
+.note:not(.selected) .icons, .note:not(.selected) .check-circle {
   visibility: hidden;
+}
+.note.selected .check-circle {
+  display: none;
 }
 
 .note .text, .title {
@@ -48,7 +51,14 @@
   left: -0.625em;
   top: -0.6em;
 }
-
+.close-btn {
+  background: none;
+  border: none;
+  border-radius: 0.1875em; /* 3px / 16px = 0.1875em */
+  padding: 0.3125em 0.6875em; /* 5px / 16px = 0.3125em, 11px / 16px = 0.6875em */
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+}
 .message {
   color: #5f6368;
   cursor: default;
@@ -168,8 +178,8 @@
 
 .dropdown-menu {
   background-color: #fff;
-  width: 0.4875em; /* 7.8vw converted to em */
-  height: 2.16em; /* 13.5vh converted to em */
+  min-width: 8.4875em; /* 7.8vw converted to em */
+  min-height: 2.16em; /* 13.5vh converted to em */
   border-width: 0;
   box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
   position: absolute;
@@ -178,8 +188,8 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 22.25em; /* 356px converted to em */
-  top: 17.3125em; /* 277px converted to em */
+  left: 7.25em; /* 356px converted to em */
+  top: 7.3125em; /* 277px converted to em */
 }
 
 .item {
@@ -219,6 +229,48 @@
   background-color: #b5bdbd;
   border-radius: 0.0625em; /* 1px converted to em */
   cursor: pointer;
+}
+/* Style for selected note */
+.selected {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; /* Adjust width as needed */
+  z-index: 1000; /* Ensure the selected note is above other elements */
+  background-color: #fff; /* Background color for the selected note */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow for the selected note */
+
+
+
+}
+
+/* Style for transparent overlay */
+.note-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4); /* Adjust the opacity here */
+  z-index: 999; /* Adjust the z-index as needed to appear on top of other content */
+}
+
+
+
+.note-content {
+  padding: 16px; /* Adjust padding as needed */
+  text-align: center;
+  background-color: #fff;
+
+}
+
+/* Style for the editable textarea within the selected note */
+.note-content textarea {
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  border: none;
+  resize: none;
 }
 
 
