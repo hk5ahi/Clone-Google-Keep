@@ -1,0 +1,40 @@
+.notes {
+  display: flex;
+  justify-content: center;
+}
+
+.note {
+  background: white;
+  width: 15em; /* 240px converted to 15em */
+  margin: 0.625em; /* 10px converted to 0.625em */
+  border: 0.0625em solid #e0e1e0; /* 1px converted to 0.0625em */
+  border-radius: 0.5em; /* 8px converted to 0.5em */
+  position: relative;
+}
+
+.note .title {
+  width: 100%;
+  margin: 0.9375em 0 0 0.9375em; /* 15px converted to 0.9375em */
+}
+
+.note .text {
+  width: 100%;
+  margin: 0.625em 0 0 0.9375em; /* 10px converted to 0.625em, 15px converted to 0.9375em */
+}
+
+.note .note-footer {
+  display: flex;
+  margin-top: 0.9375em; /* 15px converted to 0.9375em */
+  padding: 0;
+  justify-content: center;
+}
+
+.note-footer .material-icons-outlined {
+  color: #5f6368;
+}
+
+.note .check-circle {
+  position: absolute;
+  left: -0.625em; /* -10px converted to -0.625em */
+  top: -0.625em; /* -10px converted to -0.625em */
+}

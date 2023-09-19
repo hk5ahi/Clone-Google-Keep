@@ -1,0 +1,18 @@
+<div *ngIf="hasNotes()" class="notes">
+  <!-- Your note items go here -->
+  <div class="note">
+    <span class="material-icons check-circle">check_circle</span>
+    <div class="title">Title</div>
+    <div class="text">Text</div>
+    <div class="note-footer">
+      <div class="tooltip">
+        <span class="material-icons-outlined hover small-icon">archive</span>
+        <span class="tooltip-text">Archive</span>
+      </div>
+      <div class="tooltip">
+        <span class="material-icons-outlined hover small-icon">more_vert</span>
+        <span class="tooltip-text">More</span>
+      </div>
+    </div>
+  </div>
+</div>
