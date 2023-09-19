@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { KeepContentComponent } from './keep-content.component';
+import {KeepContentComponent} from './keep-content.component';
 
 describe('KeepContentComponent', () => {
   let component: KeepContentComponent;

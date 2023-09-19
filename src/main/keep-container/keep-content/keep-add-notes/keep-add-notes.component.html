@@ -1,27 +1,38 @@
 <div class="form-container">
-  <form class="enter-note" (click)="toggleSecondForm()">
+  <form class="first-form"
+        *ngIf="showFirstForm"
+        (click)="toggleForms()">
     <input class="note-text" type="text" placeholder="Take a note..."/>
     <div class="form-actions">
     </div>
   </form>
 </div>
 
-<div *ngIf="showSecondForm" class="form-container active-form">
-  <form>
-    <input type="text" class="note-title" placeholder="Title"/>
-    <input class="note-text" type="text" placeholder="Take a note..."/>
+
+<div *ngIf="!showFirstForm" class="form-container active-form">
+  <form class="second-form">
+    <input name="title" type="text" [(ngModel)]="title" class="note-title" placeholder="Title"/>
+    <input name="noteMessage" class="note-text" [(ngModel)]="noteMessage" type="text" placeholder="Take a note..."/>
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">
           <span class="material-icons-outlined hover small-icon">archive</span>
           <span class="tooltip-text">Archive</span>
         </div>
-        <div class="tooltip">
+        <div class="tooltip" (click)="toggleDropdownMenu()">
           <span class="material-icons-outlined hover small-icon">more_vert</span>
           <span class="tooltip-text">More</span>
         </div>
       </div>
-      <button class="close-btn" (click)="toggleSecondForm()">Close</button>
+      <button class="close-btn" (click)="toggleForms()">Close</button>
     </div>
   </form>
 </div>
+<div *ngIf="showDropdownMenu" class="dropdown-menu">
+  <ul>
+    <li class="item"><a class="text" href="#">Add label</a></li>
+
+  </ul>
+</div>
+
+<app-keep-notes></app-keep-notes>
