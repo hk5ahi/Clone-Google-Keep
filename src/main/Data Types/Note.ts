@@ -4,4 +4,7 @@ export interface Note {
   content: string;
   isArchived: boolean;
   showDropdown?: boolean;
+  isHidden?: boolean;
+  isMoreIconClicked: boolean;
+
 }

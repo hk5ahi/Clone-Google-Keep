@@ -180,8 +180,8 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to 0.375em */
   opacity: 1;
-  left: 8.25em; /* 356px converted to em */
-  top: 7.3125em; /* 277px converted to em */
+  left: 7.25em; /* 356px converted to em */
+  top: 5.3125em; /* 277px converted to em */
 }
 
 .item {
@@ -231,3 +231,68 @@
 
 
 }
+.second-form {
+  background: #fff;
+  max-width: 37.375em; /* 598px / 16px = 37.375em */
+  margin: 2em auto; /* 32px / 16px = 2em */
+  box-shadow: 0 0.125em 0.25em 0 rgba(60, 64, 67, 0.3), 0 0.25em 0.75em 0 rgba(60, 64, 67, 0.15); /* 1px = 0.0625em */
+  border: 0.0625em solid #e0e1e0; /* 1px = 0.0625em */
+  border-radius: 0.5em; /* 8px / 16px = 0.5em */
+}
+.form-container .active-form{
+
+  min-width: 632px;
+  min-height: 212px;
+}
+.form-container form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  color: #5f6368;
+  left: 324px;
+  top: 120.725px;
+
+}
+.form-actions {
+  display: flex;
+}
+
+
+.active-form form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.625em;
+}
+
+.active-form form .form-actions .icons {
+  display: flex;
+}
+
+.active-form form .form-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.3125em; /* 5px / 16px = 0.3125em */
+}
+.close-btn {
+  background: none;
+  border: none;
+  border-radius: 0.1875em; /* 3px / 16px = 0.1875em */
+  padding: 0.3125em 0.6875em; /* 5px / 16px = 0.3125em, 11px / 16px = 0.6875em */
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+}
+
+.close-btn:hover {
+  background: ghostwhite;
+}
+
+
+
+.material-icons-outlined {
+  padding: 0.625em;
+}
+
+

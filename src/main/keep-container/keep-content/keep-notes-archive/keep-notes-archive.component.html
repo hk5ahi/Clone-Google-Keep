@@ -1,6 +1,8 @@
 <div class="notes" *ngIf="(notes$ | async) as notes">
-  <div *ngFor="let note of notes">
-    <div *ngIf="note.isArchived" class="note" [ngClass]="{ 'empty-note': note.title=='' || note.content=='' }">
+  <div *ngFor="let note of notes$ |async">
+    <div class="note" *ngIf="note.isArchived" [ngClass]="{ 'empty-note': note.title=='' || note.content=='' }"
+         [hidden]="note.isHidden"
+         (click)="selectNoteForEditing(note)">
       <div>
         <span class="material-icons check-circle">check_circle</span>
         <div class="title">{{ note.title }}</div>
@@ -9,29 +11,54 @@
         <div class="icons">
           <div class="tooltip">
             <span class="material-icons-outlined hover small-icon icon"
-                  (click)="UnArchiveNote(note.id)">archive</span>
+                  (click)="UnArchiveNote(note.id)">unarchive</span>
             <span class="tooltip-text">Unarchive</span>
           </div>
-          <div class="tooltip" (click)="note.showDropdown = !note.showDropdown">
+          <div class="tooltip" (click)="handleMoreIconClick($event, note)">
             <span class="material-icons-outlined hover small-icon icon">more_vert</span>
             <span class="tooltip-text">More</span>
           </div>
         </div>
       </div>
 
-      <!-- Dropdown menu for each note -->
       <div *ngIf="note.showDropdown" class="dropdown-menu">
         <ul>
-          <li class="item"><a class="text" (click)="deleteNote(note.id)">Delete Note</a></li>
+          <li class="item"><a class="text" (click)="deleteNote($event,note.id)">Delete Note</a></li>
           <li class="item"><a class="text">Add label</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
+<div *ngIf="selectedNote && selectedNote.isArchived" class="form-container active-form">
+  <form class="second-form">
+    <input name="title" type="text" [(ngModel)]="selectedNote.title" class="note-title"/>
+    <input name="noteMessage" class="note-text" [(ngModel)]="selectedNote.content" type="text"/>
+    <div class="form-actions">
+      <div class="icons">
+        <div class="tooltip">
+          <span class="material-icons-outlined hover small-icon "
+                (click)="UnArchiveNote(selectedNote.id)">unarchive</span>
+          <span class="tooltip-text">Unarchive</span>
+        </div>
+        <div class="tooltip" (click)="handleMoreIconClick($event, selectedNote)">
+          <span class="material-icons-outlined hover small-icon">more_vert</span>
+          <span class="tooltip-text">More</span>
+        </div>
 
+        <div *ngIf="selectedNote.showDropdown" class="dropdown-menu-selected">
+          <ul>
+            <li class="item"><a class="text" (click)="deleteNote($event,selectedNote.id)">Delete Note</a></li>
+            <li class="item"><a class="text">Add label</a></li>
+          </ul>
+        </div>
+      </div>
+      <button class="close-btn" (click)="closeEditor(selectedNote)">Close</button>
+    </div>
 
-<!-- Check if notesCount is greater than 0 -->
+  </form>
+</div>
+
 
 <div *ngIf="(hasNotes() | async) === 0 || !(checkArchive() | async)" class="box">
   <img class="archive-icon"

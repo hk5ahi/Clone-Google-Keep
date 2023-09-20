@@ -2,7 +2,7 @@ import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 
 import {NoteService} from '../../../Service/note.service';
 import {Note} from "../../../Data Types/Note";
-import {of} from "rxjs";
+import {BehaviorSubject, map, Observable, of, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-keep-notes',
@@ -11,33 +11,47 @@ import {of} from "rxjs";
 })
 export class KeepNotesComponent implements OnInit {
   notes: Note[] = [];
-  // showDropdownMenu: boolean = false;
   isArchiveNotesPresent: boolean = false;
-  selectedNote: Note |null = null; // Initialize as null
+  selectedNote: Note | null = null; // Initialize as null
 
   constructor(private noteService: NoteService, private elementRef: ElementRef) {
   }
+
   selectNoteForEditing(note: Note) {
     this.selectedNote = note;
+    this.notes.forEach((note) => {
+        note.isHidden = false;
+      }
+    );
+    if (!note.isMoreIconClicked) {
+      note.isHidden = true;
+    }
+
   }
+
 
   saveNoteChanges() {
 
-    this.selectedNote=this.noteService.updateNote(this.selectedNote);
+    this.selectedNote = this.noteService.updateNote(this.selectedNote);
 
   }
-closeEditor()
-{
-  this.saveNoteChanges();
-  this.selectedNote=null;
 
-}
+  handleMoreIconClick(event: MouseEvent, note: Note) {
+    note.showDropdown = !note.showDropdown;
+    event.stopPropagation();
+    note.isMoreIconClicked = !note.isMoreIconClicked;
 
+  }
+
+  closeEditor(note: Note) {
+    this.saveNoteChanges();
+    this.selectedNote = null;
+    note.isHidden = false;
+
+  }
 
   hasNotes() {
-
     return this.notes.length > 0;
-
   }
 
   ngOnInit(): void {
@@ -49,6 +63,7 @@ closeEditor()
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
+
     if (!this.elementRef.nativeElement.contains(event.target)) {
 
       this.notes.forEach((note) => {
@@ -59,12 +74,10 @@ closeEditor()
     }
   }
 
-  toggleDropdownMenu(note: Note) {
-    // Toggle the showDropdown property for the clicked note
-    note.showDropdown = !note.showDropdown;
-  }
   archiveNote(id: number) {
+
     this.notes = this.noteService.archiveNote(id);
+    console.log(this.notes);
   }
 
   isArchiveNotes() {
@@ -72,11 +85,14 @@ closeEditor()
     return this.isArchiveNotesPresent;
   }
 
-  deleteNote(id: number) {
+  deleteNote(event: Event, id: number) {
+    event.stopPropagation();
     this.noteService.deleteNote(id).subscribe(updatedNotes => {
       this.notes = updatedNotes;
-    });
-  }
+      this.selectedNote = null;
 
+    });
+
+  }
 
 }

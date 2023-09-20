@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable, Optional} from '@angular/core';
+import {BehaviorSubject, isEmpty, Observable} from 'rxjs';
 import {Note} from "../Data Types/Note";
 
 
@@ -8,7 +8,7 @@ import {Note} from "../Data Types/Note";
 })
 export class NoteService {
   private notes: Note[] = [];
-  private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]); // Create a new BehaviorSubject with an empty array as the initial value
 
   constructor() {
   }
@@ -24,41 +24,40 @@ export class NoteService {
       content: noteMessage,
       isArchived: false,
       showDropdown: false,
+      isHidden: false,
+      isMoreIconClicked: false,
     };
 
     this.notes.push(newNote);
     this.notesSubject.next(this.notes);
   }
 
-updateNote(note:Note|null):null
-{
-  if (note) {
-    // Find the index of the selected note in the notes array
-    const noteIndex = this.notes.findIndex((note) => note.id === note.id);
+  updateNote(selectedNote: Note | null): null {
+    if (selectedNote) {
+      const noteIndex = this.notes.findIndex((note) => selectedNote.id === note.id);
 
-    if (noteIndex !== -1) {
-      // Update the content of the selected note
-      this.notes[noteIndex].content = note.content;
+      if (noteIndex !== -1) {
+        this.notes[noteIndex].content = selectedNote.content;
+        this.notes[noteIndex].title = selectedNote.title;
 
-      // Reset the selectedNote to null to exit editing mode
-
+      }
     }
+    return null;
   }
-  return null;
-}
+
   archiveNote(id: number) {
 
-    // Find the index of the note with the matching title
     const noteIndexToArchive = this.notes.findIndex((note) => note.id === id);
-
-    // Check if the note was found (noteIndexToArchive >= 0)
     if (noteIndexToArchive >= 0) {
-      // Archive the note by setting isArchived to true
+
       this.notes[noteIndexToArchive].isArchived = true;
+      this.notes[noteIndexToArchive].isHidden = false;
     }
+
     return this.notes;
 
   }
+
   unArchiveNote(id: number) {
 
     const noteIndexToUnArchive = this.notes.findIndex((note) => note.id === id);
@@ -71,19 +70,27 @@ updateNote(note:Note|null):null
 
     return this.notes;
   }
-  deleteNote(id: number):Observable<Note[]> {
+
+  deleteNote(id: number): Observable<Note[]> {
     const noteIndexToDelete = this.notes.findIndex((note) => note.id === id);
 
     if (noteIndexToDelete >= 0) {
-      // Remove the note from the array by its index
-      this.notes.splice(noteIndexToDelete, 1);
-      // Optionally, you can update your observable or service to reflect the changes.
-      this.notesSubject.next(this.notes);
 
+      this.notes.splice(noteIndexToDelete, 1);
+      this.notesSubject.next(this.notes);
     }
     return this.notesSubject.asObservable();
   }
 
+  changeHiddenStatus(id: number) {
 
+    const noteIndexToHide = this.notes.findIndex((note) => note.id === id);
+
+    if (noteIndexToHide >= 0) {
+
+      this.notes[noteIndexToHide].isHidden = false;
+    }
+    return this.notes;
+  }
 
 }
