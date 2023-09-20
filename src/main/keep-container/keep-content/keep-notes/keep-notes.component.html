@@ -1,7 +1,7 @@
 <div *ngIf="hasNotes()" class="notes">
   <div *ngFor="let note of notes">
-    <div  *ngIf="!note.isArchived" class="note"  [ngClass]="{ 'empty-note': note.title=='' || note.content=='' }" >
-      <div >
+    <div *ngIf="!note.isArchived" class="note" [ngClass]="{ 'empty-note': note.title=='' || note.content=='' }">
+      <div>
         <span class="material-icons check-circle">check_circle</span>
         <div class="title">{{ note.title }}</div>
         <div class="text">{{ note.content }}</div>
@@ -23,8 +23,8 @@
 </div>
 <div *ngIf="showDropdownMenu" class="dropdown-menu">
   <ul>
-    <li class="item"><a class="text"  href="#">Delete Note</a></li>
-    <li class="item"><a class="text"  href="#">Add label</a></li>
+    <li class="item"><a class="text" href="#">Delete Note</a></li>
+    <li class="item"><a class="text" href="#">Add label</a></li>
 
   </ul>
 </div>

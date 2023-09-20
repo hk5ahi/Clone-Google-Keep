@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NoteService} from '../../../Service/note.service';
-import {defaultIfEmpty, map, Observable} from 'rxjs';
-import {Note} from "../../../Data Types/Note";
-
+import { Component, OnInit } from '@angular/core';
+import { NoteService } from '../../../Service/note.service';
+import { defaultIfEmpty, map, Observable } from 'rxjs';
+import { Note } from "../../../Data Types/Note";
 
 @Component({
   selector: 'app-keep-notes-archive',

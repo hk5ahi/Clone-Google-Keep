@@ -1,6 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {KeepAddNotesComponent} from './keep-add-notes.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { KeepAddNotesComponent } from './keep-add-notes.component';
 
 describe('KeepAddNotesComponent', () => {
   let component: KeepAddNotesComponent;

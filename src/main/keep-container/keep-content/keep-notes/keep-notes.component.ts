@@ -1,7 +1,6 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
-
-import {NoteService} from '../../../Service/note.service';
-import {Note} from "../../../Data Types/Note";
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { NoteService } from '../../../Service/note.service';
+import { Note } from "../../../Data Types/Note";
 
 @Component({
   selector: 'app-keep-notes',
@@ -12,6 +11,7 @@ export class KeepNotesComponent implements OnInit {
   notes: Note[] = [];
   showDropdownMenu: boolean = false;
   isArchiveNotesPresent: boolean = false;
+
   constructor(private noteService: NoteService, private elementRef: ElementRef) {
   }
 
@@ -22,7 +22,6 @@ export class KeepNotesComponent implements OnInit {
   hasNotes() {
 
     return this.notes.length > 0;
-
   }
 
   ngOnInit(): void {
@@ -37,10 +36,7 @@ export class KeepNotesComponent implements OnInit {
     if (!this.elementRef.nativeElement.contains(event.target)) {
 
       this.showDropdownMenu = false;
-
-
     }
-
   }
 
   archiveNote(title: string) {
@@ -51,5 +47,4 @@ export class KeepNotesComponent implements OnInit {
     this.isArchiveNotesPresent = this.notes.some((note) => note.isArchived);
     return this.isArchiveNotesPresent;
   }
-
 }

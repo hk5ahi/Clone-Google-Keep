@@ -1,6 +1,5 @@
-import {Component, ElementRef, HostListener} from '@angular/core';
-import {NoteService} from "../../../Service/note.service";
-
+import { Component, ElementRef, HostListener } from '@angular/core';
+import { NoteService } from "../../../Service/note.service";
 
 @Component({
   selector: 'app-keep-add-notes',
@@ -14,7 +13,9 @@ export class KeepAddNotesComponent {
   title: string = '';
   noteMessage: string = '';
 
-  constructor( private elementRef: ElementRef,private noteService: NoteService) {}
+  constructor(private elementRef: ElementRef, private noteService: NoteService) {
+  }
+
   toggleDropdownMenu() {
     this.showDropdownMenu = !this.showDropdownMenu;
   }
@@ -26,12 +27,13 @@ export class KeepAddNotesComponent {
   }
 
   addNote() {
-    if(this.title!='' || this.noteMessage!='') {
+    if (this.title != '' || this.noteMessage != '') {
       this.noteService.addNote(this.title, this.noteMessage);
       this.title = '';
       this.noteMessage = '';
     }
   }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target) && this.showDropdownMenu) {
@@ -40,9 +42,6 @@ export class KeepAddNotesComponent {
       this.showFirstForm = true;
 
     }
-
   }
-
-
 
 }

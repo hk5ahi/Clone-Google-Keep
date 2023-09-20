@@ -2,7 +2,6 @@
   min-height: 6.5em !important;
 }
 
-
 .notes {
   display: flex;
   justify-content: start;
@@ -38,7 +37,6 @@
   justify-content: center;
 }
 
-
 .note-footer .material-icons-outlined {
   color: #5f6368;
 }
@@ -71,7 +69,6 @@
   margin-top: 20vh;
 }
 
-
 .icons-container {
   position: relative;
   display: flex;
@@ -102,7 +99,6 @@
   visibility: visible;
 }
 
-
 .note-title {
   border: none;
   font-size: 1rem;
@@ -125,12 +121,10 @@
 
 }
 
-
 .small-icon {
   color: black;
   font-size: 1.1rem;
 }
-
 
 .material-icons-outlined {
   padding: 0.625em;
@@ -189,7 +183,6 @@
   list-style-type: none;
 }
 
-
 .text {
   text-decoration: none;
   color: #3c4043;
@@ -205,7 +198,6 @@
   margin: 0 0.5em; /* 8px converted to em */
 }
 
-
 .bulb {
   -webkit-background-size: 7.5em 7.5em; /* 120px converted to em */
   background-size: 7.5em 7.5em; /* 120px converted to em */
@@ -220,5 +212,3 @@
   border-radius: 0.0625em; /* 1px converted to em */
   cursor: pointer;
 }
-
-

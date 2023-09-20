@@ -1,8 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {KeepContainerComponent} from './keep-container.component';
-import {KeepSideBarComponent} from "./keep-side-bar/keep-side-bar.component";
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { KeepContainerComponent } from './keep-container.component';
+import { KeepSideBarComponent } from "./keep-side-bar/keep-side-bar.component";
 
 describe('KeepNotesContainerComponent', () => {
   let component: KeepContainerComponent;
