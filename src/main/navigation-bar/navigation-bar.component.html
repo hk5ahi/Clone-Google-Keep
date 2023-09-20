@@ -4,22 +4,27 @@
       <span class="material-icons-outlined hover">menu</span>
       <span class="tooltip-text">Main Menu</span>
     </div>
-    <img class="logo"
+    <div *ngIf="isNotes() |async" class="Keep">
+      <img class="logo"
 
-         src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
-         srcset="
+           src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
+           srcset="
             https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x,
             https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x "
-         alt=""
-         aria-hidden="true"
+           alt=""
+           aria-hidden="true"
 
-    />
-    <span class="logo-text ">Keep</span>
+      />
+      <span class="logo-text ">Keep</span>
+    </div>
+  </div>
+  <div *ngIf="isArchive() |async">
+    <p class="archive">Archive</p>
   </div>
 
   <div class="search-area">
     <div class="tooltip">
-      <span class="material-icons-outlined hover">search</span>
+      <span class="material-icons-outlined hover" (click)="onSearch()">search</span>
       <span class="tooltip-text">Search</span>
     </div>
     <input type="text" placeholder="Search"/>

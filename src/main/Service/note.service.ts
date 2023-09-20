@@ -16,7 +16,51 @@ export class NoteService {
   getNotes(): Observable<Note[]> {
     return this.notesSubject.asObservable();
   }
+  addAndArchive(title:string,message:string){
 
+    if(title!='' && message!='') {
+      const newNote: Note = {
+        id: this.notes.length + 1, // Generate a unique ID
+        title: title,
+        content: message,
+        isArchived: true,
+        showDropdown: false,
+        isHidden: false,
+        isMoreIconClicked: false,
+      };
+      this.notes.push(newNote);
+      this.notesSubject.next(this.notes);
+    }
+    else if(title!='' && message==''){
+      const newNote: Note = {
+        id: this.notes.length + 1, // Generate a unique ID
+        title: title,
+        content: '',
+        isArchived: true,
+        showDropdown: false,
+        isHidden: false,
+        isMoreIconClicked: false,
+      };
+      this.notes.push(newNote);
+      this.notesSubject.next(this.notes);
+    }
+    else if(title=='' && message!=''){
+      const newNote: Note = {
+        id: this.notes.length + 1, // Generate a unique ID
+        title: '',
+        content: message,
+        isArchived: true,
+        showDropdown: false,
+        isHidden: false,
+        isMoreIconClicked: false,
+      };
+      this.notes.push(newNote);
+      this.notesSubject.next(this.notes);
+    }
+    else{
+      return;
+    }
+  }
   addNote(title: string, noteMessage: string) {
     const newNote: Note = {
       id: this.notes.length + 1, // Generate a unique ID

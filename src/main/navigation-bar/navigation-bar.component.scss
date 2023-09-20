@@ -20,6 +20,28 @@ nav {
   position: relative;
 }
 
+.Keep {
+
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.archive {
+  font-family: Google Sans, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.25em;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  line-height: 3em;
+  color: #3c4043;
+  margin-left: -3em;
+}
+
+.archive:hover {
+  cursor: context-menu;
+}
+
 .tooltip-text {
   position: absolute;
   left: 0;
@@ -34,6 +56,7 @@ nav {
   visibility: hidden;
   z-index: 1;
 }
+
 
 .tooltip:hover .tooltip-text {
   visibility: visible;

@@ -16,8 +16,8 @@
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">
-          <span class="material-icons-outlined hover small-icon" >archive</span>
-<!--          (click)="archiveNote(note.id)-->
+          <span class="material-icons-outlined hover small-icon" (click)="addAndArchiveNote(title, noteMessage)">archive</span>
+
           <span class="tooltip-text">Archive</span>
         </div>
         <div class="tooltip" (click)="toggleDropdownMenu()">

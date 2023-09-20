@@ -42,6 +42,12 @@ export class KeepAddNotesComponent {
     }
 
   }
+  addAndArchiveNote(title:string,message:string){
+    this.noteService.addAndArchive(title,message);
+    this.title = '';
+    this.noteMessage = '';
+    this.showFirstForm = true;
+  };
 
 
 

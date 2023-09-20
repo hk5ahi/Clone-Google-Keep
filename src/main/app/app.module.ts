@@ -13,6 +13,7 @@ import {
 } from "../keep-container/keep-content/keep-notes-archive/keep-notes-archive.component";
 import {NoteService} from "../Service/note.service";
 import {FormsModule} from "@angular/forms";
+import { KeepService } from "../Service/keep.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     FormsModule
   ],
-  providers: [NoteService],
+  providers: [NoteService,KeepService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

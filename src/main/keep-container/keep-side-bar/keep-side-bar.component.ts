@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { KeepService } from "../../Service/keep.service";
 
 @Component({
   selector: 'app-keep-side-bar',
@@ -6,5 +7,16 @@ import {Component} from '@angular/core';
   styleUrls: ['./keep-side-bar.component.scss']
 })
 export class KeepSideBarComponent {
+
+  constructor(private keepService: KeepService) {
+  }
+
+  updateIsNotes() {
+    this.keepService.updateIsNotes()
+  }
+
+  updateIsArchive() {
+    this.keepService.updateIsArchive()
+  }
 
 }
