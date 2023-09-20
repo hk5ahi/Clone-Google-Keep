@@ -10,6 +10,11 @@
   margin-top: 0.65em;
 }
 
+.tooltip-text{
+  text-align: center;
+  margin-left: 2em;
+  font-size: medium;
+}
 .active {
   background-color: #fef0c3;
   border-radius: 50%;
@@ -91,7 +96,7 @@
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25rem;
-    width: 100%;
+    width: 85%;
     height: 3em;
     overflow: hidden;
     cursor: pointer;
@@ -154,6 +159,12 @@ input::placeholder {
     cursor: pointer;
   }
 
+}
+
+.picture{
+  color: black;
+
+    align-items: center;
 }
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { More } from "../../../Constants";
 
 @Component({
   selector: 'app-keep-add-notes',
@@ -8,9 +9,9 @@ import { Component } from '@angular/core';
 export class KeepAddNotesComponent {
   showSecondForm = false;
 
-
-  // Function to toggle the visibility of the second form
   toggleSecondForm() {
     this.showSecondForm = !this.showSecondForm;
   }
+
+  protected readonly More = More;
 }

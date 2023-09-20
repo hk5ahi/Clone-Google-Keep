@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Note} from "../../../Data Types/Note";
+import {More} from "../../../Constants";
 
 
 @Component({
@@ -16,4 +17,5 @@ export class KeepNotesComponent {
   }
 
 
+  protected readonly More = More;
 }
