@@ -16,6 +16,7 @@ import { FormsModule } from "@angular/forms";
 import { KeepService } from "../Service/keep.service";
 import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/keep-search.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,7 @@ import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/
     AppRoutingModule,
     FormsModule
   ],
-  providers: [NoteService, KeepService],
+  providers: [NoteService, KeepService,NavigationBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

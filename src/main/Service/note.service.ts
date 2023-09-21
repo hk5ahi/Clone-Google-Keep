@@ -1,6 +1,6 @@
-import {Injectable, Optional} from '@angular/core';
-import {BehaviorSubject, isEmpty, Observable} from 'rxjs';
-import {Note} from "../Data Types/Note";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Note } from "../Data Types/Note";
 
 
 @Injectable({
@@ -8,17 +8,52 @@ import {Note} from "../Data Types/Note";
 })
 export class NoteService {
   private notes: Note[] = [];
-  private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]); // Create a new BehaviorSubject with an empty array as the initial value
+  private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  private searchDataSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() {
+    this.getNotes().subscribe((notes) => {
+      this.notes = notes.reverse();
+    });
+
+  }
+  getSearchedData(): Observable<string> {
+    return this.searchDataSubject.asObservable();
   }
 
+  setSearchedData(data: string): void {
+    this.searchDataSubject.next(data);
+  }
+  notesExist(data: string): void {
+
+    this.searchDataSubject.next(data);
+
+    for (const note of this.notes) {
+      note.noteExist = false;
+    }
+    const searchDataLower = data.toLowerCase();
+
+    if (data.trim() !== '') {
+
+      for (const note of this.notes) {
+
+        const titleLower = note.title.toLowerCase();
+        const contentLower = note.content.toLowerCase();
+
+        if (titleLower.includes(searchDataLower) || contentLower.includes(searchDataLower)) {
+          note.noteExist = true;
+        }
+      }
+    }
+
+  }
   getNotes(): Observable<Note[]> {
     return this.notesSubject.asObservable();
   }
-  addAndArchive(title:string,message:string){
 
-    if(title!='' && message!='') {
+  addAndArchive(title: string, message: string) {
+
+    if (title != '' && message != '') {
       const newNote: Note = {
         id: this.notes.length + 1, // Generate a unique ID
         title: title,
@@ -27,11 +62,11 @@ export class NoteService {
         showDropdown: false,
         isHidden: false,
         isMoreIconClicked: false,
+        noteExist: false,
       };
       this.notes.push(newNote);
       this.notesSubject.next(this.notes);
-    }
-    else if(title!='' && message==''){
+    } else if (title != '' && message == '') {
       const newNote: Note = {
         id: this.notes.length + 1, // Generate a unique ID
         title: title,
@@ -40,11 +75,11 @@ export class NoteService {
         showDropdown: false,
         isHidden: false,
         isMoreIconClicked: false,
+        noteExist: false,
       };
       this.notes.push(newNote);
       this.notesSubject.next(this.notes);
-    }
-    else if(title=='' && message!=''){
+    } else if (title == '' && message != '') {
       const newNote: Note = {
         id: this.notes.length + 1, // Generate a unique ID
         title: '',
@@ -53,14 +88,15 @@ export class NoteService {
         showDropdown: false,
         isHidden: false,
         isMoreIconClicked: false,
+        noteExist: false,
       };
       this.notes.push(newNote);
       this.notesSubject.next(this.notes);
-    }
-    else{
+    } else {
       return;
     }
   }
+
   addNote(title: string, noteMessage: string) {
     const newNote: Note = {
       id: this.notes.length + 1, // Generate a unique ID
@@ -70,10 +106,12 @@ export class NoteService {
       showDropdown: false,
       isHidden: false,
       isMoreIconClicked: false,
+      noteExist: false,
     };
 
     this.notes.push(newNote);
     this.notesSubject.next(this.notes);
+
   }
 
   updateNote(selectedNote: Note | null): null {
@@ -97,9 +135,7 @@ export class NoteService {
       this.notes[noteIndexToArchive].isArchived = true;
       this.notes[noteIndexToArchive].isHidden = false;
     }
-
     return this.notes;
-
   }
 
   unArchiveNote(id: number) {
@@ -136,5 +172,4 @@ export class NoteService {
     }
     return this.notes;
   }
-
 }

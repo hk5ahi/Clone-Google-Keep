@@ -6,5 +6,6 @@ export interface Note {
   showDropdown?: boolean;
   isHidden?: boolean;
   isMoreIconClicked: boolean;
+  noteExist:boolean;
 
 }

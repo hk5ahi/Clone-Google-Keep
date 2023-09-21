@@ -1,8 +1,7 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { NoteService } from '../../../Service/note.service';
+import { Note } from "../../../Data Types/Note";
 
-import {NoteService} from '../../../Service/note.service';
-import {Note} from "../../../Data Types/Note";
-import {BehaviorSubject, map, Observable, of, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-keep-notes',
@@ -28,7 +27,6 @@ export class KeepNotesComponent implements OnInit {
     }
 
   }
-
 
   saveNoteChanges() {
 
@@ -56,7 +54,7 @@ export class KeepNotesComponent implements OnInit {
 
   ngOnInit(): void {
     this.noteService.getNotes().subscribe((notes) => {
-      this.notes = notes;
+      this.notes = notes.reverse();
 
     });
   }
@@ -77,7 +75,7 @@ export class KeepNotesComponent implements OnInit {
   archiveNote(id: number) {
 
     this.notes = this.noteService.archiveNote(id);
-    console.log(this.notes);
+
   }
 
   isArchiveNotes() {

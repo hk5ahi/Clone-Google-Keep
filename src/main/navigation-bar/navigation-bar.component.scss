@@ -30,6 +30,23 @@ nav {
   cursor: pointer;
 
 }
+.cancel-box{
+
+
+  min-width: 2.5em;
+  min-height: 1.7em;
+  margin: 6px;
+  display: flex;
+  justify-content: center;
+
+}
+.cancel{
+
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+
+}
 .search-box {
   display: flex;
   align-items: center;
@@ -48,6 +65,10 @@ nav {
   height: 48px;
   border-width: 0 0 0 4px;
 
+}
+.search-icon{
+
+  margin-left: 0.4em;
 }
 .search-input{
 
@@ -73,6 +94,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: -1.05em;
 }
 
 .archive {
