@@ -10,14 +10,19 @@ import {KeepAddNotesComponent} from "./keep-add-notes/keep-add-notes.component";
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home', // Redirect to the 'home' route
+    pathMatch: 'full',  // Ensure full path match for the redirection
+  },
+  {
+    path: '',
     component: KeepContentComponent,
     children: [
       {path: 'home', component: KeepAddNotesComponent},
-
       {path: 'archive', component: KeepNotesArchiveComponent},
     ]
   },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
