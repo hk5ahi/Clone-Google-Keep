@@ -20,7 +20,40 @@ export class NoteService {
   getSearchedData(): Observable<string> {
     return this.searchDataSubject.asObservable();
   }
+  isNotesSimpleAndArchive(): boolean {
+    let hasArchived = false;
+    let hasUnarchived = false;
 
+    for (const note of this.notes) {
+      if (note.isArchived && note.noteExist) {
+        hasArchived = true;
+      } else if (!note.isArchived && note.noteExist) {
+        hasUnarchived = true;
+      }
+    }
+
+    // Return true only if both conditions are met
+    return hasArchived && hasUnarchived;
+  }
+
+  isArchiveNotes(): boolean {
+    let hasArchived = false;
+    let hasUnarchived = false;
+
+    for (const note of this.notes) {
+      if (note.isArchived && note.noteExist) {
+        hasArchived = true;
+      } else {
+        hasUnarchived = true;
+      }
+
+      if (hasArchived && hasUnarchived) {
+        return false;
+      }
+    }
+
+    return hasArchived;
+  }
   setSearchedData(data: string): void {
     this.searchDataSubject.next(data);
   }
@@ -65,7 +98,7 @@ export class NoteService {
         noteExist: false,
       };
       this.notes.push(newNote);
-      this.notesSubject.next(this.notes);
+      this.notesSubject.next(this.notes.reverse());
     } else if (title != '' && message == '') {
       const newNote: Note = {
         id: this.notes.length + 1, // Generate a unique ID
@@ -78,7 +111,7 @@ export class NoteService {
         noteExist: false,
       };
       this.notes.push(newNote);
-      this.notesSubject.next(this.notes);
+      this.notesSubject.next(this.notes.reverse());
     } else if (title == '' && message != '') {
       const newNote: Note = {
         id: this.notes.length + 1, // Generate a unique ID
@@ -91,7 +124,7 @@ export class NoteService {
         noteExist: false,
       };
       this.notes.push(newNote);
-      this.notesSubject.next(this.notes);
+      this.notesSubject.next(this.notes.reverse());
     } else {
       return;
     }
@@ -110,7 +143,7 @@ export class NoteService {
     };
 
     this.notes.push(newNote);
-    this.notesSubject.next(this.notes);
+    this.notesSubject.next(this.notes.reverse());
 
   }
 
@@ -157,7 +190,7 @@ export class NoteService {
     if (noteIndexToDelete >= 0) {
 
       this.notes.splice(noteIndexToDelete, 1);
-      this.notesSubject.next(this.notes);
+      this.notesSubject.next(this.notes.reverse());
     }
     return this.notesSubject.asObservable();
   }

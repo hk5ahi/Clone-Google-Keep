@@ -15,6 +15,7 @@ import { NoteService } from "../Service/note.service";
 import { FormsModule } from "@angular/forms";
 import { KeepService } from "../Service/keep.service";
 import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/keep-search.component";
+import { SafeHtmlPipe } from "../Pipes/safeHtmlPipe";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/
     KeepAddNotesComponent,
     KeepNotesComponent,
     KeepNotesArchiveComponent,
-    KeepSearchComponent
+    KeepSearchComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,

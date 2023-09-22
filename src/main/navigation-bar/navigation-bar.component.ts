@@ -44,12 +44,9 @@ export class NavigationBarComponent implements OnInit{
  }
 
   onSearchDataChange(newValue: string) {
-
-
     if (newValue.trim() !== '') {
 
       this.router.navigate(['search']);
-
     }
     this.noteService.notesExist(newValue);
 
@@ -58,7 +55,6 @@ export class NavigationBarComponent implements OnInit{
   ngOnInit(): void {
     this.noteService.getSearchedData().subscribe((searchData) => {
       this.searchData = searchData;
-      console.log(this.searchData);
     });
   }
 

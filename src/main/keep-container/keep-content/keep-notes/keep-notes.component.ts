@@ -25,9 +25,7 @@ export class KeepNotesComponent implements OnInit {
     if (!note.isMoreIconClicked) {
       note.isHidden = true;
     }
-
   }
-
   saveNoteChanges() {
 
     this.selectedNote = this.noteService.updateNote(this.selectedNote);
@@ -58,7 +56,6 @@ export class KeepNotesComponent implements OnInit {
 
     });
   }
-
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
 
@@ -68,29 +65,31 @@ export class KeepNotesComponent implements OnInit {
           note.showDropdown = false;
         }
       );
-
     }
   }
+  adjustTextareaHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Reset the height to auto
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content's scrollHeight
 
+  }
   archiveNote(id: number) {
-
     this.notes = this.noteService.archiveNote(id);
-
   }
 
   isArchiveNotes() {
     this.isArchiveNotesPresent = this.notes.every((note) => note.isArchived);
     return this.isArchiveNotesPresent;
   }
-
+  convertNewlinesToBreaks(text: string): string {
+    return text.replace(/\n/g, '<br>');
+  }
   deleteNote(event: Event, id: number) {
     event.stopPropagation();
     this.noteService.deleteNote(id).subscribe(updatedNotes => {
       this.notes = updatedNotes;
       this.selectedNote = null;
-
     });
-
   }
 
 }

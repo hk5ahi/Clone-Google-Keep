@@ -10,7 +10,7 @@ import { NoteService } from "../../Service/note.service";
 })
 export class KeepSideBarComponent {
 
-  constructor(private keepService: KeepService,private noteService:NoteService) {
+  constructor(private keepService: KeepService, private noteService: NoteService) {
   }
 
   updateIsNotes() {

@@ -32,15 +32,24 @@ export class KeepAddNotesComponent {
       this.noteMessage = '';
     }
   }
+  addNewLine()
+  {
+    this.noteMessage = this.noteMessage + '\n';
+  }
+
+  adjustTextareaHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Reset the height to auto
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content's scrollHeight
+
+  }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target) && this.showDropdownMenu) {
 
       this.showDropdownMenu = false;
       this.showFirstForm = true;
-
     }
-
   }
   addAndArchiveNote(title:string,message:string){
     this.noteService.addAndArchive(title,message);
@@ -50,5 +59,5 @@ export class KeepAddNotesComponent {
   };
 
 
-
+  protected readonly KeyboardEvent = KeyboardEvent;
 }

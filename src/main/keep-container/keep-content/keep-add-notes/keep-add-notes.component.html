@@ -12,7 +12,14 @@
 <div *ngIf="!showFirstForm" class="form-container active-form">
   <form class="second-form">
     <input name="title" type="text" [(ngModel)]="title" class="note-title" placeholder="Title"/>
-    <input name="noteMessage" class="note-text" [(ngModel)]="noteMessage" type="text" placeholder="Take a note..."/>
+    <textarea
+      name="noteMessage"
+      class="note-text"
+      [(ngModel)]="noteMessage"
+      (input)="adjustTextareaHeight($event)"
+      placeholder="Take a note..."
+    ></textarea>
+
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">

@@ -2,11 +2,40 @@
   min-height: 6.5em !important;
   .dropdown-menu{
     left: 8em !important;
-    top: 5em !important;
+    top: 6.8em !important;
   }
 }
 
+//.title{
+//  letter-spacing: .00625em;
+//  font-family: "Google Sans",Roboto,Arial,sans-serif;
+//  font-size: 1rem;
+//  font-weight: 500;
+//  line-height: 1.5rem;
+//  padding-top: 12px;
+//}
+.note-text{
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+}
+.text{
+  border: 1px solid transparent;
+  letter-spacing: .01428571em;
+  font-family: Roboto,Arial,sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  padding: 5px 10px 5px 10px;
+}
+textarea{
 
+  outline: none;
+  resize: none;
+   overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none;
+}
 .notes {
   display: flex;
   justify-content: start;
@@ -178,7 +207,7 @@
 
 .dropdown-menu {
   background-color: #fff;
-  min-width: 8.4875em; /* 7.8vw converted to em */
+  min-width: 10.4875em; /* 7.8vw converted to em */
   min-height: 2.16em; /* 13.5vh converted to em */
   border-width: 0;
   box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
@@ -189,7 +218,7 @@
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
   left: 7.25em; /* 356px converted to em */
-  top: 7.3125em; /* 277px converted to em */
+  top: 8.5em; /* 277px converted to em */
 }
 .dropdown-menu-selected{
   background-color: #fff;
@@ -215,14 +244,6 @@
   list-style-type: none;
 }
 
-
-.text {
-  text-decoration: none;
-  color: #3c4043;
-  font-size: 0.875em; /* 14px converted to em */
-  font-family: Roboto, arial, sans-serif;
-  margin-top: 3.125em; /* 50px converted to em */
-}
 
 .icon {
   width: 2.125em; /* 34px converted to em */
@@ -286,7 +307,7 @@
   font-size: 1rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: 0.625em; /* 10px / 16px = 0.625em */
+  margin-left: 0.27em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
 }
@@ -360,7 +381,7 @@
   white-space: nowrap;
   border-radius: 0.3125em;
   visibility: hidden;
-  z-index: 1;
+  z-index: 5004;
 }
 
 .tooltip:hover .tooltip-text {

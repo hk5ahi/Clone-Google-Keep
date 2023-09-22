@@ -18,12 +18,19 @@ export class KeepNotesArchiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.notes$ = this.noteService.getNotes(); // Subscribe to the observable
+
+    this.notes$.subscribe((notes) => {
+      if (Array.isArray(notes)) {
+        this.notes$ = new Observable((observer) => {
+          observer.next(notes.reverse());
+          observer.complete();
+        });
+      }
+    });
   }
 
   selectNoteForEditing(note: Note) {
     this.selectedNote = note;
-
-    // Map over the notes and update the isHidden property
     this.notes$ = this.notes$.pipe(
       map((notes) =>
         notes.map((n) => ({
@@ -37,7 +44,6 @@ export class KeepNotesArchiveComponent implements OnInit {
 
     return this.notes$.pipe(
       map((notes) => notes.length),
-
       defaultIfEmpty(0)
     );
 
@@ -46,7 +52,6 @@ export class KeepNotesArchiveComponent implements OnInit {
     note.showDropdown = !note.showDropdown;
     event.stopPropagation();
     note.isMoreIconClicked = !note.isMoreIconClicked;
-
   }
 
   closeEditor(note: Note) {
@@ -54,14 +59,10 @@ export class KeepNotesArchiveComponent implements OnInit {
     this.notes$=of(this.noteService.changeHiddenStatus(note.id));
     this.selectedNote = null;
   }
-
   saveNoteChanges() {
-
     this.selectedNote = this.noteService.updateNote(this.selectedNote);
-
   }
   UnArchiveNote(id: number) {
-
     this.notes$ = of(this.noteService.unArchiveNote(id)).pipe(
       switchMap((currentNotes) => {
         return this.noteService.getNotes();
@@ -69,18 +70,24 @@ export class KeepNotesArchiveComponent implements OnInit {
     );
 
   }
+  adjustTextareaHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Reset the height to auto
+    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content's scrollHeight
+
+  }
   checkArchive(): Observable<boolean> {
     return this.notes$.pipe(
       map((notes) => notes.some((note) => note.isArchived))
     );
   }
-
+  convertNewlinesToBreaks(text: string): string {
+    return text.replace(/\n/g, '<br>');
+  }
   deleteNote(event: Event,id: number) {
     event.stopPropagation();
     this.noteService.deleteNote(id).subscribe((updatedNotes) => {
       this.notes$ = of(updatedNotes);
     });
   }
-
-
 }

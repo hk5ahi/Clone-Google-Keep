@@ -14,6 +14,7 @@
   box-shadow: 0 0.125em 0.25em 0 rgba(60, 64, 67, 0.3), 0 0.25em 0.75em 0 rgba(60, 64, 67, 0.15); /* 1px = 0.0625em */
   border: 0.0625em solid #e0e1e0; /* 1px = 0.0625em */
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
+
 }
 
 .form-container form {
@@ -42,6 +43,10 @@
   margin-left: 0.625em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
+  resize: none;
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .form-actions {
@@ -121,7 +126,7 @@
 }
 
 
-input:focus {
+input:focus,textarea:focus {
   outline: none;
 }
 

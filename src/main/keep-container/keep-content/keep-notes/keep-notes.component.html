@@ -8,7 +8,7 @@
 
         <span class="material-icons check-circle">check_circle</span>
         <div class="title">{{ note.title }}</div>
-        <div class="text">{{ note.content }}</div>
+        <div class="note-text" [innerHTML]="convertNewlinesToBreaks(note.content)"></div>
 
         <div class="icons">
           <div class="tooltip">
@@ -36,7 +36,14 @@
 <div *ngIf="selectedNote && !selectedNote.isArchived" class="form-container active-form ">
   <form class="second-form">
     <input name="title" type="text" [(ngModel)]="selectedNote.title" class="note-title"/>
-    <input name="noteMessage" class="note-text" [(ngModel)]="selectedNote.content" type="text"/>
+    <textarea
+      name="noteMessage"
+      class="note-text"
+      [(ngModel)]="selectedNote.content"
+      (input)="adjustTextareaHeight($event)"
+
+    ></textarea>
+
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">
