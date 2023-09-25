@@ -1,10 +1,15 @@
 .first-form {
   background: #fff;
-  max-width: 37.375em; /* 598px / 16px = 37.375em */
+  width: 38.8em; /* 598px / 16px = 37.375em */
   margin: 2em auto; /* 32px / 16px = 2em */
   box-shadow: 0 0.125em 0.25em 0 rgba(60, 64, 67, 0.3), 0 0.25em 0.75em 0 rgba(60, 64, 67, 0.15); /* 1px = 0.0625em */
   border: 0.0625em solid #e0e1e0; /* 1px = 0.0625em */
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
+  position: relative;
+  right: -7.1%;
+  padding: 3px 0;
+
+
 }
 
 .second-form {
@@ -14,7 +19,8 @@
   box-shadow: 0 0.125em 0.25em 0 rgba(60, 64, 67, 0.3), 0 0.25em 0.75em 0 rgba(60, 64, 67, 0.15); /* 1px = 0.0625em */
   border: 0.0625em solid #e0e1e0; /* 1px = 0.0625em */
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
-
+  position: relative;
+  right: -6.6%;
 }
 
 .form-container form {
@@ -47,6 +53,7 @@
   overflow: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  color: rgb(42, 36, 42);
 }
 
 .form-actions {
@@ -126,7 +133,7 @@
 }
 
 
-input:focus,textarea:focus {
+input:focus, textarea:focus {
   outline: none;
 }
 

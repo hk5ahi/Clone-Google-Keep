@@ -7,7 +7,7 @@
   color: #5f6368;
   width: 5em;
   overflow-x: hidden;
-  margin-top: -0.15em;
+  margin-top: 0.35em;
 }
 
 .active {
@@ -55,11 +55,11 @@
   }
 
   &.close {
-    width: 5em;
+    width: 3em;
 
     .item {
       &.active {
-        width: 3em;
+        width: 5em;
         padding-left: 0;
         margin-left: 0.75em;
         border-radius: 50%;
@@ -70,7 +70,7 @@
       }
 
       &:hover:not(.active) {
-        width: 3em;
+        width: 5em;
         height: 3em;
         padding-left: 0;
         margin-left: 0.75em;
@@ -78,7 +78,10 @@
       }
     }
   }
-
+.menu{
+  position: relative;
+  left:-10%;
+}
   .item {
     box-sizing: border-box;
     border: 0.0625em solid transparent;
@@ -91,11 +94,11 @@
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25rem;
-    width: 80%;
+    width: 98%;
     height: 3em;
     overflow: hidden;
     cursor: pointer;
-    padding-left: 0.75em;
+    padding-left: 1.95em;
     transition: all 0.08s;
 
 
@@ -103,7 +106,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin-left: 1.25em;
+      margin-left: 2em;
     }
 
     &.active {

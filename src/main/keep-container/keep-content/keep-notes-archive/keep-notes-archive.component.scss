@@ -63,7 +63,7 @@
   color: #5f6368;
   cursor: default;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  font-size: 1.375rem;
+  font-size: 1.43rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.75rem;
@@ -79,6 +79,8 @@
   flex-direction: column;
   align-content: center;
   margin-top: 20vh;
+  position: relative;
+  right: -6.9%;
 }
 
 .icons-container {

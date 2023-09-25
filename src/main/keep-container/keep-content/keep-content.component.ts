@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-
 @Component({
   selector: 'app-keep-content',
   templateUrl: './keep-content.component.html',

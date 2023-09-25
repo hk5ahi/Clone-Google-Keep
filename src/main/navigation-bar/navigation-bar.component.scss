@@ -5,8 +5,10 @@ nav {
   height: 4em; /* 64px / 16px */
   border-bottom: 0.0625em solid #dadce0;
   padding: 0.5em;
-  margin: -0.125em 0.625em;
+  margin: -0.15em 0.625em;
   color: #5f6368;
+  width: 100%;
+
 }
 
 .search-icon :hover {
@@ -14,8 +16,6 @@ nav {
   color: black;
   border-radius: 50%;
   cursor: pointer;
-
-
 }
 
 .tooltip {
@@ -31,8 +31,6 @@ nav {
 
 }
 .cancel-box{
-
-
   min-width: 2.5em;
   min-height: 1.7em;
   margin: 6px;
@@ -50,7 +48,7 @@ nav {
 .search-box {
   display: flex;
   align-items: center;
-  min-width: 47.75em;
+  min-width: 50em;
   background-color:#f1f3f4 ;
   min-height: 3.15em;
   margin-right: -6em;
@@ -64,6 +62,8 @@ nav {
   -webkit-user-select: none;
   height: 48px;
   border-width: 0 0 0 4px;
+  position: relative;
+  right: 10%;
 
 }
 .search-icon{
@@ -104,11 +104,12 @@ nav {
   letter-spacing: 0.25px;
   line-height: 3em;
   color: #3c4043;
-  margin-left: -3em;
+  margin-left: -11em;
 }
 
 .archive:hover {
   cursor: context-menu;
+
 }
 
 .tooltip-text {
@@ -159,7 +160,10 @@ nav {
   align-items: center;
 
 }
-
+.account{
+  position: relative;
+  right: 10%;
+}
 .search-area input {
   border: none;
   background: #f1f3f4;
@@ -177,8 +181,10 @@ nav {
   border: 1px solid #dadce0;
   border-left: none;
 
-
-
+}
+.settings-area{
+  position: relative;
+  right:-9%;
 }
 .tooltip search-icon:focus{
   background: white !important;

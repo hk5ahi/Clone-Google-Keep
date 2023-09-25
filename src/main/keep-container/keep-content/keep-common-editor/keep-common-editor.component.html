@@ -1,0 +1,44 @@
+<div class="form-container active-form " #formContainer>
+  <form class="second-form">
+    <input name="title" type="text" [(ngModel)]="data.Note.title" class="note-title"/>
+    <textarea
+      name="noteMessage"
+      class="note-text"
+      [(ngModel)]="data.Note.content"
+      (input)="adjustTextareaHeight($event)"
+
+    ></textarea>
+
+    <div class="form-actions">
+      <div class="icons">
+        <div class="tooltip">
+
+          <ng-container *ngIf="data.Note.isArchived">
+            <span class="material-icons-outlined hover small-icon icon"
+                  (click)=UnArchiveNote(data.Note.id)>unarchive</span>
+            <span class="tooltip-text">Unarchive</span>
+          </ng-container>
+          <ng-container *ngIf="!data.Note.isArchived">
+            <span class="material-icons-outlined hover small-icon icon"
+                  (click)="archiveNote(data.Note.id)">archive</span>
+            <span class="tooltip-text">Archive</span>
+          </ng-container>
+
+        </div>
+        <div class="tooltip" (click)="handleMoreIconClick($event, data.Note)">
+          <span class="material-icons-outlined hover small-icon">more_vert</span>
+          <span class="tooltip-text">More</span>
+        </div>
+
+        <div *ngIf="data.Note.showDropdown" class="dropdown-menu-selected">
+          <ul>
+            <li class="item"><a class="text" (click)="deleteNote($event,data.Note.id)">Delete Note</a></li>
+            <li class="item"><a class="text">Add label</a></li>
+          </ul>
+        </div>
+      </div>
+      <button class="close-btn" (click)="closeEditor(data.Note)">Close</button>
+    </div>
+  </form>
+</div>
+

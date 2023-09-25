@@ -1,6 +1,5 @@
-import {Component, ElementRef, HostListener} from '@angular/core';
-import {NoteService} from "../../../Service/note.service";
-
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { NoteService } from "../../../Service/note.service";
 
 @Component({
   selector: 'app-keep-add-notes',
@@ -13,8 +12,11 @@ export class KeepAddNotesComponent {
   showDropdownMenu: boolean = false;
   title: string = '';
   noteMessage: string = '';
+  @ViewChild('titleInput', {static: false}) titleInput!: ElementRef;
 
-  constructor( private elementRef: ElementRef,private noteService: NoteService) {}
+  constructor(private elementRef: ElementRef, private noteService: NoteService) {
+  }
+
   toggleDropdownMenu() {
     this.showDropdownMenu = !this.showDropdownMenu;
   }
@@ -26,23 +28,13 @@ export class KeepAddNotesComponent {
   }
 
   addNote() {
-    if(this.title!='' || this.noteMessage!='') {
+    if (this.title != '' || this.noteMessage != '') {
       this.noteService.addNote(this.title, this.noteMessage);
       this.title = '';
       this.noteMessage = '';
     }
   }
-  addNewLine()
-  {
-    this.noteMessage = this.noteMessage + '\n';
-  }
 
-  adjustTextareaHeight(event: Event): void {
-    const textarea = event.target as HTMLTextAreaElement;
-    textarea.style.height = 'auto'; // Reset the height to auto
-    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content's scrollHeight
-
-  }
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target) && this.showDropdownMenu) {
@@ -51,13 +43,26 @@ export class KeepAddNotesComponent {
       this.showFirstForm = true;
     }
   }
-  addAndArchiveNote(title:string,message:string){
-    this.noteService.addAndArchive(title,message);
+
+  adjustTextareaHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  addAndArchiveNote(title: string, message: string) {
+    this.noteService.addAndArchive(title, message);
     this.title = '';
     this.noteMessage = '';
     this.showFirstForm = true;
   };
 
+  focusTextarea() {
+    this.titleInput.nativeElement.blur();
+    setTimeout(() => {
+      const textarea = document.querySelector('.note-text') as HTMLTextAreaElement;
+      textarea.focus();
+    }, 0);
+  }
 
-  protected readonly KeyboardEvent = KeyboardEvent;
 }

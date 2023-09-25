@@ -1,7 +1,7 @@
 <nav>
   <div class="logo-area">
     <div class="tooltip">
-      <span class="material-icons-outlined hover">menu</span>
+      <span class="material-icons-outlined hover menu">menu</span>
       <span class="tooltip-text">Main Menu</span>
     </div>
     <div *ngIf="isNotes() |async" class="Keep">
@@ -21,8 +21,6 @@
   <div *ngIf="isArchive() |async">
     <p class="archive">Archive</p>
   </div>
-
-
   <section class="search-box">
     <div class="tooltip search-icon">
       <span class="material-icons-outlined">search</span>
@@ -30,10 +28,11 @@
 
 
     </div>
-    <input class="search-input" type="text" placeholder="Search" [(ngModel)]="searchData" (ngModelChange)="onSearchDataChange($event)"/>
+    <input class="search-input" type="text" placeholder="Search" [(ngModel)]="searchData"
+           (ngModelChange)="onSearchDataChange($event)"/>
 
 
-    <div *ngIf="searchDataExist()"  class="cancel-box tooltip">
+    <div *ngIf="searchDataExist()" class="cancel-box tooltip">
 
       <img (click)="clearData()" class="cancel material-icons-outlined hover" src="assets/svg/cancel.svg"
            alt="Cancel Svg">
@@ -42,25 +41,25 @@
 
   </section>
   <div class="settings-area">
-    <div class="tooltip  search-icon right">
+    <div class="tooltip search-icon right">
       <span class="material-icons-outlined hover">refresh</span>
       <span class="tooltip-text">Refresh</span>
     </div>
-    <div class="tooltip  search-icon right">
+    <div class="tooltip search-icon right">
       <span class="material-icons-outlined hover">view_agenda</span>
       <span class="tooltip-text">List View</span>
     </div>
-    <div class="tooltip  search-icon right">
+    <div class="tooltip search-icon right">
       <span class="material-icons-outlined hover">settings</span>
       <span class="tooltip-text">Settings</span>
     </div>
   </div>
   <div class="profile-actions-area">
-    <div class="tooltip  search-icon">
+    <div class="tooltip search-icon">
       <span class="material-icons-outlined hover">apps</span>
       <span class="tooltip-text">Apps</span>
     </div>
-    <div class="tooltip  search-icon">
+    <div class="tooltip search-icon account">
       <span class="material-icons-outlined hover">account_circle</span>
       <span class="tooltip-text">Account</span>
     </div>

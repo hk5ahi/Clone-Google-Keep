@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Note } from "../Data Types/Note";
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -13,13 +12,15 @@ export class NoteService {
 
   constructor() {
     this.getNotes().subscribe((notes) => {
-      this.notes = notes.reverse();
+      this.notes = notes;
     });
 
   }
+
   getSearchedData(): Observable<string> {
     return this.searchDataSubject.asObservable();
   }
+
   isNotesSimpleAndArchive(): boolean {
     let hasArchived = false;
     let hasUnarchived = false;
@@ -31,36 +32,16 @@ export class NoteService {
         hasUnarchived = true;
       }
     }
-
-    // Return true only if both conditions are met
     return hasArchived && hasUnarchived;
   }
 
-  isArchiveNotes(): boolean {
-    let hasArchived = false;
-    let hasUnarchived = false;
-
-    for (const note of this.notes) {
-      if (note.isArchived && note.noteExist) {
-        hasArchived = true;
-      } else {
-        hasUnarchived = true;
-      }
-
-      if (hasArchived && hasUnarchived) {
-        return false;
-      }
-    }
-
-    return hasArchived;
-  }
   setSearchedData(data: string): void {
     this.searchDataSubject.next(data);
   }
+
   notesExist(data: string): void {
 
     this.searchDataSubject.next(data);
-
     for (const note of this.notes) {
       note.noteExist = false;
     }
@@ -80,54 +61,28 @@ export class NoteService {
     }
 
   }
+
   getNotes(): Observable<Note[]> {
     return this.notesSubject.asObservable();
   }
 
   addAndArchive(title: string, message: string) {
-
-    if (title != '' && message != '') {
-      const newNote: Note = {
-        id: this.notes.length + 1, // Generate a unique ID
-        title: title,
-        content: message,
-        isArchived: true,
-        showDropdown: false,
-        isHidden: false,
-        isMoreIconClicked: false,
-        noteExist: false,
-      };
-      this.notes.push(newNote);
-      this.notesSubject.next(this.notes.reverse());
-    } else if (title != '' && message == '') {
-      const newNote: Note = {
-        id: this.notes.length + 1, // Generate a unique ID
-        title: title,
-        content: '',
-        isArchived: true,
-        showDropdown: false,
-        isHidden: false,
-        isMoreIconClicked: false,
-        noteExist: false,
-      };
-      this.notes.push(newNote);
-      this.notesSubject.next(this.notes.reverse());
-    } else if (title == '' && message != '') {
-      const newNote: Note = {
-        id: this.notes.length + 1, // Generate a unique ID
-        title: '',
-        content: message,
-        isArchived: true,
-        showDropdown: false,
-        isHidden: false,
-        isMoreIconClicked: false,
-        noteExist: false,
-      };
-      this.notes.push(newNote);
-      this.notesSubject.next(this.notes.reverse());
-    } else {
+    if (title === '' && message === '') {
       return;
     }
+    const newNote: Note = {
+      id: this.notes.length + 1, // Generate a unique ID
+      title: title || '',
+      content: message || '',
+      isArchived: true,
+      showDropdown: false,
+      isHidden: false,
+      isMoreIconClicked: false,
+      noteExist: false,
+    };
+
+    this.notes.unshift(newNote);
+    this.notesSubject.next(this.notes);
   }
 
   addNote(title: string, noteMessage: string) {
@@ -142,9 +97,8 @@ export class NoteService {
       noteExist: false,
     };
 
-    this.notes.push(newNote);
-    this.notesSubject.next(this.notes.reverse());
-
+    this.notes.unshift(newNote);
+    this.notesSubject.next(this.notes);
   }
 
   updateNote(selectedNote: Note | null): null {
@@ -154,7 +108,6 @@ export class NoteService {
       if (noteIndex !== -1) {
         this.notes[noteIndex].content = selectedNote.content;
         this.notes[noteIndex].title = selectedNote.title;
-
       }
     }
     return null;
@@ -175,10 +128,9 @@ export class NoteService {
 
     const noteIndexToUnArchive = this.notes.findIndex((note) => note.id === id);
 
-
     if (noteIndexToUnArchive >= 0) {
-
       this.notes[noteIndexToUnArchive].isArchived = false;
+      this.notes[noteIndexToUnArchive].isHidden = false;
     }
 
     return this.notes;
@@ -188,20 +140,18 @@ export class NoteService {
     const noteIndexToDelete = this.notes.findIndex((note) => note.id === id);
 
     if (noteIndexToDelete >= 0) {
-
       this.notes.splice(noteIndexToDelete, 1);
-      this.notesSubject.next(this.notes.reverse());
+      this.notesSubject.next(this.notes);
     }
     return this.notesSubject.asObservable();
   }
 
-  changeHiddenStatus(id: number) {
+  changeHiddenStatus(id: number, isHidden: boolean) {
 
     const noteIndexToHide = this.notes.findIndex((note) => note.id === id);
 
     if (noteIndexToHide >= 0) {
-
-      this.notes[noteIndexToHide].isHidden = false;
+      this.notes[noteIndexToHide].isHidden = isHidden;
     }
     return this.notes;
   }

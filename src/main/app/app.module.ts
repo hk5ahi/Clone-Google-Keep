@@ -16,6 +16,13 @@ import { FormsModule } from "@angular/forms";
 import { KeepService } from "../Service/keep.service";
 import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/keep-search.component";
 import { SafeHtmlPipe } from "../Pipes/safeHtmlPipe";
+import { KeepCommonNoteComponent } from "../keep-container/keep-content/keep-common-note/keep-common-note.component";
+import {
+  KeepCommonEditorComponent
+} from "../keep-container/keep-content/keep-common-editor/keep-common-editor.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
 
 
 @NgModule({
@@ -29,14 +36,19 @@ import { SafeHtmlPipe } from "../Pipes/safeHtmlPipe";
     KeepNotesComponent,
     KeepNotesArchiveComponent,
     KeepSearchComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    KeepCommonEditorComponent,
+    KeepCommonNoteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule, // Add MatDialogModule to your imports
+    MatButtonModule, // Add MatButtonModule for buttons
   ],
-  providers: [NoteService, KeepService,NavigationBarComponent],
+  providers: [NoteService, KeepService, NavigationBarComponent,KeepCommonNoteComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

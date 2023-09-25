@@ -1,7 +1,7 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { NoteService } from '../../../Service/note.service';
 import { Note } from "../../../Data Types/Note";
-
+import { defaultIfEmpty, map, Observable } from "rxjs";
 
 @Component({
   selector: 'app-keep-notes',
@@ -9,87 +9,47 @@ import { Note } from "../../../Data Types/Note";
   styleUrls: ['./keep-notes.component.scss'],
 })
 export class KeepNotesComponent implements OnInit {
-  notes: Note[] = [];
-  isArchiveNotesPresent: boolean = false;
-  selectedNote: Note | null = null; // Initialize as null
+  notes$: Observable<Note[]>;
 
   constructor(private noteService: NoteService, private elementRef: ElementRef) {
-  }
-
-  selectNoteForEditing(note: Note) {
-    this.selectedNote = note;
-    this.notes.forEach((note) => {
-        note.isHidden = false;
-      }
-    );
-    if (!note.isMoreIconClicked) {
-      note.isHidden = true;
-    }
-  }
-  saveNoteChanges() {
-
-    this.selectedNote = this.noteService.updateNote(this.selectedNote);
-
-  }
-
-  handleMoreIconClick(event: MouseEvent, note: Note) {
-    note.showDropdown = !note.showDropdown;
-    event.stopPropagation();
-    note.isMoreIconClicked = !note.isMoreIconClicked;
-
-  }
-
-  closeEditor(note: Note) {
-    this.saveNoteChanges();
-    this.selectedNote = null;
-    note.isHidden = false;
-
+    this.notes$ = this.noteService.getNotes();
   }
 
   hasNotes() {
-    return this.notes.length > 0;
+    return this.notes$.pipe(
+      map((notes) => notes.length),
+      defaultIfEmpty(0)
+    );
+
   }
 
   ngOnInit(): void {
-    this.noteService.getNotes().subscribe((notes) => {
-      this.notes = notes.reverse();
+    this.notes$ = this.noteService.getNotes(); // Subscribe to the observable
 
+    this.notes$.subscribe((notes) => {
+      if (Array.isArray(notes)) {
+        this.notes$ = new Observable((observer) => {
+          observer.next(notes);
+          observer.complete();
+        });
+      }
     });
   }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-
     if (!this.elementRef.nativeElement.contains(event.target)) {
-
-      this.notes.forEach((note) => {
+      this.notes$.subscribe((notes) => {
+        notes.forEach((note) => {
           note.showDropdown = false;
-        }
-      );
+        });
+      });
     }
   }
-  adjustTextareaHeight(event: Event): void {
-    const textarea = event.target as HTMLTextAreaElement;
-    textarea.style.height = 'auto'; // Reset the height to auto
-    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content's scrollHeight
 
+  isArchiveNotes(): Observable<boolean> {
+    return this.notes$.pipe(
+      map(notes => notes.every(note => note.isArchived))
+    );
   }
-  archiveNote(id: number) {
-    this.notes = this.noteService.archiveNote(id);
-  }
-
-  isArchiveNotes() {
-    this.isArchiveNotesPresent = this.notes.every((note) => note.isArchived);
-    return this.isArchiveNotesPresent;
-  }
-  convertNewlinesToBreaks(text: string): string {
-    return text.replace(/\n/g, '<br>');
-  }
-  deleteNote(event: Event, id: number) {
-    event.stopPropagation();
-    this.noteService.deleteNote(id).subscribe(updatedNotes => {
-      this.notes = updatedNotes;
-      this.selectedNote = null;
-    });
-  }
-
 }
