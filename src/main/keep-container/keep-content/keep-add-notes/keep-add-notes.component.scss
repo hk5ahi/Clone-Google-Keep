@@ -8,8 +8,6 @@
   position: relative;
   right: -7.1%;
   padding: 3px 0;
-
-
 }
 
 .second-form {
@@ -21,6 +19,7 @@
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
   position: relative;
   right: -6.6%;
+  max-height: 8.8em;
 }
 
 .form-container form {
@@ -39,6 +38,7 @@
   margin-left: 0.625em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
+  padding-bottom: 0.7em !important;
 }
 
 .note-text {
@@ -54,6 +54,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   color: rgb(42, 36, 42);
+
 }
 
 .form-actions {
@@ -95,6 +96,11 @@
 .small-icon {
   color: black;
   font-size: 1.1rem;
+}
+.icon{
+
+  position: relative;
+  top:0.4em;
 }
 
 
@@ -158,8 +164,8 @@ input:focus, textarea:focus {
   z-index: 5003;
   padding: 0.375em 0; /* 6px / 16px = 0.375em */
   opacity: 1;
-  left: 24.375em; /* 390px / 16px = 24.375em */
-  top: 14.125em; /* 226px / 16px = 14.125em */
+  left: 30.375em; /* 390px / 16px = 24.375em */
+  top: 13.5em; /* 226px / 16px = 14.125em */
 }
 
 .item:hover {

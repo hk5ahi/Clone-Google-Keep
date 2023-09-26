@@ -8,4 +8,5 @@ export interface Note {
   isMoreIconClicked: boolean;
   noteExist: boolean;
 
+
 }

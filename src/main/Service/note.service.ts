@@ -104,7 +104,6 @@ export class NoteService {
   updateNote(selectedNote: Note | null): null {
     if (selectedNote) {
       const noteIndex = this.notes.findIndex((note) => selectedNote.id === note.id);
-
       if (noteIndex !== -1) {
         this.notes[noteIndex].content = selectedNote.content;
         this.notes[noteIndex].title = selectedNote.title;
@@ -113,6 +112,12 @@ export class NoteService {
     return null;
   }
 
+  makeAllNotesVisible(): Note[] {
+    for (const note of this.notes) {
+      note.isHidden = false;
+    }
+    return this.notes;
+  }
   archiveNote(id: number) {
 
     const noteIndexToArchive = this.notes.findIndex((note) => note.id === id);
@@ -138,7 +143,6 @@ export class NoteService {
 
   deleteNote(id: number): Observable<Note[]> {
     const noteIndexToDelete = this.notes.findIndex((note) => note.id === id);
-
     if (noteIndexToDelete >= 0) {
       this.notes.splice(noteIndexToDelete, 1);
       this.notesSubject.next(this.notes);

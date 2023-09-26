@@ -80,20 +80,6 @@ export class KeepCommonEditorComponent implements OnInit {
 
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (this.formContainer.nativeElement.contains(event.target) && this.selectedNote) {
-      this.data.Note.isHidden = false;
-      console.log(this.data.Note);
-      this.closeEditor(this.data.Note);
-    }
-    if (this.data.dialogBoxOpen) {
-      this.data.Note.isHidden = true;
-    }
-
-
-  }
-
   closeEditor(note: Note) {
 
     this.saveNoteChanges();
@@ -103,6 +89,7 @@ export class KeepCommonEditorComponent implements OnInit {
     this.selectedNote = null;
     this.data.dialogBoxOpen = false;
     this.dialogRef.close();
+
 
   }
 }

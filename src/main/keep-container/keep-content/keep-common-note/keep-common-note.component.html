@@ -1,24 +1,31 @@
 <div *ngIf="(notes$ | async) as notes" class="notes grey-background">
-  <div *ngFor="let note of notes$ |async">
+  <div *ngFor="let note of notes$ |async" [@noteEnterLeave]="note">
+
     <div class="note"
          *ngIf="(isSearch && note.noteExist && (isArchiveNotePresent ? note.isArchived : !note.isArchived) ) || (!isSearch && (isArchiveNotePresent ? note.isArchived : !note.isArchived))"
-         [ngClass]="{ 'empty-note': note.title=='' || note.content=='' }"
+         [ngClass]="{ 'empty-note': note.title=='' || note.content==''}"
          [hidden]="note.isHidden"
          (click)="selectNoteForEditing(note)">
       <div>
         <span class="material-icons check-circle">check_circle</span>
-        <ng-container *ngIf="isSearch">
-          <div class="title" [style.display]="'block'">
-            <span [innerHTML]="highlightSearchTerm(note.title, searchValue) | safeHtml"></span>
-          </div>
-          <div class="text" [style.display]="'block'">
-            <div [innerHTML]="formattedContent(note.content)"></div>
-
-          </div>
+        <ng-container *ngIf="note.title=='' && note.content==''">
+          <div class="full-empty">Empty note</div>
         </ng-container>
-        <ng-container *ngIf="!isSearch">
-          <div class="title">{{note.title }}</div>
-          <div class="note-text" [innerHTML]="convertNewlinesToBreaks(note.content)"></div>
+        <ng-container>
+          <ng-container *ngIf="isSearch">
+            <div class="title" [style.display]="'block'">
+              <span [innerHTML]="highlightSearchTerm(note.title, searchValue) | safeHtml"></span>
+            </div>
+            <div class="text" [style.display]="'block'" [ngClass]="{ 'note-text-up': note.title==''}">
+              <div [innerHTML]="formattedContent(note.content)"></div>
+
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isSearch">
+            <div class="title">{{note.title }}</div>
+            <div [ngClass]="{ 'note-text-up': note.title==''}" class="note-text"
+                 [innerHTML]="convertNewlinesToBreaks(note.content)"></div>
+          </ng-container>
         </ng-container>
         <div class="icons">
           <div class="tooltip">
@@ -46,11 +53,9 @@
         </ul>
       </div>
     </div>
+
   </div>
+
 </div>
-<!--<ng-container *ngIf="selectedNote && !isSearch">-->
-<!--  <app-keep-common-editor [selectedNote]="selectedNote"></app-keep-common-editor>-->
-<!--</ng-container>-->
-<!--<ng-container *ngIf="selectedNote && isSearch">-->
-<!--  <app-keep-common-editor [selectedNote]="selectedNote"></app-keep-common-editor>-->
-<!--</ng-container>-->
+
+

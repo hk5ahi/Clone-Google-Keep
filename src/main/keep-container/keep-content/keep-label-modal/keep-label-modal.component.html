@@ -1,0 +1,26 @@
+<div class="modal">
+
+  <span class="text">Edit labels </span>
+  <div class="input-area">
+    <div class="icons">
+      <div class="tooltip">
+      <ng-container *ngIf="showPlusIcon"><img class="plus-icon hover small-icon icon" src="assets/svg/plus.svg" alt="Plus Button"
+                                              (click)="showIcons()">
+        <span class="tooltip-text">Create label</span></ng-container>
+      <ng-container *ngIf="showCrossIcon"><img class="cross-icon hover small-icon icon" src="assets/svg/x-btn.svg" alt="Cross Button">
+        <span class="tooltip-text">Cancel</span>
+      </ng-container>
+      <ng-container *ngIf="showTickIcon"><img class="tick-icon hover small-icon icon" src="assets/svg/check2.svg" alt="Tick Button">
+        <span class="tooltip-text">Create Label</span>
+      </ng-container>
+    </div>
+    <input #labelInput class="search-input" type="text" name="label" value="" placeholder="Create new label"
+           (click)="showIcons()" [attr.autofocus]=false>
+
+  </div>
+</div>
+  <hr class="break-line">
+<div class="modal-footer">
+  <button type="button" name="button" class="close" (click)="closeModal()">Done</button>
+</div>
+</div>

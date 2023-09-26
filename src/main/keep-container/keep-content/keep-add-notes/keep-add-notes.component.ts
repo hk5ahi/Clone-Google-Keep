@@ -9,10 +9,15 @@ import { NoteService } from "../../../Service/note.service";
 })
 export class KeepAddNotesComponent {
   showFirstForm: boolean = true;
+  showSecondForm: boolean = false;
   showDropdownMenu: boolean = false;
   title: string = '';
   noteMessage: string = '';
   @ViewChild('titleInput', {static: false}) titleInput!: ElementRef;
+  @ViewChild('secondForm') secondFormElement!: ElementRef;
+  @ViewChild('firstForm') firstFormElement!: ElementRef;
+  @ViewChild('form') FormElement!: ElementRef;
+  @ViewChild('textarea') Text!: ElementRef;
 
   constructor(private elementRef: ElementRef, private noteService: NoteService) {
   }
@@ -21,8 +26,16 @@ export class KeepAddNotesComponent {
     this.showDropdownMenu = !this.showDropdownMenu;
   }
 
-  toggleForms() {
-    this.showFirstForm = !this.showFirstForm; // Open the first form
+  openSecondForm() {
+    this.showFirstForm = false; // Open the first form
+    this.showSecondForm = true; // Open the second form
+    this.showDropdownMenu = false; // Close the dropdown menu
+    this.addNote();
+  }
+
+  openFirstForm() {
+    this.showFirstForm = true; // Open the first form
+    this.showSecondForm = false; // Open the second form
     this.showDropdownMenu = false; // Close the dropdown menu
     this.addNote();
   }
@@ -41,6 +54,12 @@ export class KeepAddNotesComponent {
 
       this.showDropdownMenu = false;
       this.showFirstForm = true;
+    }
+    if (this.showSecondForm && (this.elementRef.nativeElement.contains(event.target) || (this.FormElement && this.FormElement.nativeElement.contains(event.target)) || (this.Text && this.Text.nativeElement.contains(event.target))) && (this.secondFormElement && !this.secondFormElement.nativeElement.contains(event.target))) {
+      this.showFirstForm = true;
+      this.showSecondForm = false;
+      this.addNote();
+
     }
   }
 

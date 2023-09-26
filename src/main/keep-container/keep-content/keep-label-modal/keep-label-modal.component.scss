@@ -1,0 +1,151 @@
+.modal {
+
+  min-width: 18.75em !important;
+  min-height: 10.6875em !important;
+  overflow: hidden !important;
+}
+
+.search-input {
+  border: none !important;
+}
+
+.search-input:focus {
+  outline: none !important;
+  border: none;
+  border-bottom: 1px solid #dadce0 !important;
+}
+
+.input-area {
+
+  width: 16.875em;
+  height: 2.8125em;
+  display: flex;
+  align-items: center;
+  position: relative;
+  right: -7.1%;
+}
+
+.text {
+  color: #202124;
+  display: inline-block !important;
+  letter-spacing: .00625em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  position: relative;
+  padding: 0 1em;
+  text-overflow: ellipsis;
+  width: 16.875em !important;
+  height: 1.5625em !important;
+  margin-top: 0.75em;
+}
+
+.close {
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, .87);
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: .01785714em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  padding: 8px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  outline: none !important;
+  position: relative;
+  border: none;
+  width: 86px;
+  height: 36px;
+  top: 2.7em;
+  right: -1.7em;
+  background-color: transparent;
+
+  margin: 0 0 0 13em;
+}
+
+.close:hover {
+  background-color: #e4e6ee;
+}
+.break-line{
+  border-bottom: 0.01px solid #dadce0;
+  width: 100%;
+  position: relative;
+  top: 1.5em;
+}
+.icons {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 26px !important;
+  height: 26px !important;
+
+}
+
+.plus-icon {
+  position: relative !important;
+  right: 0.5em;
+}
+.cross-icon{
+  position: relative !important;
+  top: 0.95em;
+  right: 0.7em;
+}
+.tick-icon{
+  position: relative !important;
+  right: -15em;
+  top: -0.9em;
+  background-color: white;
+}
+
+.small-icon {
+  color: black;
+  font-size: 0.9rem;
+}
+
+
+.hover:hover {
+  background: #f1f3f4;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+.material-icons-outlined {
+  padding: 0.9em; // circle area
+}
+
+.tooltip {
+  position: relative;
+}
+
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}

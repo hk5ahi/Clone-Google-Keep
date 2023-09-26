@@ -1,14 +1,14 @@
-<div class="form-container">
-  <form class="first-form"
+<div class="form-container" #form>
+  <form class="first-form" #firstForm
         *ngIf="showFirstForm"
-        (click)="toggleForms()">
+        (click)="openSecondForm()">
     <input class="note-text" type="text" placeholder="Take a note..."/>
     <div class="form-actions">
     </div>
   </form>
 </div>
 <div *ngIf="!showFirstForm" class="form-container active-form">
-  <form class="second-form">
+  <form class="second-form" #secondForm>
     <input name="title" type="text" [(ngModel)]="title" class="note-title" placeholder="Title" #titleInput
            (keydown.enter)="focusTextarea()"/>
     <textarea
@@ -21,17 +21,17 @@
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">
-          <span class="material-icons-outlined hover small-icon"
+          <span class="material-icons-outlined hover small-icon icon"
                 (click)="addAndArchiveNote(title, noteMessage)">archive</span>
 
           <span class="tooltip-text">Archive</span>
         </div>
         <div class="tooltip" (click)="toggleDropdownMenu()">
-          <span class="material-icons-outlined hover small-icon">more_vert</span>
+          <span class="material-icons-outlined hover small-icon icon">more_vert</span>
           <span class="tooltip-text">More</span>
         </div>
       </div>
-      <button class="close-btn" (click)="toggleForms()">Close</button>
+      <button class="close-btn icon" (click)="openFirstForm()">Close</button>
     </div>
   </form>
 </div>
@@ -40,4 +40,4 @@
     <li class="item"><a class="text">Add label</a></li>
   </ul>
 </div>
-<app-keep-notes></app-keep-notes>
+<app-keep-notes #textarea></app-keep-notes>

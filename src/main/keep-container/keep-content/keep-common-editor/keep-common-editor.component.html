@@ -1,9 +1,10 @@
 <div class="form-container active-form " #formContainer>
   <form class="second-form">
-    <input name="title" type="text" [(ngModel)]="data.Note.title" class="note-title"/>
+    <input name="title" type="text" [(ngModel)]="data.Note.title" class="note-title" placeholder="Title"/>
     <textarea
       name="noteMessage"
       class="note-text"
+      placeholder="Note"
       [(ngModel)]="data.Note.content"
       (input)="adjustTextareaHeight($event)"
 

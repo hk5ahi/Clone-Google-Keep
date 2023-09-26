@@ -23,6 +23,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
+import { KeepLabelModalComponent } from "../keep-container/keep-content/keep-label-modal/keep-label-modal.component";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     KeepSearchComponent,
     SafeHtmlPipe,
     KeepCommonEditorComponent,
-    KeepCommonNoteComponent
+    KeepCommonNoteComponent,
+    KeepLabelModalComponent
   ],
   imports: [
     BrowserModule,

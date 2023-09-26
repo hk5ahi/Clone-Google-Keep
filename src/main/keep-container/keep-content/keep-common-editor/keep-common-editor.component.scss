@@ -14,7 +14,9 @@
   top: 8.6em;
 
 }
-
+.form input{
+  font-size: medium;
+}
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: var(--mdc-dialog-container-shape, 4px);
   background: transparent;
@@ -24,7 +26,7 @@
   padding: 1em;
   z-index: 4001;
   min-width: 39.5em !important;
-  min-height: 7.5625em !important;
+  min-height: 17.5625em !important;
 }
 
 .form-container form {
@@ -50,20 +52,20 @@
 
 .note-title {
   border: none;
-  font-size: 1rem; /* 16px */
+  font-size: 1.2rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: 0.625em; /* 10px / 16px = 0.625em */
+  margin-left: -0.44em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
 }
 
 .note-text {
   border: none;
-  font-size: 1rem; /* 16px */
+  font-size: 0.85rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: 0.27em; /* 10px / 16px = 0.625em */
+  margin-left: -0.44em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
 }
@@ -269,27 +271,7 @@ textarea {
   visibility: hidden;
 }
 
-.note-title {
-  border: none;
-  font-size: 1rem;
-  height: 100%;
-  padding: 0.625em;
-  margin-left: 0.625em;
-  width: 100%;
-  margin-right: 0.625em;
 
-}
-
-.note-text {
-  border: none;
-  font-size: 1rem;
-  height: 100%;
-  padding: 0.625em;
-  margin-left: 0.625em;
-  width: 100%;
-  margin-right: 0.625em;
-
-}
 
 .small-icon {
   color: black;
@@ -361,6 +343,7 @@ textarea {
   opacity: 1;
   left: 16.1em; /* 356px converted to em */
   top: 2.25em; /* 277px converted to em */
+  overflow-y: hidden;
 
 }
 
@@ -369,6 +352,7 @@ textarea {
   height: 100%;
   vertical-align: top;
   list-style-type: none;
+  overflow: hidden;
 }
 
 .icon {
