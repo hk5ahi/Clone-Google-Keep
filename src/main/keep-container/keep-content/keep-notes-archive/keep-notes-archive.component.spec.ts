@@ -1,6 +1,5 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {KeepNotesArchiveComponent} from './keep-notes-archive.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { KeepNotesArchiveComponent } from './keep-notes-archive.component';
 
 describe('KeepNotesArchiveComponent', () => {
   let component: KeepNotesArchiveComponent;

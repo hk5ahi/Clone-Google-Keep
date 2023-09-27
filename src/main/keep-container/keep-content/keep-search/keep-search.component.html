@@ -1,9 +1,9 @@
-<app-keep-common-note [isArchiveNotePresent]="false" [isSearch]="true" ></app-keep-common-note>
+<app-keep-common-note [isArchiveNotePresent]="false" [isSearch]="true"></app-keep-common-note>
 
 <div *ngIf="isNotesSimpleAndArchive() ">
   <div class="text-archive">Archive</div>
 </div>
-<app-keep-common-note [isArchiveNotePresent]="true" [isSearch]="true" ></app-keep-common-note>
+<app-keep-common-note [isArchiveNotePresent]="true" [isSearch]="true"></app-keep-common-note>
 
 <div *ngIf=" (!(hasNotes()) ||isMatchedNotes()) && searchValue!='' " class="box">
   <div class="message">No matching results.</div>

@@ -59,7 +59,6 @@ export class NoteService {
         }
       }
     }
-
   }
 
   getNotes(): Observable<Note[]> {
@@ -79,6 +78,7 @@ export class NoteService {
       isHidden: false,
       isMoreIconClicked: false,
       noteExist: false,
+      labels: [],
     };
 
     this.notes.unshift(newNote);
@@ -95,6 +95,7 @@ export class NoteService {
       isHidden: false,
       isMoreIconClicked: false,
       noteExist: false,
+      labels: [],
     };
 
     this.notes.unshift(newNote);
@@ -118,6 +119,7 @@ export class NoteService {
     }
     return this.notes;
   }
+
   archiveNote(id: number) {
 
     const noteIndexToArchive = this.notes.findIndex((note) => note.id === id);
@@ -153,7 +155,6 @@ export class NoteService {
   changeHiddenStatus(id: number, isHidden: boolean) {
 
     const noteIndexToHide = this.notes.findIndex((note) => note.id === id);
-
     if (noteIndexToHide >= 0) {
       this.notes[noteIndexToHide].isHidden = isHidden;
     }

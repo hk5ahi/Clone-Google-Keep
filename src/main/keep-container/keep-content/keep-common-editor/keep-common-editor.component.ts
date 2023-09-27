@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Observable, of, switchMap } from "rxjs";
 import { NoteService } from "../../../Service/note.service";
@@ -77,7 +77,6 @@ export class KeepCommonEditorComponent implements OnInit {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
-
   }
 
   closeEditor(note: Note) {

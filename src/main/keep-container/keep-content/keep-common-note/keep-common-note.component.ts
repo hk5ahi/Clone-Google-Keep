@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, of, switchMap } from "rxjs";
+import { Observable, of, Subscription, switchMap } from "rxjs";
 import { Note } from "../../../Data Types/Note";
 import { NoteService } from "../../../Service/note.service";
 import { MatDialog } from "@angular/material/dialog";
 import { KeepCommonEditorComponent } from "../keep-common-editor/keep-common-editor.component";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { LabelService } from "../../../Service/label.service";
+import { Label } from "../../../Data Types/Label";
 
 
 @Component({
@@ -32,18 +34,32 @@ export class KeepCommonNoteComponent implements OnInit {
   @Input() isSearch: boolean = false;
   searchValue: string = '';
   dialogBoxOpen: boolean = false;
+  labels: Label[] = [];
+  private labelListSubscription!: Subscription;
+  addLabelIndicator: boolean = false;
+  searchLabelText: string = '';
 
-
-  constructor(public dialog: MatDialog, private noteService: NoteService) {
+  constructor(public dialog: MatDialog, private noteService: NoteService, private labelService: LabelService) {
     this.notes$ = this.noteService.getNotes();
   }
 
   selectNoteForEditing(note: Note) {
     this.selectedNote = note;
     this.dialogBoxOpen = true;
+    note.showLabelDropdown = false;
+    note.showDropdown = false;
     this.notes$ = of(this.noteService.changeHiddenStatus(note.id, true));
     this.openDialog();
 
+  }
+
+  addLabel(text: string, note: Note) {
+    this.labelService.addLabel(text, note);
+
+  }
+
+  searchLabels(searchText: string): boolean {
+    return this.labelService.searchLabels(searchText);
   }
 
   makeAllNotesVisible() {
@@ -67,12 +83,16 @@ export class KeepCommonNoteComponent implements OnInit {
 
   handleMoreIconClick(event: MouseEvent, note: Note) {
     note.showDropdown = !note.showDropdown;
+    if (note.showLabelDropdown) {
+      note.showLabelDropdown = !note.showLabelDropdown;
+      this.searchLabelText = '';
+    }
     event.stopPropagation();
     note.isMoreIconClicked = !note.isMoreIconClicked;
   }
 
   ngOnInit(): void {
-    this.notes$ = this.noteService.getNotes(); // Subscribe to the observable
+    this.notes$ = this.noteService.getNotes();
     this.notes$.subscribe((notes) => {
       if (Array.isArray(notes)) {
         this.notes$ = new Observable((observer) => {
@@ -82,9 +102,25 @@ export class KeepCommonNoteComponent implements OnInit {
       }
     });
     this.selectedNote = null;
+    this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
+      this.labels = labels;
+    });
     this.noteService.getSearchedData().subscribe((searchData) => {
       this.searchValue = searchData;
     });
+  }
+
+  stopEvent(event: Event) {
+    event.stopPropagation();
+
+  }
+
+  checkSearchText() {
+    if (this.searchLabelText != '') {
+      this.addLabelIndicator = true;
+    } else if (this.searchLabelText == '') {
+      this.addLabelIndicator = false;
+    }
   }
 
   archiveNote(id: number) {
@@ -94,6 +130,11 @@ export class KeepCommonNoteComponent implements OnInit {
       })
     );
     this.selectedNote = null;
+  }
+
+  hasLabels(note: Note) {
+
+    return note.labels.length > 0;
   }
 
   convertNewlinesToBreaks(text: string): string {
@@ -116,6 +157,13 @@ export class KeepCommonNoteComponent implements OnInit {
       this.notes$ = of(updatedNotes);
     });
   }
+
+  showLabelDropdown(event: Event, note: Note) {
+    event.stopPropagation();
+    note.showDropdown = !note.showDropdown;
+    note.showLabelDropdown = !note.showLabelDropdown;
+  }
+
 
   openDialog(): void {
     this.dialogBoxOpen = true;

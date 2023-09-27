@@ -16,7 +16,7 @@
 }
 
 .note-text {
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 .close-btn:hover {
@@ -46,7 +46,7 @@
 .tooltip-text {
   position: absolute;
   left: 0;
-  top: 100%;
+  top: 115%;
   font-size: 0.78rem;
   background-color: #323232;
   color: white;
@@ -67,21 +67,52 @@ input:focus {
   outline: none;
 }
 
-.settings-area {
-  display: flex;
-}
-
-.profile-actions-area {
-  display: flex;
-}
-
 .empty-note {
   min-height: 6.875em !important;
 
-  .dropdown-menu {
-    left: 8em !important;
-    top: 6.8em !important;
+  .dropdown-menu, .label-Dropdown {
+    left: 12.3em !important;
+    top: 6em !important;
   }
+
+}
+
+.bold {
+
+  font-weight: bold;
+}
+
+.label-text {
+  width: 3.5em;
+  height: 1.0625em;
+}
+
+.plus-icon {
+  display: inline-block;
+  height: 1.125em;
+  opacity: 0.54;
+  width: 1.125em;
+}
+
+.add-label-area {
+  border-top: 0.1px solid #dadce0;
+  width: 14.0625em;
+  height: 1.875em;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 5px 0.625em 3px;
+  position: relative;
+}
+
+.add-label-area:hover {
+  background-color: #f1f3f4;
+
+}
+
+.label-add {
+  width: 12.8125em;
+  height: 1.3125em;
 }
 
 .text {
@@ -182,7 +213,7 @@ input:focus {
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.75rem;
-  padding: 30px 15px 0 15px;
+  padding: 1.875em 0.9375em 0 0.9375em;
 
 }
 
@@ -225,6 +256,77 @@ input:focus {
   padding: 0.625em;
 }
 
+.label-Dropdown {
+
+  min-width: 14.0625em;
+  min-height: 4.75em;
+  background-color: #fff;
+  border-width: 0;
+  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
+  position: absolute;
+  -webkit-border-radius: 0.25em; /* 4px converted to em */
+  border-radius: 0.2em; /* 4px converted to em */
+  z-index: 5003;
+  padding: 0.375em 0; /* 6px converted to em */
+  opacity: 1;
+  left: 27.25em; /* 356px converted to em */
+  top: 19.2em; /* 277px converted to em */
+}
+
+.save-labels-area {
+  width: 14.0625em;
+  height: 1.8125em;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 5px 10px 3px;
+  position: relative;
+
+}
+
+.check-box {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  opacity: 0.54;
+  -webkit-background-size: 18px 18px;
+  background-size: 18px 18px;
+}
+
+.show-labels {
+
+  width: inherit;
+  height: 2.5625em;
+}
+
+.show-labels:hover {
+  background-color: #f1f3f4;
+}
+
+.label-text {
+
+  height: 2.25em;
+  width: inherit;
+  cursor: default;
+  font-size: 0.875em;
+  padding: 0 0.75em;
+  margin: 3.5px;
+
+}
+
+.label-search-text {
+  min-width: 3.5em;
+  min-height: 1.0625em;
+  display: inline-block;
+  margin-left: 7px;
+  max-width: 10em;
+  padding-top: 2px;
+  vertical-align: top;
+  word-wrap: break-word;
+  font-size: small;
+
+}
+
 .hover:hover {
   background: #f1f3f4;
   color: black;
@@ -243,7 +345,7 @@ input:focus {
 
 .dropdown-menu {
   background-color: #fff;
-  min-width: 9.37em; /* 7.8vw converted to em */
+  min-width: 9.87em; /* 7.8vw converted to em */
   min-height: 2.16em; /* 13.5vh converted to em */
   border-width: 0;
   box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
@@ -253,9 +355,46 @@ input:focus {
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 12.25em; /* 356px converted to em */
-  top: 7.5em; /* 277px converted to em */
+  left: 27.25em; /* 356px converted to em */
+  top: 19.2em; /* 277px converted to em */
 }
+
+.container-input {
+  width: 14.0625em;
+  height: 2.25em;
+  padding: 8px 0.75em;
+  position: relative;
+  -webkit-transition: box-shadow 0.218s;
+  transition: box-shadow 0.218s;
+  margin-top: -1.5625em;
+
+}
+
+.input {
+
+  box-sizing: border-box;
+  height: auto;
+  padding: 2px 1.375em 2px 2px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.small-search-icon {
+  width: 1.125em; /* 18px converted to em */
+  height: 1.125em; /* 18px converted to em */
+  -webkit-background-size: 0.875em 0.875em; /* 14px converted to em */
+  background-size: 0.875em 0.875em; /* 14px converted to em */
+  opacity: 0.35;
+  position: absolute;
+  right: 0.6875em; /* 11px converted to em */
+  top: 0.5em; /* 8px converted to em */
+}
+
 
 .dropdown-menu-selected {
   background-color: #fff;

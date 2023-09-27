@@ -78,10 +78,12 @@
       }
     }
   }
-.menu{
-  position: relative;
-  left:-10%;
-}
+
+  .menu {
+    position: relative;
+    left: -10%;
+  }
+
   .item {
     box-sizing: border-box;
     border: 0.0625em solid transparent;
@@ -119,7 +121,6 @@
   }
 }
 
-
 input:focus {
   border-bottom: 0.0625em solid #5f6368;
 }
@@ -128,7 +129,6 @@ input::placeholder {
   color: #e8eaed;
   opacity: 0.5;
 }
-
 
 .footer {
   border-top: 1px solid #5f6368;

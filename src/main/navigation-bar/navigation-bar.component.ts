@@ -29,7 +29,6 @@ export class NavigationBarComponent implements OnInit {
 
   searchDataExist(): boolean {
     return this.searchData != '';
-
   }
 
   clearData() {
@@ -55,7 +54,6 @@ export class NavigationBarComponent implements OnInit {
       this.searchData = searchData;
     });
   }
-
 
 }
 

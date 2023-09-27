@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { KeepLabelModalComponent } from "../keep-container/keep-content/keep-label-modal/keep-label-modal.component";
+import { LabelService } from "../Service/label.service";
 
 
 @NgModule({
@@ -47,10 +48,10 @@ import { KeepLabelModalComponent } from "../keep-container/keep-content/keep-lab
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule, // Add MatDialogModule to your imports
-    MatButtonModule, // Add MatButtonModule for buttons
+    MatDialogModule,
+    MatButtonModule,
   ],
-  providers: [NoteService, KeepService, NavigationBarComponent,KeepCommonNoteComponent],
+  providers: [NoteService, KeepService, NavigationBarComponent, KeepCommonNoteComponent, LabelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

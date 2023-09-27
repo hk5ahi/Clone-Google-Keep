@@ -9,10 +9,13 @@ import { NoteService } from "../../../Service/note.service";
 })
 export class KeepSearchComponent implements OnInit {
   @Input() isSearch: boolean = false;
+
   constructor(private noteService: NoteService) {
   }
-  notes: Note[] = []; // Use an array instead of an observable
+
+  notes: Note[] = [];
   searchValue: string = '';
+
   ngOnInit(): void {
     this.noteService.getNotes().subscribe((notes) => {
       this.notes = notes;
@@ -21,12 +24,15 @@ export class KeepSearchComponent implements OnInit {
       this.searchValue = searchData;
     });
   }
+
   isNotesSimpleAndArchive(): boolean {
     return this.noteService.isNotesSimpleAndArchive();
   }
+
   isMatchedNotes(): boolean {
     return this.notes.every((note) => !note.noteExist);
   }
+
   hasNotes(): boolean {
     return this.notes.length > 0;
   }

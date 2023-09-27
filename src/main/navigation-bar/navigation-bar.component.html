@@ -6,15 +6,12 @@
     </div>
     <div *ngIf="isNotes() |async" class="Keep">
       <img class="logo"
-
            src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
            srcset="
             https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x,
             https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x "
            alt=""
-           aria-hidden="true"
-
-      />
+           aria-hidden="true"/>
       <span class="logo-text ">Keep</span>
     </div>
   </div>
@@ -25,7 +22,6 @@
     <div class="tooltip search-icon">
       <span class="material-icons-outlined">search</span>
       <span class="tooltip-text">Search</span>
-
 
     </div>
     <input class="search-input" type="text" placeholder="Search" [(ngModel)]="searchData"
@@ -38,7 +34,6 @@
            alt="Cancel Svg">
       <span class="tooltip-text">Clear Search</span>
     </div>
-
   </section>
   <div class="settings-area">
     <div class="tooltip search-icon right">

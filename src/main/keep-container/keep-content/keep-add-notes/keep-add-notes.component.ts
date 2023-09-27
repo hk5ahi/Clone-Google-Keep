@@ -59,7 +59,6 @@ export class KeepAddNotesComponent {
       this.showFirstForm = true;
       this.showSecondForm = false;
       this.addNote();
-
     }
   }
 

@@ -7,16 +7,18 @@
   -webkit-box-shadow: none;
   box-shadow: none;
   opacity: 0;
-  padding: 16px;
+  padding: 1em;
   position: fixed;
   z-index: 4001;
   left: 40.25em;
   top: 8.6em;
 
 }
-.form input{
+
+.form input {
   font-size: medium;
 }
+
 ::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: var(--mdc-dialog-container-shape, 4px);
   background: transparent;
@@ -270,7 +272,6 @@ textarea {
 .note .icons, .note .check-circle {
   visibility: hidden;
 }
-
 
 
 .small-icon {

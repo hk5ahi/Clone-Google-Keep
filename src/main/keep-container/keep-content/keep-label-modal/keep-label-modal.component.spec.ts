@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { KeepLabelModalComponent } from './keep-label-modal.component';
 
 describe('KeepLabelModalComponent', () => {

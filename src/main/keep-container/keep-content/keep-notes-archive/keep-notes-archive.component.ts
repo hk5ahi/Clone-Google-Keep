@@ -3,7 +3,6 @@ import { NoteService } from '../../../Service/note.service';
 import { defaultIfEmpty, map, Observable } from 'rxjs';
 import { Note } from "../../../Data Types/Note";
 
-
 @Component({
   selector: 'app-keep-notes-archive',
   templateUrl: './keep-notes-archive.component.html',
@@ -17,7 +16,7 @@ export class KeepNotesArchiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notes$ = this.noteService.getNotes(); // Subscribe to the observable
+    this.notes$ = this.noteService.getNotes();
 
     this.notes$.subscribe((notes) => {
       if (Array.isArray(notes)) {

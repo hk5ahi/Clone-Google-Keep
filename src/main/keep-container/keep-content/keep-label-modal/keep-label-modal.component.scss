@@ -1,28 +1,99 @@
 .modal {
-
   min-width: 18.75em !important;
-  min-height: 10.6875em !important;
+  min-height: 6.25em !important;
   overflow: hidden !important;
 }
 
-.search-input {
-  border: none !important;
+.tick-icon {
+
+  position: relative;
+  right: -73%;
 }
 
-.search-input:focus {
+.tick-icon-label {
+  position: relative;
+  right: -50%;
+}
+
+.edit-icon {
+  margin-right: -20%;
+}
+
+.search-input, .label-input {
+  border: none !important;
+  margin-bottom: 0;
+  margin-right: 1em;
+  font-size: 0.85em;
+  font-weight: 500;
+  width: 11.75em;
+  height: 1.625em;
+}
+
+.label {
+  max-height: 2.8125em !important;
+}
+
+.label-area {
+  position: relative !important;
+  right: -4%;
+}
+
+.search-input:focus, .label-input:focus {
   outline: none !important;
   border: none;
   border-bottom: 1px solid #dadce0 !important;
 }
 
-.input-area {
+.modal-footer {
+
+  width: 18.75em;
+  height: 4.4375em;
+  border-top: 0.1px solid #dadce0;
+  position: relative;
+  top: -3% !important;
+  margin: 0;
+  overflow: hidden !important;
+}
+
+.input-area, .label-area {
 
   width: 16.875em;
   height: 2.8125em;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.input-area {
   position: relative;
-  right: -7.1%;
+  right: -5%;
+
+}
+
+.labels {
+
+  position: relative;
+  top: -5%;
+  padding: 0.625em;
+  margin-top: -1.5em;
+}
+
+.label-icon,
+{
+
+  position: relative !important;
+  right: 22%;
+}
+
+.edit-icon {
+
+  position: relative !important;
+  right: -156%;
+}
+
+.input-area {
+  margin-bottom: 1.125em;
+
 }
 
 .text {
@@ -51,54 +122,45 @@
   font-size: .875rem;
   font-weight: 500;
   line-height: 1.25rem;
-  padding: 8px 24px;
-  border-radius: 4px;
+  padding: 0.5em 1.5em;
+  border-radius: 0.25em;
   cursor: pointer;
   display: inline-block;
   outline: none !important;
   position: relative;
   border: none;
-  width: 86px;
-  height: 36px;
-  top: 2.7em;
-  right: -1.7em;
+  width: 5.375em;
+  height: 2.25em;
+  top: 1.25em;
+  right: -1.81em;
   background-color: transparent;
-
   margin: 0 0 0 13em;
 }
 
 .close:hover {
   background-color: #e4e6ee;
 }
-.break-line{
+
+.material-icons-outlined {
+  padding: 0.625em;
+}
+
+.break-line {
   border-bottom: 0.01px solid #dadce0;
   width: 100%;
   position: relative;
   top: 1.5em;
 }
+
 .icons {
   cursor: pointer;
-  display: flex;
+  width: 1.625em !important;
+  height: 1.625em !important;
+  display: flex !important;
+  justify-content: center;
   align-items: center;
-  width: 26px !important;
-  height: 26px !important;
+  margin-right: 1.125em;
 
-}
-
-.plus-icon {
-  position: relative !important;
-  right: 0.5em;
-}
-.cross-icon{
-  position: relative !important;
-  top: 0.95em;
-  right: 0.7em;
-}
-.tick-icon{
-  position: relative !important;
-  right: -15em;
-  top: -0.9em;
-  background-color: white;
 }
 
 .small-icon {
@@ -131,21 +193,92 @@
   border-radius: 0.3125em;
   visibility: hidden;
   z-index: 5004;
+  overflow: auto;
+  width: auto;
+}
+
+.tooltip-text-tick {
+  position: absolute;
+  left: -103% !important;
+  top: 115%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+  overflow: visible;
+
+}
+
+.tooltip-text-tick-label {
+  position: absolute;
+  left: -225% !important;
+  top: 96%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+  overflow: visible;
+
+}
+
+.delete-icon {
+  position: relative;
+  right: 22%;
+}
+
+.tooltip-text-edit {
+  position: absolute;
+  left: -133% !important;
+  top: 100%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+  overflow: visible;
+
 }
 
 .tooltip:hover .tooltip-text {
   visibility: visible;
+
+}
+
+.tooltip:hover .tooltip-text-tick {
+  visibility: visible;
+
+}
+
+.tooltip:hover .tooltip-text-edit {
+  visibility: visible;
+
+}
+
+.tooltip:hover .tooltip-text-tick-label {
+  visibility: visible;
+
 }
 
 .material-icons-outlined {
-  padding: 0.9em; // circle area
+  padding: 1.9em; // circle area
 }
 
-.tooltip {
-  position: relative;
-}
+.icon {
+  width: 1.25em;
+  height: 1.25em;
 
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
 }

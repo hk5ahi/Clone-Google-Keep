@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { NoteService } from '../../../Service/note.service';
 import { Note } from "../../../Data Types/Note";
 import { defaultIfEmpty, map, Observable } from "rxjs";
@@ -24,7 +24,7 @@ export class KeepNotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.notes$ = this.noteService.getNotes(); // Subscribe to the observable
+    this.notes$ = this.noteService.getNotes();
 
     this.notes$.subscribe((notes) => {
       if (Array.isArray(notes)) {
