@@ -1,0 +1,199 @@
+.empty-note {
+  min-height: 6.875em !important;
+
+  .dropdown-menu, .label-Dropdown {
+    left: 12.3em !important;
+    top: 6em !important;
+  }
+
+}
+
+
+.label-Dropdown {
+
+  min-width: 14.0625em;
+  min-height: 4.75em;
+  background-color: #fff;
+  border-width: 0;
+  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
+  position: absolute;
+  -webkit-border-radius: 0.25em; /* 4px converted to em */
+  border-radius: 0.2em; /* 4px converted to em */
+  z-index: 5003;
+  padding: 0.375em 0; /* 6px converted to em */
+  opacity: 1;
+  left: 27.25em; /* 356px converted to em */
+  top: 18.2em; /* 277px converted to em */
+}
+
+.dropdown-menu-up, .label-Dropdown-menu-up {
+  top: 21.2em !important;
+}
+
+.label-text {
+
+  height: 2.25em;
+  width: inherit;
+  cursor: default;
+  font-size: 0.875em;
+  padding: 0 0.75em;
+  margin: 3.5px;
+
+}
+
+.container-input {
+  width: 14.0625em;
+  height: 2.25em;
+  padding: 8px 0.75em;
+  position: relative;
+  -webkit-transition: box-shadow 0.218s;
+  transition: box-shadow 0.218s;
+  margin-top: -1.5625em;
+
+}
+
+.input {
+
+  box-sizing: border-box;
+  height: auto;
+  padding: 2px 1.375em 2px 2px;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.small-search-icon {
+  width: 1.125em; /* 18px converted to em */
+  height: 1.125em; /* 18px converted to em */
+  -webkit-background-size: 0.875em 0.875em; /* 14px converted to em */
+  background-size: 0.875em 0.875em; /* 14px converted to em */
+  opacity: 0.35;
+  position: absolute;
+  right: 0.6875em; /* 11px converted to em */
+  top: 0.5em; /* 8px converted to em */
+}
+
+.add-label-area, .show-labels {
+  border-top: 0.1px solid #dadce0;
+  width: 14.0625em;
+  height: 1.875em;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 5px 0.625em 3px;
+  position: relative;
+}
+
+.show-labels {
+  border-top: none !important;
+}
+
+.label-add {
+  width: 12.8125em;
+  height: 1.3125em;
+}
+
+.plus-icon {
+  display: inline-block;
+  height: 1.125em;
+  opacity: 0.54;
+  width: 1.125em;
+}
+
+.label-search-text {
+  min-width: 3.5em;
+  min-height: 1.0625em;
+  display: inline-block;
+  margin-left: 7px;
+  max-width: 10em;
+  padding-top: 2px;
+  vertical-align: top;
+  word-wrap: break-word;
+  font-size: small;
+
+}
+
+.bold {
+
+  font-weight: bold;
+}
+
+.show-labels:hover {
+  background-color: #f1f3f4;
+}
+
+.save-labels-area {
+  width: 14.0625em;
+  height: 1.8125em;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 5px 10px 3px;
+  position: relative;
+
+}
+
+.check-box {
+  width: 1.2em;
+  height: 1.2em;
+  display: inline-block;
+  opacity: 0.8;
+  position: relative;
+  top: -0.1em;
+  right: 0.8em;
+}
+
+.save-label-text {
+
+  display: inline-block;
+  margin-left: 7px;
+  max-width: 10em;
+  padding-top: 2px;
+  vertical-align: top;
+  word-wrap: break-word;
+  position: relative;
+  right: -0.2em;
+  top: -1.9em;
+  font-size: 0.9em;
+}
+
+.save-label-text-add {
+  top: -1.84em;
+}
+
+.label-Dropdown-position {
+  min-width: 14.0625em;
+  min-height: 4.75em;
+  background-color: #fff;
+  border-width: 0;
+  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
+  position: absolute;
+  -webkit-border-radius: 0.25em; /* 4px converted to em */
+  border-radius: 0.2em; /* 4px converted to em */
+  z-index: 5003;
+  padding: 0.375em 0; /* 6px converted to em */
+  opacity: 1;
+  left: 16.25em; /* 356px converted to em */
+  top: 2.2em; /* 277px converted to em */
+}
+
+.label-selected {
+
+  min-width: 14.0625em;
+  min-height: 5.75em;
+  background-color: #fff;
+  border-width: 0;
+  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
+  position: absolute;
+  -webkit-border-radius: 0.25em; /* 4px converted to em */
+  border-radius: 0.2em; /* 4px converted to em */
+  z-index: 5003;
+  padding: 0.375em 0; /* 6px converted to em */
+  opacity: 1;
+  left: 16.25em; /* 356px converted to em */
+  top: 2.2em !important; /* 277px converted to em */
+}

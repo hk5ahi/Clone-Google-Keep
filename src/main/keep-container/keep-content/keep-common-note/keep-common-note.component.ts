@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable, of, Subscription, switchMap } from "rxjs";
 import { Note } from "../../../Data Types/Note";
 import { NoteService } from "../../../Service/note.service";
@@ -36,11 +36,14 @@ export class KeepCommonNoteComponent implements OnInit {
   dialogBoxOpen: boolean = false;
   labels: Label[] = [];
   private labelListSubscription!: Subscription;
-  addLabelIndicator: boolean = false;
   searchLabelText: string = '';
+  @ViewChild('notes') notes!: ElementRef;
 
   constructor(public dialog: MatDialog, private noteService: NoteService, private labelService: LabelService) {
     this.notes$ = this.noteService.getNotes();
+    this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
+      this.labels = labels;
+    });
   }
 
   selectNoteForEditing(note: Note) {
@@ -50,16 +53,6 @@ export class KeepCommonNoteComponent implements OnInit {
     note.showDropdown = false;
     this.notes$ = of(this.noteService.changeHiddenStatus(note.id, true));
     this.openDialog();
-
-  }
-
-  addLabel(text: string, note: Note) {
-    this.labelService.addLabel(text, note);
-
-  }
-
-  searchLabels(searchText: string): boolean {
-    return this.labelService.searchLabels(searchText);
   }
 
   makeAllNotesVisible() {
@@ -102,25 +95,14 @@ export class KeepCommonNoteComponent implements OnInit {
       }
     });
     this.selectedNote = null;
-    this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
-      this.labels = labels;
-    });
+
     this.noteService.getSearchedData().subscribe((searchData) => {
       this.searchValue = searchData;
     });
   }
 
-  stopEvent(event: Event) {
-    event.stopPropagation();
-
-  }
-
-  checkSearchText() {
-    if (this.searchLabelText != '') {
-      this.addLabelIndicator = true;
-    } else if (this.searchLabelText == '') {
-      this.addLabelIndicator = false;
-    }
+  isLabelsExist(note: Note): boolean {
+    return note.labels.length > 0;
   }
 
   archiveNote(id: number) {
@@ -133,8 +115,25 @@ export class KeepCommonNoteComponent implements OnInit {
   }
 
   hasLabels(note: Note) {
-
+    this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
+      this.labels = labels;
+    });
     return note.labels.length > 0;
+  }
+
+  onMouseEnter(label: Label) {
+    label.showCrossIcon = true;
+  }
+
+  onMouseLeave(label: Label) {
+    label.showCrossIcon = false;
+  }
+
+  removeLabel(note: Note, label: Label, event: Event) {
+    event.stopPropagation();
+    this.noteService.removeLabel(note, label);
+    note.showLabelDropdown = false;
+    note.showDropdown = false;
   }
 
   convertNewlinesToBreaks(text: string): string {
@@ -152,7 +151,6 @@ export class KeepCommonNoteComponent implements OnInit {
 
   deleteNote(event: Event, id: number) {
     event.stopPropagation();
-
     this.noteService.deleteNote(id).subscribe((updatedNotes) => {
       this.notes$ = of(updatedNotes);
     });
@@ -163,7 +161,6 @@ export class KeepCommonNoteComponent implements OnInit {
     note.showDropdown = !note.showDropdown;
     note.showLabelDropdown = !note.showLabelDropdown;
   }
-
 
   openDialog(): void {
     this.dialogBoxOpen = true;
@@ -177,9 +174,23 @@ export class KeepCommonNoteComponent implements OnInit {
         }
       );
     }
-
   }
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+
+    const isClickInsideNote = this.notes.nativeElement.contains(event.target);
+    if (!isClickInsideNote) {
+
+      this.notes$.forEach((notes) => {
+          notes.forEach((note) => {
+            note.showDropdown = false;
+            note.showLabelDropdown = false;
+          });
+        }
+      );
+    }
+  }
 }
 
 

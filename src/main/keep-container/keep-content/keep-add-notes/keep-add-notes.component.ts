@@ -11,6 +11,7 @@ export class KeepAddNotesComponent {
   showFirstForm: boolean = true;
   showSecondForm: boolean = false;
   showDropdownMenu: boolean = false;
+  showLabelDropdown: boolean = false;
   title: string = '';
   noteMessage: string = '';
   @ViewChild('titleInput', {static: false}) titleInput!: ElementRef;
@@ -24,6 +25,12 @@ export class KeepAddNotesComponent {
 
   toggleDropdownMenu() {
     this.showDropdownMenu = !this.showDropdownMenu;
+    this.showLabelDropdown = false;
+  }
+
+  toggleLabelDropdown() {
+    this.showLabelDropdown = true;
+    console.log(this.showLabelDropdown);
   }
 
   openSecondForm() {
@@ -58,6 +65,7 @@ export class KeepAddNotesComponent {
     if (this.showSecondForm && (this.elementRef.nativeElement.contains(event.target) || (this.FormElement && this.FormElement.nativeElement.contains(event.target)) || (this.Text && this.Text.nativeElement.contains(event.target))) && (this.secondFormElement && !this.secondFormElement.nativeElement.contains(event.target))) {
       this.showFirstForm = true;
       this.showSecondForm = false;
+      this.showDropdownMenu = false;
       this.addNote();
     }
   }

@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Note } from "../Data Types/Note";
+import { Label } from "../Data Types/Label";
 
 @Injectable({
   providedIn: 'root',
 })
 export class NoteService {
   private notes: Note[] = [];
+  private labels: Label[] = [];
   private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
+  private labelsSubject: BehaviorSubject<Label[]> = new BehaviorSubject<Label[]>([]);
   private searchDataSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() {
     this.getNotes().subscribe((notes) => {
       this.notes = notes;
+    });
+    this.getLabels().subscribe((labels) => {
+      this.labels = labels;
     });
 
   }
@@ -39,23 +45,35 @@ export class NoteService {
     this.searchDataSubject.next(data);
   }
 
-  notesExist(data: string): void {
+  setLabels(labels: Label[]): void {
+    this.labelsSubject.next(labels);
+  }
 
+  notesExist(data: string): void {
     this.searchDataSubject.next(data);
+
     for (const note of this.notes) {
       note.noteExist = false;
     }
+
     const searchDataLower = data.toLowerCase();
 
     if (data.trim() !== '') {
-
       for (const note of this.notes) {
-
         const titleLower = note.title.toLowerCase();
         const contentLower = note.content.toLowerCase();
 
         if (titleLower.includes(searchDataLower) || contentLower.includes(searchDataLower)) {
           note.noteExist = true;
+        }
+        if (note.labels) {
+          for (const label of note.labels) {
+            const labelLower = label.text.toLowerCase();
+            if (labelLower.includes(searchDataLower)) {
+              note.noteExist = true;
+              break;
+            }
+          }
         }
       }
     }
@@ -65,6 +83,32 @@ export class NoteService {
     return this.notesSubject.asObservable();
   }
 
+  getLabels(): Observable<Label[]> {
+    return this.labelsSubject.asObservable();
+  }
+
+  toggleCheckBox(note: Note, labelToToggle: Label) {
+    const existingLabelIndex = note.labels.findIndex(label => label.id === labelToToggle.id);
+
+    if (existingLabelIndex !== -1) {
+      note.labels[existingLabelIndex].showCheckbox = !note.labels[existingLabelIndex].showCheckbox;
+      if (!note.labels[existingLabelIndex].showCheckbox) {
+        note.labels.splice(existingLabelIndex, 1);
+      }
+    } else {
+
+      const newLabel: Label = {...labelToToggle, showCheckbox: true};
+      note.labels = [newLabel, ...note.labels];
+    }
+  }
+
+  removeLabel(note: Note, labelToRemove: Label) {
+
+    const labelIndex = note.labels.findIndex(label => label.id === labelToRemove.id);
+    if (labelIndex !== -1) {
+      note.labels.splice(labelIndex, 1);
+    }
+  }
   addAndArchive(title: string, message: string) {
     if (title === '' && message === '') {
       return;
@@ -79,6 +123,9 @@ export class NoteService {
       isMoreIconClicked: false,
       noteExist: false,
       labels: [],
+      showSelectedLabelDropdown: false,
+      showSelectedDropdown: false,
+      showLabelDropdown: false,
     };
 
     this.notes.unshift(newNote);
@@ -96,6 +143,9 @@ export class NoteService {
       isMoreIconClicked: false,
       noteExist: false,
       labels: [],
+      showSelectedLabelDropdown: false,
+      showSelectedDropdown: false,
+      showLabelDropdown: false,
     };
 
     this.notes.unshift(newNote);

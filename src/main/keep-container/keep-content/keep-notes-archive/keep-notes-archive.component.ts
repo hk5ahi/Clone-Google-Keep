@@ -17,7 +17,6 @@ export class KeepNotesArchiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.notes$ = this.noteService.getNotes();
-
     this.notes$.subscribe((notes) => {
       if (Array.isArray(notes)) {
         this.notes$ = new Observable((observer) => {
@@ -29,12 +28,10 @@ export class KeepNotesArchiveComponent implements OnInit {
   }
 
   hasNotes() {
-
     return this.notes$.pipe(
       map((notes) => notes.length),
       defaultIfEmpty(0)
     );
-
   }
 
   checkArchive(): Observable<boolean> {
@@ -42,6 +39,4 @@ export class KeepNotesArchiveComponent implements OnInit {
       map((notes) => notes.some((note) => note.isArchived))
     );
   }
-
-
 }

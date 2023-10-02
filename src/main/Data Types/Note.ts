@@ -5,8 +5,10 @@ export interface Note {
   title: string;
   content: string;
   isArchived: boolean;
-  showDropdown?: boolean;
-  showLabelDropdown?: boolean;
+  showDropdown: boolean;
+  showSelectedDropdown: boolean;
+  showLabelDropdown: boolean;
+  showSelectedLabelDropdown: boolean;
   isHidden?: boolean;
   isMoreIconClicked: boolean;
   noteExist: boolean;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Label } from '../Data Types/Label';
 import { Note } from "../Data Types/Note";
+import { NoteService } from "./note.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LabelService {
   private labelListSubject: BehaviorSubject<Label[]> = new BehaviorSubject<Label[]>([]);
   labelList$ = this.labelListSubject.asObservable();
 
-  constructor() {
+  constructor(private noteService: NoteService) {
   }
 
   public get labelList(): Label[] {
@@ -31,12 +32,15 @@ export class LabelService {
         showEditIcon: true,
         showDeleteIcon: false,
         showTickIcon: false,
-
+        showCheckbox: true,
+        showCrossIcon: false
       };
+
       if (note) {
         note.labels.push(newLabel);
       }
       this.labelList = [...this.labelList, newLabel];
+      this.noteService.setLabels(this.labelList);
     }
   }
 
@@ -47,15 +51,10 @@ export class LabelService {
       label.showDeleteIcon = false;
       label.showTickIcon = false;
     });
-    console.log(this.labelList);
   }
 
   searchLabels(searchText: string): boolean {
-
-    this.labelList.forEach(label => {
-      return label.text.toLowerCase().includes(searchText.toLowerCase());
-    });
-    return false;
+    return this.labelList.some(label => label.text.toLowerCase().includes(searchText.toLowerCase()));
   }
 
   deleteLabel(label: Label) {
@@ -78,6 +77,5 @@ export class LabelService {
         this.labelList = [...this.labelList];
       }
     }
-
   }
 }

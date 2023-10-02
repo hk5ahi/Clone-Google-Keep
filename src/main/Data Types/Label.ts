@@ -5,5 +5,6 @@ export interface Label {
   showEditIcon: boolean;
   showDeleteIcon: boolean;
   showTickIcon: boolean;
-
+  showCheckbox: boolean;
+  showCrossIcon: boolean;
 }

@@ -37,7 +37,11 @@
 </div>
 <div *ngIf="showDropdownMenu" class="dropdown-menu">
   <ul>
-    <li class="item"><a class="text">Add label</a></li>
+    <li (click)="toggleLabelDropdown()" class="item"><a class="text">Add label</a></li>
   </ul>
+  <app-keep-label-dropdown *ngIf="showLabelDropdown"
+                           [labelDropdown]="showLabelDropdown"
+                           [DialogBoxOpen]="false">
+  </app-keep-label-dropdown>
 </div>
 <app-keep-notes #textarea></app-keep-notes>

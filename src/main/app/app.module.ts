@@ -25,6 +25,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { KeepLabelModalComponent } from "../keep-container/keep-content/keep-label-modal/keep-label-modal.component";
 import { LabelService } from "../Service/label.service";
+import {
+  KeepLabelDropdownComponent
+} from "../keep-container/keep-content/keep-label-dropdown/keep-label-dropdown.component";
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { LabelService } from "../Service/label.service";
     SafeHtmlPipe,
     KeepCommonEditorComponent,
     KeepCommonNoteComponent,
-    KeepLabelModalComponent
+    KeepLabelModalComponent,
+    KeepLabelDropdownComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,9 +12,6 @@ export class KeepService {
   isNotes$ = this.isNotesSubject.asObservable();
   isArchive$ = this.isArchiveSubject.asObservable();
 
-  constructor() {
-  }
-
   updateIsNotes() {
     this.isNotesSubject.next(true);
     this.isArchiveSubject.next(false);
