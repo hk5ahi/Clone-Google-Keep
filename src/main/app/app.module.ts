@@ -13,7 +13,7 @@ import {
 } from "../keep-container/keep-content/keep-notes-archive/keep-notes-archive.component";
 import { NoteService } from "../Service/note.service";
 import { FormsModule } from "@angular/forms";
-import { KeepService } from "../Service/keep.service";
+import { HeaderService } from "../Service/header.service";
 import { KeepSearchComponent } from "../keep-container/keep-content/keep-search/keep-search.component";
 import { SafeHtmlPipe } from "../Pipes/safeHtmlPipe";
 import { KeepCommonNoteComponent } from "../keep-container/keep-content/keep-common-note/keep-common-note.component";
@@ -23,11 +23,11 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
-import { KeepLabelModalComponent } from "../keep-container/keep-content/keep-label-modal/keep-label-modal.component";
 import { LabelService } from "../Service/label.service";
 import {
   KeepLabelDropdownComponent
 } from "../keep-container/keep-content/keep-label-dropdown/keep-label-dropdown.component";
+import { KeepStoreLabelsComponent } from "../keep-container/keep-content/keep-store-labels/keep-store-labels.component";
 
 
 @NgModule({
@@ -44,8 +44,8 @@ import {
     SafeHtmlPipe,
     KeepCommonEditorComponent,
     KeepCommonNoteComponent,
-    KeepLabelModalComponent,
     KeepLabelDropdownComponent,
+    KeepStoreLabelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +55,7 @@ import {
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [NoteService, KeepService, NavigationBarComponent, KeepCommonNoteComponent, LabelService],
+  providers: [NoteService, HeaderService, LabelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

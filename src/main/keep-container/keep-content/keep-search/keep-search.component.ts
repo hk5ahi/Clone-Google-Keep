@@ -9,12 +9,11 @@ import { NoteService } from "../../../Service/note.service";
 })
 export class KeepSearchComponent implements OnInit {
   @Input() isSearch: boolean = false;
+  notes: Note[] = [];
+  searchValue: string = '';
 
   constructor(private noteService: NoteService) {
   }
-
-  notes: Note[] = [];
-  searchValue: string = '';
 
   ngOnInit(): void {
     this.noteService.getNotes().subscribe((notes) => {
@@ -30,7 +29,7 @@ export class KeepSearchComponent implements OnInit {
   }
 
   isMatchedNotes(): boolean {
-    return this.notes.every((note) => !note.noteExist);
+    return this.noteService.filteredNotes.length == 0;
   }
 
   hasNotes(): boolean {

@@ -132,7 +132,7 @@
   white-space: nowrap;
   border-radius: 0.3125em;
   visibility: hidden;
-  z-index: 1;
+  z-index: 5004;
 }
 
 .tooltip:hover .tooltip-text {
@@ -165,7 +165,7 @@ input:focus, textarea:focus {
   z-index: 5003;
   padding: 0.375em 0; /* 6px / 16px = 0.375em */
   opacity: 1;
-  left: 30.375em; /* 390px / 16px = 24.375em */
+  left: 52.8em; /* 390px / 16px = 24.375em */
   top: 13.5em; /* 226px / 16px = 14.125em */
 }
 

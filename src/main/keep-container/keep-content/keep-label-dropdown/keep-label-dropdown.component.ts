@@ -1,24 +1,25 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Label } from "../../../Data Types/Label";
 import { LabelService } from "../../../Service/label.service";
 import { NoteService } from "../../../Service/note.service";
 import { Subscription } from "rxjs";
 
+
 @Component({
   selector: 'app-keep-label-dropdown',
   templateUrl: './keep-label-dropdown.component.html',
   styleUrls: ['./keep-label-dropdown.component.scss']
 })
-export class KeepLabelDropdownComponent {
+export class KeepLabelDropdownComponent implements OnDestroy {
 
   @Input() note!: Note;
-  labels: Label[] = [];
-  private labelListSubscription!: Subscription;
-  @ Input() searchLabelText: string = '';
-  addLabelIndicator: boolean = false;
+  @Input() searchLabelText: string = '';
   @Input() labelDropdown: boolean = false;
   @Input() DialogBoxOpen: boolean = false;
+  @Input() selectedNote!: Note | null; // Initialize as null
+  private labelListSubscription!: Subscription;
+  labels: Label[] = [];
 
   constructor(private labelService: LabelService, private noteService: NoteService) {
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
@@ -28,14 +29,6 @@ export class KeepLabelDropdownComponent {
 
   isLabelsExist(note: Note): boolean {
     return note.labels.length > 0;
-  }
-
-  checkSearchText() {
-    if (this.searchLabelText != '') {
-      this.addLabelIndicator = true;
-    } else if (this.searchLabelText == '') {
-      this.addLabelIndicator = false;
-    }
   }
 
   addLabel(text: string, note: Note) {
@@ -53,14 +46,23 @@ export class KeepLabelDropdownComponent {
 
   getCheckBox(note: Note, labelToFind: Label): boolean {
     const foundLabel = note.labels.find(label => label.id === labelToFind.id);
+    return !!foundLabel;
+  }
 
-    if (foundLabel) {
-      return foundLabel.showCheckbox;
-    }
-    return false;
+  getDynamicHeight(): string {
+    const numberOfLabels = this.labels.length;
+    const additionalHeight = 35.5;
+    const totalHeight = (numberOfLabels * 29) + additionalHeight;
+    return `${totalHeight}px`;
   }
 
   searchLabels(searchText: string): boolean {
     return this.labelService.searchLabels(searchText);
+  }
+
+  ngOnDestroy(): void {
+    if (this.labelListSubscription) {
+      this.labelListSubscription.unsubscribe();
+    }
   }
 }

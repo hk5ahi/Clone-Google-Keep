@@ -8,42 +8,27 @@ import { NoteService } from "../../../Service/note.service";
 
 })
 export class KeepAddNotesComponent {
-  showFirstForm: boolean = true;
-  showSecondForm: boolean = false;
-  showDropdownMenu: boolean = false;
-  showLabelDropdown: boolean = false;
-  title: string = '';
-  noteMessage: string = '';
   @ViewChild('titleInput', {static: false}) titleInput!: ElementRef;
   @ViewChild('secondForm') secondFormElement!: ElementRef;
   @ViewChild('firstForm') firstFormElement!: ElementRef;
-  @ViewChild('form') FormElement!: ElementRef;
-  @ViewChild('textarea') Text!: ElementRef;
+  @ViewChild('form') formElement!: ElementRef;
+  @ViewChild('textarea') textElement!: ElementRef;
+
+  showFirstForm: boolean = true;
+  showDropdownMenu: boolean = false;
+  title: string = '';
+  noteMessage: string = '';
 
   constructor(private elementRef: ElementRef, private noteService: NoteService) {
   }
 
   toggleDropdownMenu() {
     this.showDropdownMenu = !this.showDropdownMenu;
-    this.showLabelDropdown = false;
   }
 
-  toggleLabelDropdown() {
-    this.showLabelDropdown = true;
-    console.log(this.showLabelDropdown);
-  }
-
-  openSecondForm() {
-    this.showFirstForm = false; // Open the first form
-    this.showSecondForm = true; // Open the second form
-    this.showDropdownMenu = false; // Close the dropdown menu
-    this.addNote();
-  }
-
-  openFirstForm() {
-    this.showFirstForm = true; // Open the first form
-    this.showSecondForm = false; // Open the second form
-    this.showDropdownMenu = false; // Close the dropdown menu
+  toggleForms() {
+    this.showFirstForm = !this.showFirstForm; // Open the first form
+    this.showDropdownMenu = false;
     this.addNote();
   }
 
@@ -62,9 +47,8 @@ export class KeepAddNotesComponent {
       this.showDropdownMenu = false;
       this.showFirstForm = true;
     }
-    if (this.showSecondForm && (this.elementRef.nativeElement.contains(event.target) || (this.FormElement && this.FormElement.nativeElement.contains(event.target)) || (this.Text && this.Text.nativeElement.contains(event.target))) && (this.secondFormElement && !this.secondFormElement.nativeElement.contains(event.target))) {
+    if ((this.elementRef.nativeElement.contains(event.target) || (this.formElement && this.formElement.nativeElement.contains(event.target)) || (this.textElement && this.textElement.nativeElement.contains(event.target))) && (this.secondFormElement && !this.secondFormElement.nativeElement.contains(event.target))) {
       this.showFirstForm = true;
-      this.showSecondForm = false;
       this.showDropdownMenu = false;
       this.addNote();
     }
@@ -83,12 +67,10 @@ export class KeepAddNotesComponent {
     this.showFirstForm = true;
   };
 
-  focusTextarea() {
+  focusTextarea(event: Event) {
+    event.preventDefault();
     this.titleInput.nativeElement.blur();
-    setTimeout(() => {
-      const textarea = document.querySelector('.note-text') as HTMLTextAreaElement;
-      textarea.focus();
-    }, 0);
+    const textarea = document.querySelector('.note-text') as HTMLTextAreaElement;
+    textarea.focus();
   }
-
 }

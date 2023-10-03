@@ -11,8 +11,21 @@ export class LabelService {
 
   private labelListSubject: BehaviorSubject<Label[]> = new BehaviorSubject<Label[]>([]);
   labelList$ = this.labelListSubject.asObservable();
+  private STORAGE_KEY_LABELS = 'labels';
 
   constructor(private noteService: NoteService) {
+    this.loadLabelsFromLocalStorage();
+  }
+
+  private loadLabelsFromLocalStorage(): void {
+    const storedLabels = localStorage.getItem(this.STORAGE_KEY_LABELS);
+    if (storedLabels) {
+      this.labelListSubject.next(JSON.parse(storedLabels));
+    }
+  }
+
+  private saveLabelsToLocalStorage(): void {
+    localStorage.setItem(this.STORAGE_KEY_LABELS, JSON.stringify(this.labelListSubject.getValue()));
   }
 
   public get labelList(): Label[] {
@@ -21,6 +34,7 @@ export class LabelService {
 
   public set labelList(value: Label[]) {
     this.labelListSubject.next(value);
+    this.saveLabelsToLocalStorage();
   }
 
   addLabel(label: string, note?: Note) {
@@ -28,54 +42,19 @@ export class LabelService {
       const newLabel: Label = {
         id: this.labelList.length + 1,
         text: label,
-        showLabelIcon: true,
-        showEditIcon: true,
-        showDeleteIcon: false,
-        showTickIcon: false,
-        showCheckbox: true,
         showCrossIcon: false
       };
-
       if (note) {
-        note.labels.push(newLabel);
+        note.labels = [...note.labels, newLabel];
+        this.noteService.updateNote(note);
       }
       this.labelList = [...this.labelList, newLabel];
       this.noteService.setLabels(this.labelList);
     }
   }
 
-  updateLabelIcons() {
-    this.labelList.forEach(label => {
-      label.showLabelIcon = true;
-      label.showEditIcon = true;
-      label.showDeleteIcon = false;
-      label.showTickIcon = false;
-    });
-  }
-
   searchLabels(searchText: string): boolean {
     return this.labelList.some(label => label.text.toLowerCase().includes(searchText.toLowerCase()));
   }
 
-  deleteLabel(label: Label) {
-    const index = this.labelList.findIndex(l => l.id === label.id);
-    this.labelList.splice(index, 1);
-    this.labelList = [...this.labelList];
-  }
-
-  updateLabel(label: Label) {
-    if (label.text !== "") {
-
-      const index = this.labelList.findIndex(l => l.id === label.id);
-      if (label.text.trim() === "") {
-        let text = this.labelList[index].text;
-        this.labelList[index] = label;
-        this.labelList[index].text = text;
-        this.labelList = [...this.labelList];
-      } else {
-        this.labelList[index] = label;
-        this.labelList = [...this.labelList];
-      }
-    }
-  }
 }

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { KeepService } from "../../Service/keep.service";
+import { HeaderService } from "../../Service/header.service";
 import { NoteService } from "../../Service/note.service";
-import { MatDialog } from "@angular/material/dialog";
-import { KeepLabelModalComponent } from "../keep-content/keep-label-modal/keep-label-modal.component";
 
 @Component({
   selector: 'app-keep-side-bar',
@@ -11,17 +9,7 @@ import { KeepLabelModalComponent } from "../keep-content/keep-label-modal/keep-l
 })
 export class KeepSideBarComponent {
 
-  constructor(public dialog: MatDialog, private keepService: KeepService, private noteService: NoteService) {
-  }
-
-  openLabelModal() {
-    this.openDialog();
-  }
-
-  openDialog(): void {
-    this.dialog.open(KeepLabelModalComponent, {});
-    this.dialog.afterAllClosed.subscribe(() => {
-    });
+  constructor(private keepService: HeaderService, private noteService: NoteService) {
   }
 
   updateIsNotes() {

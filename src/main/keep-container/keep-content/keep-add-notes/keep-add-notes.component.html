@@ -1,7 +1,7 @@
 <div class="form-container" #form>
   <form class="first-form" #firstForm
         *ngIf="showFirstForm"
-        (click)="openSecondForm()">
+        (click)="toggleForms()">
     <input class="note-text" type="text" placeholder="Take a note..."/>
     <div class="form-actions">
     </div>
@@ -10,7 +10,7 @@
 <div *ngIf="!showFirstForm" class="form-container active-form">
   <form class="second-form" #secondForm>
     <input name="title" type="text" [(ngModel)]="title" class="note-title" placeholder="Title" #titleInput
-           (keydown.enter)="focusTextarea()"/>
+           (keydown.enter)="focusTextarea($event)"/>
     <textarea
       name="noteMessage"
       class="note-text"
@@ -31,17 +31,13 @@
           <span class="tooltip-text">More</span>
         </div>
       </div>
-      <button class="close-btn icon" (click)="openFirstForm()">Close</button>
+      <button class="close-btn icon" (click)="toggleForms()">Close</button>
     </div>
   </form>
 </div>
 <div *ngIf="showDropdownMenu" class="dropdown-menu">
   <ul>
-    <li (click)="toggleLabelDropdown()" class="item"><a class="text">Add label</a></li>
+    <li class="item"><a class="text">Add label</a></li>
   </ul>
-  <app-keep-label-dropdown *ngIf="showLabelDropdown"
-                           [labelDropdown]="showLabelDropdown"
-                           [DialogBoxOpen]="false">
-  </app-keep-label-dropdown>
 </div>
 <app-keep-notes #textarea></app-keep-notes>

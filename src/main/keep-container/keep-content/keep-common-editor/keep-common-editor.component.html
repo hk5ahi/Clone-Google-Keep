@@ -9,19 +9,7 @@
       (input)="adjustTextareaHeight($event)"
 
     ></textarea>
-    <div *ngIf="isLabelsExist(data.Note)" class="note-labels">
-      <div *ngFor="let label of data.Note.labels" (mouseenter)="onMouseEnter(label)"
-           (mouseleave)="onMouseLeave(label)">
-        <div class="note-label">
-          <div>{{label.text}}</div>
-          <div class="tooltip" *ngIf="label.showCrossIcon">
-            <img class=" small-icon small-cross-icon" src="assets/svg/small-cross.svg"
-                 alt="cross" (click)="removeLabel(data.Note,label,$event)">
-            <span class="tooltip-text">Rename label</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-keep-store-labels [note]="data.Note" [ModalOpen]="true"></app-keep-store-labels>
     <div class="form-actions">
       <div class="icons">
         <div class="tooltip">
@@ -43,7 +31,8 @@
           <span class="tooltip-text">More</span>
         </div>
 
-        <div *ngIf="data.Note.showSelectedDropdown" class="dropdown-menu-selected">
+
+        <div *ngIf="data.Note.showDropdown" class="dropdown-menu-selected">
           <ul>
             <li class="item"><a class="text" (click)="deleteNote($event,data.Note.id)">Delete Note</a></li>
             <ng-container *ngIf="!hasLabels(data.Note)">
@@ -55,8 +44,8 @@
           </ul>
         </div>
         <app-keep-label-dropdown [note]="data.Note" [searchLabelText]="searchLabelText"
-                                 [labelDropdown]="data.Note.showSelectedLabelDropdown"
-                                 [DialogBoxOpen]="true"></app-keep-label-dropdown>
+                                 [labelDropdown]="data.Note.showLabelDropdown"
+                                 [DialogBoxOpen]="true" [selectedNote]="data.Note"></app-keep-label-dropdown>
       </div>
       <button class="close-btn" (click)="closeEditor(data.Note)">Close</button>
     </div>

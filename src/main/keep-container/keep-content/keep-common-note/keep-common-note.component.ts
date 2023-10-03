@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable, of, Subscription, switchMap } from "rxjs";
 import { Note } from "../../../Data Types/Note";
 import { NoteService } from "../../../Service/note.service";
@@ -26,24 +26,56 @@ import { Label } from "../../../Data Types/Label";
   templateUrl: './keep-common-note.component.html',
 })
 
-export class KeepCommonNoteComponent implements OnInit {
+export class KeepCommonNoteComponent implements OnInit, OnDestroy {
 
-  notes$: Observable<Note[]>;
-  selectedNote: Note | null = null; // Initialize as null
   @Input() isArchiveNotePresent: boolean = false;
   @Input() isSearch: boolean = false;
+  @ViewChild('notes') notes!: ElementRef;
+  notes$: Observable<Note[]>;
+  selectedNote: Note | null = null; // Initialize as null
   searchValue: string = '';
   dialogBoxOpen: boolean = false;
   labels: Label[] = [];
   private labelListSubscription!: Subscription;
   searchLabelText: string = '';
-  @ViewChild('notes') notes!: ElementRef;
+
 
   constructor(public dialog: MatDialog, private noteService: NoteService, private labelService: LabelService) {
     this.notes$ = this.noteService.getNotes();
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
       this.labels = labels;
     });
+  }
+
+  ngOnInit(): void {
+    this.notes$ = this.noteService.getNotes();
+    this.notes$.subscribe((notes) => {
+      if (Array.isArray(notes)) {
+        this.notes$ = new Observable((observer) => {
+          observer.next(notes);
+          observer.complete();
+        });
+      }
+    });
+    this.selectedNote = null;
+
+    this.noteService.getSearchedData().subscribe((searchData) => {
+      this.searchValue = searchData;
+    });
+    this.notes$.subscribe((notes) => {
+      if (Array.isArray(notes)) {
+        this.notes$ = new Observable((observer) => {
+          observer.next(notes);
+          observer.complete();
+        });
+      }
+    });
+  }
+
+  isCommonNote(note: Note): boolean {
+    const isNotePresent = this.noteService.filteredNotes.some(filteredNote => filteredNote.id === note.id);
+    const isArchivedMatch = this.isArchiveNotePresent ? note.isArchived : !note.isArchived;
+    return (this.isSearch && isNotePresent && isArchivedMatch) || (!this.isSearch && isArchivedMatch);
   }
 
   selectNoteForEditing(note: Note) {
@@ -53,10 +85,6 @@ export class KeepCommonNoteComponent implements OnInit {
     note.showDropdown = false;
     this.notes$ = of(this.noteService.changeHiddenStatus(note.id, true));
     this.openDialog();
-  }
-
-  makeAllNotesVisible() {
-    this.notes$ = of(this.noteService.makeAllNotesVisible());
   }
 
   formattedContent(content: string): string {
@@ -75,29 +103,15 @@ export class KeepCommonNoteComponent implements OnInit {
   }
 
   handleMoreIconClick(event: MouseEvent, note: Note) {
+
     note.showDropdown = !note.showDropdown;
     if (note.showLabelDropdown) {
       note.showLabelDropdown = !note.showLabelDropdown;
       this.searchLabelText = '';
     }
     event.stopPropagation();
-    note.isMoreIconClicked = !note.isMoreIconClicked;
-  }
-
-  ngOnInit(): void {
-    this.notes$ = this.noteService.getNotes();
     this.notes$.subscribe((notes) => {
-      if (Array.isArray(notes)) {
-        this.notes$ = new Observable((observer) => {
-          observer.next(notes);
-          observer.complete();
-        });
-      }
-    });
-    this.selectedNote = null;
-
-    this.noteService.getSearchedData().subscribe((searchData) => {
-      this.searchValue = searchData;
+      this.noteService.setNotes(notes);
     });
   }
 
@@ -119,21 +133,6 @@ export class KeepCommonNoteComponent implements OnInit {
       this.labels = labels;
     });
     return note.labels.length > 0;
-  }
-
-  onMouseEnter(label: Label) {
-    label.showCrossIcon = true;
-  }
-
-  onMouseLeave(label: Label) {
-    label.showCrossIcon = false;
-  }
-
-  removeLabel(note: Note, label: Label, event: Event) {
-    event.stopPropagation();
-    this.noteService.removeLabel(note, label);
-    note.showLabelDropdown = false;
-    note.showDropdown = false;
   }
 
   convertNewlinesToBreaks(text: string): string {
@@ -170,7 +169,6 @@ export class KeepCommonNoteComponent implements OnInit {
       });
       this.dialog.afterAllClosed.subscribe(() => {
           this.dialogBoxOpen = false;
-          this.makeAllNotesVisible();
         }
       );
     }
@@ -189,6 +187,12 @@ export class KeepCommonNoteComponent implements OnInit {
           });
         }
       );
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.labelListSubscription) {
+      this.labelListSubscription.unsubscribe();
     }
   }
 }

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class KeepService {
+export class HeaderService {
 
   private isNotesSubject = new BehaviorSubject<boolean>(true);
   private isArchiveSubject = new BehaviorSubject<boolean>(false);

@@ -1,0 +1,19 @@
+<div *ngIf="isLabelsExist()" class="note-labels" [ngClass]="{ 'note-labels-modal': ModalOpen}">
+
+  <div class="note-label" *ngFor="let label of getLabels()" (mouseenter)="toggleCrossIcon(label, true)"
+       (mouseleave)="toggleCrossIcon(label, false)">
+    <div>{{label.text}}</div>
+    <div class="tooltip" *ngIf="label.showCrossIcon">
+      <img class="small-icon small-cross-icon" src="assets/svg/small-cross.svg"
+           alt="cross" (click)="removeLabel(note,label,$event)">
+      <span class="tooltip-text">Rename label</span>
+    </div>
+  </div>
+
+  <div *ngIf="!ModalOpen">
+    <div *ngIf="note.labels.length > 2">
+      <div class="note-label" *ngIf="note.labels.length === 3">{{note.labels[2].text}}</div>
+      <div class="note-label-more" *ngIf="note.labels.length > 3">+{{note.labels.length - 2}}</div>
+    </div>
+  </div>
+</div>

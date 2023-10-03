@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Observable, of, Subscription, switchMap } from "rxjs";
 import { NoteService } from "../../../Service/note.service";
@@ -13,41 +13,20 @@ import { LabelService } from "../../../Service/label.service";
   styleUrls: ['./keep-common-editor.component.scss'],
 
 })
-export class KeepCommonEditorComponent implements OnInit {
+export class KeepCommonEditorComponent implements OnInit, OnDestroy {
 
   @Input() selectedNote!: Note | null; // Initialize as null
+  @ViewChild('formContainer') formContainer!: ElementRef;
   notes$: Observable<Note[]>;
   labels: Label[] = [];
   private labelListSubscription!: Subscription;
   searchLabelText: string = '';
-  @ViewChild('formContainer') formContainer!: ElementRef;
-
-  handleMoreIconClick(event: MouseEvent, note: Note) {
-    event.stopPropagation();
-    note.showSelectedDropdown = !note.showSelectedDropdown;
-    note.isMoreIconClicked = !note.isMoreIconClicked;
-    note.showSelectedLabelDropdown = false;
-
-  }
-
-  hasLabels(note: Note) {
-    this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
-      this.labels = labels;
-    });
-    return note.labels.length > 0;
-  }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     Note: Note,
     dialogBoxOpen: boolean
   }, public dialogRef: MatDialogRef<KeepCommonEditorComponent>, private noteService: NoteService, public dialog: MatDialog, private keepCommonNoteComponent: KeepCommonNoteComponent, private labelService: LabelService) {
     this.notes$ = this.noteService.getNotes();
-  }
-
-  showLabelDropdown(event: Event, note: Note) {
-    event.stopPropagation();
-    note.showSelectedDropdown = !note.showSelectedDropdown;
-    note.showSelectedLabelDropdown = !note.showSelectedLabelDropdown;
   }
 
   ngOnInit(): void {
@@ -63,10 +42,31 @@ export class KeepCommonEditorComponent implements OnInit {
     this.dialogRef
       .afterClosed()
       .subscribe((result) => {
-        this.data.Note.showSelectedLabelDropdown = false;
-        this.data.Note.showSelectedDropdown = false;
+        this.data.Note.showLabelDropdown = false;
+        this.data.Note.showDropdown = false;
+        this.data.Note.isHidden = false;
       });
 
+  }
+
+  handleMoreIconClick(event: MouseEvent, note: Note) {
+    event.stopPropagation();
+    note.showLabelDropdown = false;
+    note.showDropdown = !note.showDropdown;
+
+  }
+
+  hasLabels(note: Note) {
+    this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
+      this.labels = labels;
+    });
+    return note.labels.length > 0;
+  }
+
+  showLabelDropdown(event: Event, note: Note) {
+    event.stopPropagation();
+    note.showLabelDropdown = !note.showLabelDropdown;
+    note.showDropdown = false;
   }
 
   saveNoteChanges() {
@@ -117,20 +117,9 @@ export class KeepCommonEditorComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  isLabelsExist(note: Note): boolean {
-    return note.labels.length > 0;
-  }
-
-  onMouseEnter(label: Label) {
-    label.showCrossIcon = true;
-  }
-
-  onMouseLeave(label: Label) {
-    label.showCrossIcon = false;
-  }
-
-  removeLabel(note: Note, label: Label, event: Event) {
-    event.stopPropagation();
-    this.noteService.removeLabel(note, label);
+  ngOnDestroy(): void {
+    if (this.labelListSubscription) {
+      this.labelListSubscription.unsubscribe();
+    }
   }
 }

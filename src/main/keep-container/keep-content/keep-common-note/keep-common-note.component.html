@@ -2,7 +2,7 @@
   <div *ngFor="let note of notes$ |async" [@noteEnterLeave]="note">
 
     <div class="note"
-         *ngIf="(isSearch && note.noteExist && (isArchiveNotePresent ? note.isArchived : !note.isArchived) ) || (!isSearch && (isArchiveNotePresent ? note.isArchived : !note.isArchived))"
+         *ngIf="isCommonNote(note)"
          [ngClass]="{ 'empty-note': note.title=='' || note.content==''}"
          [hidden]="note.isHidden"
          (click)="selectNoteForEditing(note)">
@@ -27,24 +27,8 @@
                  [innerHTML]="convertNewlinesToBreaks(note.content)"></div>
           </ng-container>
         </ng-container>
-        <div *ngIf="isLabelsExist(note)" class="note-labels">
-          <div *ngFor="let label of note.labels.slice(0, 2)" (mouseenter)="onMouseEnter(label)"
-               (mouseleave)="onMouseLeave(label)">
-            <div class="note-label">
-              <div>{{label.text}}</div>
-              <div class="tooltip" *ngIf="label.showCrossIcon">
-                <img class="small-icon small-cross-icon" src="assets/svg/small-cross.svg"
-                     alt="cross" (click)="removeLabel(note,label,$event)">
-                <span class="tooltip-text">Rename label</span>
-              </div>
-            </div>
-          </div>
 
-          <div *ngIf="note.labels.length > 2">
-            <div class="note-label" *ngIf="note.labels.length === 3">{{note.labels[2].text}}</div>
-            <div class="note-label-more" *ngIf="note.labels.length > 3">+{{note.labels.length - 2}}</div>
-          </div>
-        </div>
+        <app-keep-store-labels [note]="note" [ModalOpen]="false"></app-keep-store-labels>
 
         <div class="icons">
           <div class="tooltip">
@@ -67,7 +51,8 @@
       </div>
     </div>
 
-    <div *ngIf="note.showDropdown" class="dropdown-menu" [ngClass]="{ 'dropdown-menu-up': isLabelsExist(note)}">
+    <div *ngIf="note.showDropdown && selectedNote==null" class="dropdown-menu"
+         [ngClass]="{ 'dropdown-menu-up': isLabelsExist(note)}">
       <ul>
         <li class="item"><a class="text" (click)="deleteNote($event,note.id)">Delete Note</a></li>
         <ng-container *ngIf="!hasLabels(note)">
@@ -79,7 +64,7 @@
       </ul>
     </div>
     <app-keep-label-dropdown [note]="note" [searchLabelText]="searchLabelText" [labelDropdown]="note.showLabelDropdown"
-                             [DialogBoxOpen]="false"></app-keep-label-dropdown>
+                             [DialogBoxOpen]="false" [selectedNote]="selectedNote"></app-keep-label-dropdown>
   </div>
 </div>
 

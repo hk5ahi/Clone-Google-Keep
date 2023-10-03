@@ -108,6 +108,9 @@
 .close-btn:hover {
   background: ghostwhite;
 }
+.close-btn:focus {
+  background-color: #e0e2e5;
+}
 
 .small-icon {
   color: black;
@@ -435,7 +438,7 @@ textarea {
   flex: 0 0 auto;
   width: 1.125em;
   position: relative;
-  right: -0.4em;
+  right: -0.25em;
   top: 0.1em;
   color: black !important;
 
@@ -443,9 +446,11 @@ textarea {
 
 .small-cross-icon:hover {
   cursor: pointer;
-  background: #ebebec;
-  border-radius: 50%;
+  color: #202124 !important;
+  border-radius: 50% !important;
   opacity: 1 !important;
   visibility: visible !important;
+  background-color: lightgray !important;
+  z-index: 10000000;
 
 }

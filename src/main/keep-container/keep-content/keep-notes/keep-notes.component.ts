@@ -15,14 +15,6 @@ export class KeepNotesComponent implements OnInit {
     this.notes$ = this.noteService.getNotes();
   }
 
-  hasNotes() {
-    return this.notes$.pipe(
-      map((notes) => notes.length),
-      defaultIfEmpty(0)
-    );
-
-  }
-
   ngOnInit(): void {
     this.notes$ = this.noteService.getNotes();
 
@@ -34,6 +26,14 @@ export class KeepNotesComponent implements OnInit {
         });
       }
     });
+  }
+
+  hasNotes() {
+    return this.notes$.pipe(
+      map((notes) => notes.length),
+      defaultIfEmpty(0)
+    );
+
   }
 
   @HostListener('document:click', ['$event'])

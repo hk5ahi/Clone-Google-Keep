@@ -1,13 +1,13 @@
-<div *ngIf="labelDropdown" class="label-Dropdown" (click)="stopEvent($event)"
+<div *ngIf="labelDropdown && (DialogBoxOpen || !selectedNote)" class="label-Dropdown" (click)="stopEvent($event)"
      [ngClass]="{ 'label-Dropdown-menu-up': isLabelsExist(note),'label-Dropdown-position':DialogBoxOpen, 'label-selected': isLabelsExist(note) && DialogBoxOpen}">
   <div class="label-text">Label note</div>
   <div class="container-input">
-    <input class="input" placeholder="Enter label name" [(ngModel)]="searchLabelText"
-           (ngModelChange)=checkSearchText()>
+    <input class="input" placeholder="Enter label name" [(ngModel)]="searchLabelText">
     <span class="small-search-icon">
             <img src="assets/svg/small-search.svg" alt="search">
           </span>
   </div>
+
   <div *ngIf="(searchLabelText!='' && !searchLabels(searchLabelText))" class="add-label-area"
        (click)="addLabel(searchLabelText,note)">
     <div class="label-add">
@@ -17,18 +17,20 @@
       <div class="label-search-text">Create "<span class="bold">{{searchLabelText}}</span> "</div>
     </div>
   </div>
+
   <div *ngIf="searchLabels(searchLabelText)">
-    <div (click)="toggleCheckBox(note,label)" *ngFor="let label of labels" class="show-labels">
-      <div class="save-labels-area">
-        <div>
-          <img *ngIf="getCheckBox(note,label)" src="assets/svg/check-box.svg" alt="check-box" class="check-box">
-          <img *ngIf="!getCheckBox(note,label)" src="assets/svg/small-uncheck.svg" alt="uncheck-box" class="check-box">
+    <div [style.height]="getDynamicHeight()" class="labels-container">
+      <div (click)="toggleCheckBox(note,label)" *ngFor="let label of labels" class="show-labels">
+        <div class="save-labels-area">
+          <div>
+            <img *ngIf="getCheckBox(note,label)" src="assets/svg/check-box.svg" alt="check-box" class="check-box">
+            <img *ngIf="!getCheckBox(note,label)" src="assets/svg/small-uncheck.svg" alt="uncheck-box"
+                 class="check-box">
+          </div>
+          <div class="save-label-text"
+               [ngClass]="{'save-label-text-add': !getCheckBox(note, label)}">{{label.text}}</div>
         </div>
-        <div class="save-label-text"
-             [ngClass]="{'save-label-text-add': !getCheckBox(note, label)}">{{label.text}}</div>
-
       </div>
-
     </div>
   </div>
 </div>

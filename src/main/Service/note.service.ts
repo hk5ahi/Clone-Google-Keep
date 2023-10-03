@@ -9,18 +9,48 @@ import { Label } from "../Data Types/Label";
 export class NoteService {
   private notes: Note[] = [];
   private labels: Label[] = [];
+  filteredNotes: Note[] = [];
   private notesSubject: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
   private labelsSubject: BehaviorSubject<Label[]> = new BehaviorSubject<Label[]>([]);
   private searchDataSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private STORAGE_KEY_NOTES = 'notes';
+  private STORAGE_KEY_LABELS = 'labels';
 
   constructor() {
-    this.getNotes().subscribe((notes) => {
-      this.notes = notes;
-    });
-    this.getLabels().subscribe((labels) => {
-      this.labels = labels;
-    });
+    this.loadNotesFromLocalStorage();
+    this.loadLabelsFromLocalStorage();
+  }
 
+  private loadNotesFromLocalStorage(): void {
+    const storedNotes = localStorage.getItem(this.STORAGE_KEY_NOTES);
+    if (storedNotes) {
+      this.notes = JSON.parse(storedNotes);
+      this.notesSubject.next(this.notes);
+    }
+  }
+
+  private loadLabelsFromLocalStorage(): void {
+    const storedLabels = localStorage.getItem(this.STORAGE_KEY_LABELS);
+    if (storedLabels) {
+      this.labels = JSON.parse(storedLabels);
+      this.updateNotesDropdownState();
+      this.labelsSubject.next(this.labels);
+    }
+  }
+
+  private updateNotesDropdownState(): void {
+    this.notes.forEach((note) => {
+      note.showLabelDropdown = false;
+      note.showDropdown = false;
+    });
+  }
+
+  private saveNotesToLocalStorage(): void {
+    localStorage.setItem(this.STORAGE_KEY_NOTES, JSON.stringify(this.notes));
+  }
+
+  private saveLabelsToLocalStorage(): void {
+    localStorage.setItem(this.STORAGE_KEY_LABELS, JSON.stringify(this.labels));
   }
 
   getSearchedData(): Observable<string> {
@@ -28,17 +58,8 @@ export class NoteService {
   }
 
   isNotesSimpleAndArchive(): boolean {
-    let hasArchived = false;
-    let hasUnarchived = false;
-
-    for (const note of this.notes) {
-      if (note.isArchived && note.noteExist) {
-        hasArchived = true;
-      } else if (!note.isArchived && note.noteExist) {
-        hasUnarchived = true;
-      }
-    }
-    return hasArchived && hasUnarchived;
+    return this.filteredNotes.some((note) => note.isArchived) &&
+      this.filteredNotes.some((note) => !note.isArchived);
   }
 
   setSearchedData(data: string): void {
@@ -47,36 +68,42 @@ export class NoteService {
 
   setLabels(labels: Label[]): void {
     this.labelsSubject.next(labels);
+    this.labels = labels;
+    this.saveLabelsToLocalStorage();
+  }
+
+  setNotes(notes: Note[]): void {
+    this.notesSubject.next(notes);
+    this.notes = notes;
+    this.saveNotesToLocalStorage();
   }
 
   notesExist(data: string): void {
     this.searchDataSubject.next(data);
+    this.filteredNotes = [];
 
-    for (const note of this.notes) {
-      note.noteExist = false;
-    }
-
-    const searchDataLower = data.toLowerCase();
-
-    if (data.trim() !== '') {
-      for (const note of this.notes) {
-        const titleLower = note.title.toLowerCase();
-        const contentLower = note.content.toLowerCase();
-
-        if (titleLower.includes(searchDataLower) || contentLower.includes(searchDataLower)) {
-          note.noteExist = true;
-        }
-        if (note.labels) {
-          for (const label of note.labels) {
-            const labelLower = label.text.toLowerCase();
-            if (labelLower.includes(searchDataLower)) {
-              note.noteExist = true;
-              break;
-            }
-          }
-        }
+    const searchDataLower = data.trim().toLowerCase();
+    this.notes.forEach(note => {
+      const matchedNote = this.doesNoteMatchSearch(note, searchDataLower);
+      if (matchedNote) {
+        this.filteredNotes.push(matchedNote);
       }
+    });
+
+    this.saveNotesToLocalStorage();
+  }
+
+  private doesNoteMatchSearch(note: Note, searchDataLower: string): Note | undefined {
+    const titleLower = note.title.toLowerCase();
+    const contentLower = note.content.toLowerCase();
+
+    if (titleLower.includes(searchDataLower) || contentLower.includes(searchDataLower)) {
+      return note;
     }
+    if (note.labels && note.labels.some(label => label.text.toLowerCase().includes(searchDataLower))) {
+      return note;
+    }
+    return undefined;
   }
 
   getNotes(): Observable<Note[]> {
@@ -91,15 +118,14 @@ export class NoteService {
     const existingLabelIndex = note.labels.findIndex(label => label.id === labelToToggle.id);
 
     if (existingLabelIndex !== -1) {
-      note.labels[existingLabelIndex].showCheckbox = !note.labels[existingLabelIndex].showCheckbox;
-      if (!note.labels[existingLabelIndex].showCheckbox) {
-        note.labels.splice(existingLabelIndex, 1);
-      }
+      // Label found in note's list, remove it
+      note.labels.splice(existingLabelIndex, 1);
     } else {
-
-      const newLabel: Label = {...labelToToggle, showCheckbox: true};
-      note.labels = [newLabel, ...note.labels];
+      // Label not found, add it to the note's list
+      const newLabel: Label = {...labelToToggle};
+      note.labels.push(newLabel);
     }
+    this.saveNotesToLocalStorage();
   }
 
   removeLabel(note: Note, labelToRemove: Label) {
@@ -107,50 +133,35 @@ export class NoteService {
     const labelIndex = note.labels.findIndex(label => label.id === labelToRemove.id);
     if (labelIndex !== -1) {
       note.labels.splice(labelIndex, 1);
+      this.saveNotesToLocalStorage();
     }
   }
-  addAndArchive(title: string, message: string) {
+
+  addNote(title: string, message: string, isArchived: boolean = false) {
     if (title === '' && message === '') {
       return;
     }
+
     const newNote: Note = {
-      id: this.notes.length + 1, // Generate a unique ID
+      id: this.notes.length + 1,
       title: title || '',
       content: message || '',
-      isArchived: true,
+      isArchived: isArchived,
       showDropdown: false,
       isHidden: false,
-      isMoreIconClicked: false,
-      noteExist: false,
       labels: [],
-      showSelectedLabelDropdown: false,
-      showSelectedDropdown: false,
       showLabelDropdown: false,
     };
 
     this.notes.unshift(newNote);
     this.notesSubject.next(this.notes);
+    this.saveNotesToLocalStorage();
   }
 
-  addNote(title: string, noteMessage: string) {
-    const newNote: Note = {
-      id: this.notes.length + 1, // Generate a unique ID
-      title: title,
-      content: noteMessage,
-      isArchived: false,
-      showDropdown: false,
-      isHidden: false,
-      isMoreIconClicked: false,
-      noteExist: false,
-      labels: [],
-      showSelectedLabelDropdown: false,
-      showSelectedDropdown: false,
-      showLabelDropdown: false,
-    };
-
-    this.notes.unshift(newNote);
-    this.notesSubject.next(this.notes);
+  addAndArchive(title: string, message: string) {
+    this.addNote(title, message, true);
   }
+
 
   updateNote(selectedNote: Note | null): null {
     if (selectedNote) {
@@ -158,16 +169,11 @@ export class NoteService {
       if (noteIndex !== -1) {
         this.notes[noteIndex].content = selectedNote.content;
         this.notes[noteIndex].title = selectedNote.title;
+        this.notes[noteIndex].labels = selectedNote.labels;
+        this.saveNotesToLocalStorage();
       }
     }
     return null;
-  }
-
-  makeAllNotesVisible(): Note[] {
-    for (const note of this.notes) {
-      note.isHidden = false;
-    }
-    return this.notes;
   }
 
   archiveNote(id: number) {
@@ -176,7 +182,7 @@ export class NoteService {
     if (noteIndexToArchive >= 0) {
 
       this.notes[noteIndexToArchive].isArchived = true;
-      this.notes[noteIndexToArchive].isHidden = false;
+      this.saveNotesToLocalStorage();
     }
     return this.notes;
   }
@@ -184,12 +190,10 @@ export class NoteService {
   unArchiveNote(id: number) {
 
     const noteIndexToUnArchive = this.notes.findIndex((note) => note.id === id);
-
     if (noteIndexToUnArchive >= 0) {
       this.notes[noteIndexToUnArchive].isArchived = false;
-      this.notes[noteIndexToUnArchive].isHidden = false;
+      this.saveNotesToLocalStorage();
     }
-
     return this.notes;
   }
 
@@ -198,6 +202,7 @@ export class NoteService {
     if (noteIndexToDelete >= 0) {
       this.notes.splice(noteIndexToDelete, 1);
       this.notesSubject.next(this.notes);
+      this.saveNotesToLocalStorage();
     }
     return this.notesSubject.asObservable();
   }
@@ -207,7 +212,9 @@ export class NoteService {
     const noteIndexToHide = this.notes.findIndex((note) => note.id === id);
     if (noteIndexToHide >= 0) {
       this.notes[noteIndexToHide].isHidden = isHidden;
+      this.saveNotesToLocalStorage();
     }
     return this.notes;
   }
+
 }

@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
-import { KeepService } from "../Service/keep.service";
+import { HeaderService } from "../Service/header.service";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-
 import { NoteService } from "../Service/note.service";
 
 @Component({
@@ -12,11 +11,17 @@ import { NoteService } from "../Service/note.service";
 })
 export class NavigationBarComponent implements OnInit {
 
-  isNotes$ = this.keepService.isNotes$;
-  isArchive$ = this.keepService.isArchive$;
+  isNotes$ = this.headerService.isNotes$;
+  isArchive$ = this.headerService.isArchive$;
   searchData: string = '';
 
-  constructor(private keepService: KeepService, private renderer: Renderer2, private el: ElementRef, private router: Router, private noteService: NoteService) {
+  constructor(private headerService: HeaderService, private renderer: Renderer2, private el: ElementRef, private router: Router, private noteService: NoteService) {
+  }
+
+  ngOnInit(): void {
+    this.noteService.getSearchedData().subscribe((searchData) => {
+      this.searchData = searchData;
+    });
   }
 
   isNotes(): Observable<boolean> {
@@ -47,12 +52,6 @@ export class NavigationBarComponent implements OnInit {
     }
     this.noteService.notesExist(newValue);
 
-  }
-
-  ngOnInit(): void {
-    this.noteService.getSearchedData().subscribe((searchData) => {
-      this.searchData = searchData;
-    });
   }
 
 }
