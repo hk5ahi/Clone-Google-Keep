@@ -55,7 +55,7 @@ import { KeepStoreLabelsComponent } from "../keep-container/keep-content/keep-st
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [NoteService, HeaderService, LabelService],
+  providers: [NoteService, HeaderService,KeepCommonNoteComponent, LabelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
