@@ -7,26 +7,26 @@ import { KeepSearchComponent } from "./keep-search/keep-search.component";
 
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
-    component: KeepContentComponent,
-    children: [
-      {path: 'home', component: KeepAddNotesComponent},
-      {path: 'archive', component: KeepNotesArchiveComponent},
-      {path: 'search', component: KeepSearchComponent},
-    ]
-  },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+    },
+    {
+        path: '',
+        component: KeepContentComponent,
+        children: [
+            {path: 'home', component: KeepAddNotesComponent},
+            {path: 'archive', component: KeepNotesArchiveComponent},
+            {path: 'search', component: KeepSearchComponent},
+        ]
+    },
 ];
 
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class KeepContentRoutingModule {
 }

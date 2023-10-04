@@ -82,9 +82,6 @@ input:focus {
   height: 1.0625em;
 }
 
-.dropdown-menu-up, .label-Dropdown-menu-up {
-  top: -1.5em !important;
-}
 
 .add-label-area:hover {
   background-color: #f1f3f4;
@@ -105,8 +102,8 @@ input:focus {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  margin-left: 17%; /* Add space at the start */
-  margin-right: 15%; /* Add space at the end */
+  margin-left: 16.5%; /* Add space at the start */
+  margin-right: 0.5%; /* Add space at the end */
 }
 
 .note {
@@ -118,28 +115,33 @@ input:focus {
   border: 0.0625em solid #e0e1e0;
   border-radius: 0.5em;
   position: relative;
-  transition: transform 0.3s ease-in-out;
+  word-wrap: break-word;
+
 
 }
 
-@keyframes slideLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
+.note-animation {
+  transition: transform 0.3s ease-in-out;
+  animation: fadeInAnimation ease 500ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0.95;
     transform: translateX(-100%);
   }
-
-}
-
-@keyframes fadeOut {
-  from {
+  100% {
     opacity: 1;
-  }
-  to {
-    opacity: 0;
+    transform: translateX(0);
   }
 }
+
+.hide-note {
+  opacity: 0 !important;
+}
+
 
 .note.ng-deleted {
   animation: slideLeft 0.3s ease-in-out, fadeOut 0.3s ease-in-out;
@@ -253,21 +255,6 @@ input:focus {
   visibility: visible;
 }
 
-.dropdown-menu {
-  background-color: #fff;
-  width: 8.6em !important; /* 7.8vw converted to em */
-  min-height: 2.16em; /* 13.5vh converted to em */
-  border-width: 0;
-  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
-  position: relative;
-  -webkit-border-radius: 0.25em; /* 4px converted to em */
-  border-radius: 0.25em; /* 4px converted to em */
-  z-index: 5003;
-  padding: 0.375em 0; /* 6px converted to em */
-  opacity: 1;
-  left: 14.25em; /* 356px converted to em */
-  top: -1.2em; /* 277px converted to em */
-}
 
 .dropdown-menu-selected {
   background-color: #fff;
@@ -285,12 +272,6 @@ input:focus {
   top: 2.25em; /* 277px converted to em */
 }
 
-.item {
-  padding: 0.4375em 0.75em; /* 7px 12px converted to em */
-  height: 100%;
-  vertical-align: top;
-  list-style-type: none;
-}
 
 .icon {
   width: 2.125em; /* 34px converted to em */

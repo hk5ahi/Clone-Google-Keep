@@ -1,54 +1,44 @@
-<div class="form-container active-form " #formContainer>
-  <form class="second-form">
-    <input name="title" type="text" [(ngModel)]="data.Note.title" class="note-title" placeholder="Title"/>
-    <textarea
-      name="noteMessage"
-      class="note-text"
-      placeholder="Note"
-      [(ngModel)]="data.Note.content"
-      (input)="adjustTextareaHeight($event)"
+<div #formContainer class="form-container active-form ">
+    <form class="second-form">
+        <input [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title" type="text"/>
+        <textarea
+                (input)="adjustTextareaHeight($event)"
+                [(ngModel)]="data.Note.content"
+                class="note-text"
+                name="noteMessage"
+                placeholder="Note"
 
-    ></textarea>
-    <app-keep-store-labels [note]="data.Note" [ModalOpen]="true"></app-keep-store-labels>
-    <div class="form-actions">
-      <div class="icons">
-        <div class="tooltip">
+        ></textarea>
+        <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
+        <div class="form-actions">
+            <div class="icons">
+                <div class="tooltip">
 
-          <ng-container *ngIf="data.Note.isArchived">
-            <span class="material-icons-outlined hover small-icon icon"
-                  (click)=UnArchiveNote(data.Note.id)>unarchive</span>
-            <span class="tooltip-text">Unarchive</span>
-          </ng-container>
-          <ng-container *ngIf="!data.Note.isArchived">
-            <span class="material-icons-outlined hover small-icon icon"
-                  (click)="archiveNote(data.Note.id)">archive</span>
-            <span class="tooltip-text">Archive</span>
-          </ng-container>
+                    <ng-container *ngIf="data.Note.isArchived">
+            <span (click)=UnArchiveNote(data.Note.id)
+                  class="material-icons-outlined hover small-icon icon">unarchive</span>
+                        <span class="tooltip-text">Unarchive</span>
+                    </ng-container>
+                    <ng-container *ngIf="!data.Note.isArchived">
+            <span (click)="archiveNote(data.Note.id)"
+                  class="material-icons-outlined hover small-icon icon">archive</span>
+                        <span class="tooltip-text">Archive</span>
+                    </ng-container>
 
+                </div>
+                <div class="tooltip">
+                    <span (click)="handleMoreIconClick($event, data.Note)"
+                          class="material-icons-outlined hover small-icon">more_vert</span>
+                    <span class="tooltip-text">More</span>
+                </div>
+                <app-keep-dropdown-menu [OpenDialogue]="true" [note]="data.Note"
+                                        [selectedNote]="data.Note"></app-keep-dropdown-menu>
+                <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
+                                         [note]="data.Note"
+                                         [searchLabelText]="searchLabelText" [selectedNote]="data.Note"></app-keep-label-dropdown>
+            </div>
+            <button (click)="closeEditor()" class="close-btn">Close</button>
         </div>
-        <div class="tooltip">
-          <span (click)="handleMoreIconClick($event, data.Note)" class="material-icons-outlined hover small-icon">more_vert</span>
-          <span class="tooltip-text">More</span>
-        </div>
-
-
-        <div *ngIf="data.Note.showDropdown" class="dropdown-menu-selected">
-          <ul>
-            <li class="item"><a class="text" (click)="deleteNote($event,data.Note.id)">Delete Note</a></li>
-            <ng-container *ngIf="!hasLabels(data.Note)">
-              <li class="item"><a class="text" (click)="showLabelDropdown($event,data.Note)">Add label</a></li>
-            </ng-container>
-            <ng-container *ngIf="hasLabels(data.Note)">
-              <li class="item"><a class="text" (click)="showLabelDropdown($event,data.Note)">Change labels</a></li>
-            </ng-container>
-          </ul>
-        </div>
-        <app-keep-label-dropdown [note]="data.Note" [searchLabelText]="searchLabelText"
-                                 [labelDropdown]="data.Note.showLabelDropdown"
-                                 [DialogBoxOpen]="true" [selectedNote]="data.Note"></app-keep-label-dropdown>
-      </div>
-      <button class="close-btn" (click)="closeEditor(data.Note)">Close</button>
-    </div>
-  </form>
+    </form>
 </div>
 

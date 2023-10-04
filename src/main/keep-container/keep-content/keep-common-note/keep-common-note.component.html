@@ -1,73 +1,63 @@
-<div *ngIf="(notes$ | async) as notes" class="notes grey-background" #notes>
-  <div *ngFor="let note of notes$ |async" [@noteEnterLeave]="note">
+<div *ngIf="(notes$ | async) as notes" class="notes grey-background">
+    <div #notes *ngFor="let note of notes$ |async">
 
-    <div class="note"
-         *ngIf="isCommonNote(note)"
-         [ngClass]="{ 'empty-note': note.title=='' || note.content==''}"
-         [hidden]="note.isHidden"
-         (click)="selectNoteForEditing(note)">
-      <div>
-        <span class="material-icons check-circle">check_circle</span>
-        <ng-container *ngIf="note.title=='' && note.content==''">
-          <div class="full-empty">Empty note</div>
-        </ng-container>
-        <ng-container>
-          <ng-container *ngIf="isSearch">
-            <div class="title" [style.display]="'block'">
-              <span [innerHTML]="highlightSearchTerm(note.title, searchValue) | safeHtml"></span>
+        <div (click)="selectNoteForEditing(note)"
+             *ngIf="isCommonNote(note)"
+             [ngClass]="{ 'empty-note': note.title=='' || note.content=='','hide-note':selectedNote===note,'note-animation': animationState}"
+             class="note">
+            <div>
+                <span class="material-icons check-circle">check_circle</span>
+                <ng-container *ngIf="note.title=='' && note.content==''">
+                    <div class="full-empty">Empty note</div>
+                </ng-container>
+                <ng-container>
+                    <ng-container *ngIf="isSearch">
+                        <div [style.display]="'block'" class="title">
+                            <span [innerHTML]="highlightSearchTerm(note.title, searchValue) | safeHtml"></span>
+                        </div>
+                        <div [ngClass]="{ 'note-text-up': note.title==''}" [style.display]="'block'" class="text">
+                            <div [innerHTML]="formattedContent(note.content)"></div>
+
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!isSearch">
+                        <div class="title">{{note.title }}</div>
+                        <div [innerHTML]="convertNewlinesToBreaks(note.content)"
+                             [ngClass]="{ 'note-text-up': note.title==''}"
+                             class="note-text"></div>
+                    </ng-container>
+                </ng-container>
+
+                <app-keep-store-labels [ModalOpen]="false" [note]="note"></app-keep-store-labels>
+
+                <div class="icons">
+                    <div class="tooltip">
+                        <ng-container *ngIf="isArchiveNotePresent">
+              <span (click)=UnArchiveNote(note.id) [ngClass]="{ 'icon-up': isLabelsExist(note)}"
+                    class="material-icons-outlined hover small-icon icon">unarchive</span>
+                            <span class="tooltip-text">Unarchive</span>
+                        </ng-container>
+                        <ng-container *ngIf="!isArchiveNotePresent">
+              <span (click)="archiveNote(note.id)" [ngClass]="{ 'icon-up': isLabelsExist(note)}"
+                    class="material-icons-outlined hover small-icon icon">archive</span>
+                            <span class="tooltip-text">Archive</span>
+                        </ng-container>
+                    </div>
+                    <div (click)="handleMoreIconClick($event, note)" class="tooltip">
+                        <span [ngClass]="{ 'icon-up': isLabelsExist(note)}"
+                              class="material-icons-outlined hover small-icon icon">more_vert</span>
+                        <span class="tooltip-text">More</span>
+                    </div>
+                </div>
             </div>
-            <div class="text" [style.display]="'block'" [ngClass]="{ 'note-text-up': note.title==''}">
-              <div [innerHTML]="formattedContent(note.content)"></div>
-
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!isSearch">
-            <div class="title">{{note.title }}</div>
-            <div [ngClass]="{ 'note-text-up': note.title==''}" class="note-text"
-                 [innerHTML]="convertNewlinesToBreaks(note.content)"></div>
-          </ng-container>
-        </ng-container>
-
-        <app-keep-store-labels [note]="note" [ModalOpen]="false"></app-keep-store-labels>
-
-        <div class="icons">
-          <div class="tooltip">
-            <ng-container *ngIf="isArchiveNotePresent">
-              <span class="material-icons-outlined hover small-icon icon" [ngClass]="{ 'icon-up': isLabelsExist(note)}"
-                    (click)=UnArchiveNote(note.id)>unarchive</span>
-              <span class="tooltip-text">Unarchive</span>
-            </ng-container>
-            <ng-container *ngIf="!isArchiveNotePresent">
-              <span class="material-icons-outlined hover small-icon icon" [ngClass]="{ 'icon-up': isLabelsExist(note)}"
-                    (click)="archiveNote(note.id)">archive</span>
-              <span class="tooltip-text">Archive</span>
-            </ng-container>
-          </div>
-          <div class="tooltip" (click)="handleMoreIconClick($event, note)">
-            <span class="material-icons-outlined hover small-icon icon" [ngClass]="{ 'icon-up': isLabelsExist(note)}">more_vert</span>
-            <span class="tooltip-text">More</span>
-          </div>
         </div>
-      </div>
+        <app-keep-dropdown-menu [OpenDialogue]="false" [note]="note"
+                                [selectedNote]="selectedNote"></app-keep-dropdown-menu>
+        <app-keep-label-dropdown [DialogBoxOpen]="false" [labelDropdown]="note.showLabelDropdown"
+                                 [note]="note"
+                                 [searchLabelText]="searchLabelText"
+                                 [selectedNote]="selectedNote"></app-keep-label-dropdown>
     </div>
-
-    <div *ngIf="note.showDropdown && selectedNote==null" class="dropdown-menu"
-         [ngClass]="{ 'dropdown-menu-up': isLabelsExist(note)}">
-      <ul>
-        <li class="item"><a class="text" (click)="deleteNote($event,note.id)">Delete Note</a></li>
-        <ng-container *ngIf="!hasLabels(note)">
-          <li class="item"><a class="text" (click)="showLabelDropdown($event,note)">Add label</a></li>
-        </ng-container>
-        <ng-container *ngIf="hasLabels(note)">
-          <li class="item"><a class="text" (click)="showLabelDropdown($event,note)">Change labels</a></li>
-        </ng-container>
-      </ul>
-    </div>
-    <app-keep-label-dropdown [note]="note" [searchLabelText]="searchLabelText" [labelDropdown]="note.showLabelDropdown"
-                             [DialogBoxOpen]="false" [selectedNote]="selectedNote"></app-keep-label-dropdown>
-  </div>
 </div>
-
-
 
 
