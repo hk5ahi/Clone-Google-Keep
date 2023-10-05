@@ -1,17 +1,17 @@
-<div *ngIf="(!OpenDialogue && note.showDropdown && selectedNote == null) || (note.showDropdown && OpenDialogue)"
+<div *ngIf="(!OpenDialogue && note.showDropdown && selectedNote == null ) || (note.showDropdown && OpenDialogue )"
      [ngClass]="{
        'dropdown-menu': !OpenDialogue,
        'dropdown-menu-up': isLabelsExist(note),
        'dropdown-menu-selected': OpenDialogue,
         'dropdown-menu-selected-up': OpenDialogue && isLabelsExist(note)
      }">
-    <ul>
-        <li class="item"><a (click)="deleteNote($event,note.id)" class="text">Delete Note</a></li>
-        <ng-container *ngIf="!hasLabels(note)">
-            <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Add label</a></li>
-        </ng-container>
-        <ng-container *ngIf="hasLabels(note)">
-            <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Change labels</a></li>
-        </ng-container>
-    </ul>
+  <ul>
+    <li class="item"><a (click)="deleteNote($event,note.id)" class="text">Delete Note</a></li>
+    <ng-container *ngIf="!hasLabels(note)">
+      <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Add label</a></li>
+    </ng-container>
+    <ng-container *ngIf="hasLabels(note)">
+      <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Change labels</a></li>
+    </ng-container>
+  </ul>
 </div>

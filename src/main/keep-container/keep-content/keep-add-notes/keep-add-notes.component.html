@@ -1,44 +1,37 @@
 <div class="form-container">
-    <form (click)="toggleForms()"
-          *ngIf="showFirstForm"
-          class="first-form">
-        <input class="note-text" placeholder="Take a note..." type="text"/>
-        <div class="form-actions">
-        </div>
-    </form>
+  <form #firstForm
+        *ngIf="showFirstForm"
+        class="first-form">
+    <input class="note-text" placeholder="Take a note..." type="text"/>
+    <div class="form-actions">
+    </div>
+  </form>
 </div>
 <div *ngIf="!showFirstForm" class="form-container active-form">
-    <form #secondForm class="second-form">
-        <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
-               placeholder="Title"
-               type="text"/>
-        <textarea
-                (input)="adjustTextareaHeight($event)"
-                [(ngModel)]="noteMessage"
-                class="note-text"
-                name="noteMessage"
-                placeholder="Take a note..."
-        ></textarea>
-        <div class="form-actions">
-            <div class="icons">
-                <div class="tooltip">
-          <span (click)="addAndArchiveNote(title, noteMessage)"
-                class="material-icons-outlined hover small-icon icon">archive</span>
-
-                    <span class="tooltip-text">Archive</span>
-                </div>
-                <div (click)="toggleDropdownMenu()" class="tooltip">
-                    <span class="material-icons-outlined hover small-icon icon">more_vert</span>
-                    <span class="tooltip-text">More</span>
-                </div>
-            </div>
-            <button (click)="toggleForms()" class="close-btn icon">Close</button>
-        </div>
-    </form>
+  <form #secondForm class="second-form">
+    <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
+           placeholder="Title"
+           type="text"/>
+    <textarea
+      (input)="adjustTextareaHeight($event)"
+      [(ngModel)]="noteMessage"
+      class="note-text"
+      name="noteMessage"
+      placeholder="Take a note..."
+    ></textarea>
+    <div class="form-actions">
+      <div class="icons-area">
+        <app-keep-footer-note [calledFromAddNote]="true" [noteMessage]="noteMessage"
+                              [showDropdownMenu]="showDropdownMenu"
+                              [title]="title"></app-keep-footer-note>
+      </div>
+      <button (click)="toggleForms()" class="close-btn icon">Close</button>
+    </div>
+  </form>
 </div>
-<div *ngIf="showDropdownMenu" class="dropdown-menu">
-    <ul>
-        <li class="item"><a class="text">Add label</a></li>
-    </ul>
+<div *ngIf="getDropdownValue()" class="dropdown-menu">
+  <ul>
+    <li class="item"><a class="text">Add label</a></li>
+  </ul>
 </div>
 <app-keep-notes></app-keep-notes>

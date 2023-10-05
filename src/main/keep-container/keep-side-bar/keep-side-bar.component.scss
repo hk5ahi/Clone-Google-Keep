@@ -10,16 +10,6 @@
   margin-top: 0.35em;
 }
 
-.active {
-  background-color: #fef0c3;
-  border-radius: 50%;
-  color: black;
-}
-
-.active:hover {
-  background-color: #fef0c3;
-}
-
 .sidebar .sidebar-item {
   margin-left: 1.125em;
   padding: 0.1875em 0;
@@ -44,39 +34,9 @@
   width: 17.5em;
   transition: width 0.08s;
 
-  @media (max-width: 37.4375em) {
-    &:not(.close) {
-      position: fixed;
-      z-index: 100;
-      box-shadow: 0 1em 0.625em 0 rgb(0 0 0 / 14%), 0 0.6875em 1.125em 0 rgb(0 0 0 / 12%), 0 0.8125em 0.3125em -0.0625em rgb(0 0 0 / 20%);
-      height: 100vh;
-      background-color: #202124;
-    }
-  }
 
   &.close {
     width: 3em;
-
-    .item {
-      &.active {
-        width: 5em;
-        padding-left: 0;
-        margin-left: 0.75em;
-        border-radius: 50%;
-
-        img {
-          opacity: 0.87;
-        }
-      }
-
-      &:hover:not(.active) {
-        width: 5em;
-        height: 3em;
-        padding-left: 0;
-        margin-left: 0.75em;
-        border-radius: 50%;
-      }
-    }
   }
 
   .menu {
@@ -97,27 +57,33 @@
     font-weight: 500;
     line-height: 1.25rem;
     width: 98%;
-    height: 3em;
+    height: 3.3em;
     overflow: hidden;
     cursor: pointer;
     padding-left: 1.95em;
+    padding-bottom: 1em;
     transition: all 0.08s;
-
 
     .text {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-left: 2em;
+      text-align: center;
+      width: 71px !important;
     }
 
-    &.active {
-      background-color: black;
+    &:hover:not(.background-color):not(.active) {
+      background-color: #eeeeee;
     }
+  }
+}
 
-    &:hover:not(.active) {
-      background-color: #FEEFC3
-    }
+.background-color {
+  background-color: #FEEFC3;
+
+  .picture {
+    opacity: 1;
   }
 }
 
@@ -159,4 +125,18 @@ input::placeholder {
 
 }
 
+.tooltip-text {
+  text-align: center;
+  margin-left: 2em;
+  font-size: medium;
+  width: 4.4em !important;
 
+}
+
+.picture {
+  color: black;
+  position: relative;
+  top: 6px;
+  right: -2px;
+  opacity: 0.71;
+}

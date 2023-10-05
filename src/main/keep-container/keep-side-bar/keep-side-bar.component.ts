@@ -3,23 +3,30 @@ import { HeaderService } from "../../Service/header.service";
 import { NoteService } from "../../Service/note.service";
 
 @Component({
-    selector: 'app-keep-side-bar',
-    templateUrl: './keep-side-bar.component.html',
-    styleUrls: ['./keep-side-bar.component.scss']
+  selector: 'app-keep-side-bar',
+  templateUrl: './keep-side-bar.component.html',
+  styleUrls: ['./keep-side-bar.component.scss']
 })
 export class KeepSideBarComponent {
 
-    constructor(private keepService: HeaderService, private noteService: NoteService) {
-    }
+  isNoteSelected: boolean = true;
+  isArchiveSelected: boolean = false;
 
-    updateIsNotes() {
-        this.keepService.updateIsNotes();
-        this.noteService.setSearchedData('');
-    }
+  constructor(private headerService: HeaderService, private noteService: NoteService) {
+  }
 
-    updateIsArchive() {
-        this.keepService.updateIsArchive();
-        this.noteService.setSearchedData('');
-    }
+  updateIsNotes() {
+    this.headerService.updateIsNotes();
+    this.noteService.setSearchedData('');
+    this.isNoteSelected = true;
+    this.isArchiveSelected = false;
+  }
+
+  updateIsArchive() {
+    this.headerService.updateIsArchive();
+    this.noteService.setSearchedData('');
+    this.isArchiveSelected = true;
+    this.isNoteSelected = false;
+  }
 
 }

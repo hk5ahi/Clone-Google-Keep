@@ -1,44 +1,29 @@
 <div #formContainer class="form-container active-form ">
-    <form class="second-form">
-        <input [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title" type="text"/>
-        <textarea
-                (input)="adjustTextareaHeight($event)"
-                [(ngModel)]="data.Note.content"
-                class="note-text"
-                name="noteMessage"
-                placeholder="Note"
+  <form class="second-form">
+    <input [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title" type="text"/>
+    <textarea
+      (input)="adjustTextareaHeight($event)"
+      [(ngModel)]="data.Note.content"
+      class="note-text"
+      name="noteMessage"
+      placeholder="Note"
 
-        ></textarea>
-        <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
-        <div class="form-actions">
-            <div class="icons">
-                <div class="tooltip">
+    ></textarea>
+    <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
+    <div class="form-actions">
 
-                    <ng-container *ngIf="data.Note.isArchived">
-            <span (click)=UnArchiveNote(data.Note.id)
-                  class="material-icons-outlined hover small-icon icon">unarchive</span>
-                        <span class="tooltip-text">Unarchive</span>
-                    </ng-container>
-                    <ng-container *ngIf="!data.Note.isArchived">
-            <span (click)="archiveNote(data.Note.id)"
-                  class="material-icons-outlined hover small-icon icon">archive</span>
-                        <span class="tooltip-text">Archive</span>
-                    </ng-container>
-
-                </div>
-                <div class="tooltip">
-                    <span (click)="handleMoreIconClick($event, data.Note)"
-                          class="material-icons-outlined hover small-icon">more_vert</span>
-                    <span class="tooltip-text">More</span>
-                </div>
-                <app-keep-dropdown-menu [OpenDialogue]="true" [note]="data.Note"
-                                        [selectedNote]="data.Note"></app-keep-dropdown-menu>
-                <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
-                                         [note]="data.Note"
-                                         [searchLabelText]="searchLabelText" [selectedNote]="data.Note"></app-keep-label-dropdown>
-            </div>
-            <button (click)="closeEditor()" class="close-btn">Close</button>
-        </div>
-    </form>
+      <div class="icons-area">
+        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [note]="data.Note"
+                              [searchLabelText]="searchLabelText" [selectedNote]="selectedNote"></app-keep-footer-note>
+      </div>
+      <app-keep-dropdown-menu (closeModal)="closeEditor()" [OpenDialogue]="true"
+                              [note]="data.Note" [selectedNote]="data.Note"></app-keep-dropdown-menu>
+      <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
+                               [note]="data.Note"
+                               [searchLabelText]="searchLabelText"
+                               [selectedNote]="data.Note"></app-keep-label-dropdown>
+      <button (click)="closeEditor()" class="close-btn">Close</button>
+    </div>
+  </form>
 </div>
 

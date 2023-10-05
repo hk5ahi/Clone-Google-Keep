@@ -1,0 +1,106 @@
+<div class="icons">
+  <div class="tooltip">
+    <img (click)="stopEvent($event)"
+         [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+         alt="Reminder"
+         class="icon material-icons-outlined hover" src="assets/svg/reminder.svg">
+    <span class="tooltip-text">Remind me</span>
+  </div>
+  <div class="tooltip">
+    <img (click)="stopEvent($event)"
+         [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+         alt="Collaborator"
+         class="icon material-icons-outlined hover" src="assets/svg/collaborator.svg">
+    <span class="tooltip-text">Collaborator</span>
+  </div>
+  <div class="tooltip">
+    <img (click)="stopEvent($event)"
+         [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+         alt="Background-Options"
+         class="icon material-icons-outlined hover" src="assets/svg/background-color.svg">
+    <span class="tooltip-text">Background options</span>
+  </div>
+  <div class="tooltip">
+    <img (click)="stopEvent($event)"
+         [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+         alt="Add-Image"
+         class="icon material-icons-outlined hover" src="assets/svg/Add-image.svg">
+    <span class="tooltip-text">Add Image</span>
+  </div>
+  <ng-container *ngIf="calledFromAddNote">
+    <div class="tooltip">
+      <img (click)="addAndArchiveNote(title, noteMessage)"
+           [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+           alt="Archive"
+           class="icon hover material-icons-outlined" src="assets/svg/archive.svg">
+      <span class="tooltip-text">Archive</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="calledFromNote" class="tooltip">
+    <ng-container *ngIf="isArchiveNotePresent">
+      <div class="tooltip">
+        <img (click)=UnArchiveNote(note.id)
+             [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote,'icon-up': isLabelsExist(note)}"
+             alt="Unarchive"
+             class="icon hover material-icons-outlined"
+             src="assets/svg/unarchive.svg">
+        <span class="tooltip-text">Unarchive</span>
+      </div>
+
+    </ng-container>
+    <ng-container *ngIf="!isArchiveNotePresent">
+
+      <div class="tooltip">
+        <img (click)="archiveNote(note.id)"
+             [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote,'icon-up': isLabelsExist(note)}"
+             alt="archive"
+             class="icon hover material-icons-outlined"
+             src="assets/svg/archive.svg">
+        <span class="tooltip-text">Archive</span>
+      </div>
+
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="calledFromEditorNote" class="tooltip">
+    <ng-container *ngIf="note.isArchived">
+      <div class="tooltip">
+        <img (click)=UnArchiveNote(note.id)
+             [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+             alt="Unarchive"
+             class="icon hover material-icons-outlined" src="assets/svg/unarchive.svg">
+        <span class="tooltip-text">Unarchive</span>
+      </div>
+
+    </ng-container>
+    <ng-container *ngIf="!note.isArchived">
+
+      <div class="tooltip">
+        <img (click)="archiveNote(note.id)"
+             [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+             alt="archive"
+             class="icon hover material-icons-outlined" src="assets/svg/archive.svg">
+        <span class="tooltip-text">Archive</span>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="calledFromAddNote">
+    <div (click)="toggleDropdownMenu()" class="tooltip">
+      <img (click)="archiveNote(note.id)"
+           [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+           alt="More"
+           class="icon hover material-icons-outlined" src="assets/svg/more.svg">
+      <span class="tooltip-text">More</span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="calledFromNote || calledFromEditorNote">
+    <div (click)="handleMoreIconClick($event, note)" class="tooltip">
+      <img [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}" alt="More"
+           class="icon hover material-icons-outlined" src="assets/svg/more.svg">
+      <span class="tooltip-text">More</span>
+    </div>
+  </ng-container>
+
+</div>
+
+

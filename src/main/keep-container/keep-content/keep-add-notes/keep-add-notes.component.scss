@@ -69,9 +69,6 @@
   padding: 0.625em;
 }
 
-.active-form form .form-actions .icons {
-  display: flex;
-}
 
 .active-form form .form-actions {
   display: flex;
@@ -93,52 +90,12 @@
   background: ghostwhite;
 }
 
-.small-icon {
-  color: black;
-  font-size: 1.1rem;
-}
 
 .icon {
 
   position: relative;
   top: 0.4em;
 }
-
-
-.material-icons-outlined {
-  padding: 0.625em;
-}
-
-.hover:hover {
-  background: #f1f3f4;
-  color: black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip-text {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  font-size: 0.78rem;
-  background-color: #323232;
-  color: white;
-  opacity: 0.8;
-  padding: 0.3125em;
-  white-space: nowrap;
-  border-radius: 0.3125em;
-  visibility: hidden;
-  z-index: 5004;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-}
-
 
 input:focus, textarea:focus {
   outline: none;
@@ -165,8 +122,8 @@ input:focus, textarea:focus {
   z-index: 5003;
   padding: 0.375em 0; /* 6px / 16px = 0.375em */
   opacity: 1;
-  left: 52.8em; /* 390px / 16px = 24.375em */
-  top: 13.5em; /* 226px / 16px = 14.125em */
+  left: 70em;
+  top: 13.8em;
 }
 
 .item:hover {
@@ -188,4 +145,11 @@ input:focus, textarea:focus {
   color: #3c4043;
   font-size: 0.875em; /* 14px / 16px = 0.875em */
   font-family: Roboto, arial, sans-serif;
+}
+.icons-area{
+  width:19.8125em;
+  height: 2.125em;
+  position: relative;
+  top:-1em;
+  margin-right: 1em;
 }

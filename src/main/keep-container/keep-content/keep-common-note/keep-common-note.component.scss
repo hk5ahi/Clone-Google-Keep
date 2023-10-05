@@ -24,46 +24,6 @@
   background: ghostwhite;
 }
 
-.small-icon {
-  color: black;
-  font-size: 1.1rem;
-}
-
-.material-icons-outlined {
-  padding: 0.625em;
-}
-
-.hover:hover {
-  background: #f1f3f4;
-  color: black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip-text {
-  position: absolute;
-  left: 0;
-  top: 115%;
-  font-size: 0.78rem;
-  background-color: #323232;
-  color: white;
-  opacity: 0.8;
-  padding: 0.3125em;
-  white-space: nowrap;
-  border-radius: 0.3125em;
-  visibility: hidden;
-  z-index: 5004;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-}
-
-
 input:focus {
   outline: none;
 }
@@ -95,7 +55,7 @@ input:focus {
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.25rem;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px 5px 2px;
 }
 
 .notes {
@@ -116,7 +76,6 @@ input:focus {
   border-radius: 0.5em;
   position: relative;
   word-wrap: break-word;
-
 
 }
 
@@ -201,17 +160,6 @@ input:focus {
   align-items: start;
 }
 
-.icons {
-  display: flex;
-  color: #202124;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
-  position: relative;
-  height: 2.1875em; /* 35px converted to em */
-  margin: 0.5em -0.125em; /* 2px converted to em */
-  width: 100%;
-}
-
 .note:hover {
   border: 0.0625em solid #dadce0; /* 1px converted to em */
   box-shadow: #abb7b9 0 0.0625em 0.125em 0; /* 1px 2px converted to em */
@@ -239,40 +187,6 @@ input:focus {
   margin: 3.5px;
 }
 
-.hover:hover {
-  background: #f1f3f4;
-  color: black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.tooltip {
-  position: relative;
-}
-
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-}
-
-
-.dropdown-menu-selected {
-  background-color: #fff;
-  min-width: 8.4875em; /* 7.8vw converted to em */
-  min-height: 2.16em; /* 13.5vh converted to em */
-  border-width: 0;
-  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
-  position: absolute;
-  -webkit-border-radius: 0.25em; /* 4px converted to em */
-  border-radius: 0.25em; /* 4px converted to em */
-  z-index: 5003;
-  padding: 0.375em 0; /* 6px converted to em */
-  opacity: 1;
-  left: 16.1em; /* 356px converted to em */
-  top: 2.25em; /* 277px converted to em */
-}
-
-
 .icon {
   width: 2.125em; /* 34px converted to em */
   height: 2.125em; /* 34px converted to em */
@@ -280,7 +194,11 @@ input:focus {
   margin: 0.65em -0.1em; /* 8px converted to em */
 }
 
-.icon-up {
-  margin: 0.5em -0.1em !important;
-
+.icons-area {
+  visibility: hidden;
 }
+
+.note:hover .icons-area {
+  visibility: visible;
+}
+

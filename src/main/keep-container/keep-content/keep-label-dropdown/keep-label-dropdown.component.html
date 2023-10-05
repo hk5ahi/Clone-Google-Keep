@@ -1,37 +1,44 @@
-<div (click)="stopEvent($event)" *ngIf="labelDropdown && (DialogBoxOpen || !selectedNote)" [ngClass]="{ 'label-Dropdown-menu-up': isLabelsExist(note),'label-Dropdown-position':DialogBoxOpen, 'label-selected': isLabelsExist(note) && DialogBoxOpen}"
-     class="label-Dropdown">
-    <div class="label-text">Label note</div>
-    <div class="container-input">
-        <input [(ngModel)]="searchLabelText" class="input" placeholder="Enter label name">
-        <span class="small-search-icon">
+<div
+  (click)="stopEvent($event)"
+  *ngIf="labelDropdown && (DialogBoxOpen || !selectedNote)"
+  [ngClass]="{
+    'label-Dropdown-menu-up': isLabelsExist(note),
+    'label-Dropdown-position': DialogBoxOpen,
+    'label-selected': isLabelsExist(note) && DialogBoxOpen
+  }"
+  class="label-Dropdown">
+  <div class="label-text">Label note</div>
+  <div class="container-input">
+    <input [(ngModel)]="searchLabelText" class="input" placeholder="Enter label name">
+    <span class="small-search-icon">
             <img alt="search" src="assets/svg/small-search.svg">
           </span>
-    </div>
+  </div>
 
-    <div (click)="addLabel(searchLabelText,note)" *ngIf="(searchLabelText!='' && !searchLabels(searchLabelText))"
-         class="add-label-area">
-        <div class="label-add">
-            <div class="plus-icon">
-                <img alt="Small Plus Icon" src="assets/svg/small-plus.svg">
-            </div>
-            <div class="label-search-text">Create "<span class="bold">{{searchLabelText}}</span> "</div>
-        </div>
+  <div (click)="addLabel(searchLabelText,note)" *ngIf="(searchLabelText!='' && !searchLabels(searchLabelText))"
+       class="add-label-area">
+    <div class="label-add">
+      <div class="plus-icon">
+        <img alt="Small Plus Icon" src="assets/svg/small-plus.svg">
+      </div>
+      <div class="label-search-text">Create "<span class="bold">{{searchLabelText}}</span> "</div>
     </div>
+  </div>
 
-    <div *ngIf="searchLabels(searchLabelText)">
-        <div [style.height]="getDynamicHeight()" class="labels-container">
-            <div (click)="toggleCheckBox(note,label)" *ngFor="let label of labels" class="show-labels">
-                <div class="save-labels-area">
-                    <div>
-                        <img *ngIf="getCheckBox(note,label)" alt="check-box" class="check-box"
-                             src="assets/svg/check-box.svg">
-                        <img *ngIf="!getCheckBox(note,label)" alt="uncheck-box" class="check-box"
-                             src="assets/svg/small-uncheck.svg">
-                    </div>
-                    <div [ngClass]="{'save-label-text-add': !getCheckBox(note, label)}"
-                         class="save-label-text">{{label.text}}</div>
-                </div>
-            </div>
+  <div *ngIf="searchLabels(searchLabelText)">
+    <div [style.height]="getDynamicHeight()" class="labels-container">
+      <div (click)="toggleCheckBox(note,label)" *ngFor="let label of labels" class="show-labels">
+        <div class="save-labels-area">
+          <div>
+            <img *ngIf="getCheckBox(note,label)" alt="check-box" class="check-box"
+                 src="assets/svg/check-box.svg">
+            <img *ngIf="!getCheckBox(note,label)" alt="uncheck-box" class="check-box"
+                 src="assets/svg/small-uncheck.svg">
+          </div>
+          <div [ngClass]="{'save-label-text-add': !getCheckBox(note, label)}"
+               class="save-label-text">{{label.text}}</div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

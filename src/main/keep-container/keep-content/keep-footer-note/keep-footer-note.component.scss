@@ -1,0 +1,76 @@
+
+.icons {
+  display: flex;
+  color: #202124;
+  flex-flow: row nowrap;
+  position: relative;
+  height: 2.125em; /* 35px converted to em */
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1.5em;
+  box-sizing: border-box;
+  opacity: 0.71;
+}
+
+.icons:hover {
+  opacity: 1;
+}
+
+.icon {
+  width: 2.125em; /* 34px converted to em */
+  height: 2.125em; /* 34px converted to em */
+  display: inline-block;
+  padding: 10px !important;
+  justify-content: flex-start;
+  color: black;
+  font-size: 1.1rem;
+  align-items: center;
+
+
+}
+
+.icon-add-note {
+  margin: 0 -0.3em;
+  margin-right: 1.8em !important;
+}
+
+.icon-note {
+  margin: 0 1.5px;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+
+}
+
+.material-icons-outlined {
+  padding: 0.625em;
+}
+
+.hover:hover {
+  background: #f1f3f4;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.tooltip-text {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+}
+

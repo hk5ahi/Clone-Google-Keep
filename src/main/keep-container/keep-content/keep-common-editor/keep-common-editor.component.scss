@@ -66,7 +66,10 @@
   padding: 1em;
   z-index: 4001;
   min-width: 39.5em !important;
-  min-height: 36.5625em !important;
+  min-height: 18.7em !important;
+  position: relative;
+  left: -1em;
+  top: -10em;
 }
 
 .form-container form {
@@ -143,6 +146,8 @@
   padding: 0.3125em 0.6875em; /* 5px / 16px = 0.3125em, 11px / 16px = 0.6875em */
   cursor: pointer;
   font-size: 1rem; /* 16px */
+  position: relative;
+  top: 0.5em;
 }
 
 .close-btn:hover {
@@ -151,35 +156,6 @@
 
 .close-btn:focus {
   background-color: #e0e2e5;
-}
-
-.small-icon {
-  color: black;
-  font-size: 1.1rem;
-}
-
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip-text {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  font-size: 0.78rem;
-  background-color: #323232;
-  color: white;
-  opacity: 0.8;
-  padding: 0.3125em;
-  white-space: nowrap;
-  border-radius: 0.3125em;
-  visibility: hidden;
-  z-index: 5004;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
 }
 
 
@@ -212,27 +188,10 @@ textarea {
   list-style-type: none;
 }
 
-
-.icon {
-  width: 2.125em; /* 34px converted to em */
-  height: 2.125em; /* 34px converted to em */
-  display: inline-block;
-  margin: 0 0.5em; /* 8px converted to em */
-}
-
 .item:hover {
   background-color: #b5bdbd;
   border-radius: 0.0625em; /* 1px converted to em */
   cursor: pointer;
-}
-
-
-.settings-area {
-  display: flex;
-}
-
-.profile-actions-area {
-  display: flex;
 }
 
 
@@ -268,87 +227,9 @@ textarea {
   align-items: start;
 }
 
-.icons {
-  display: flex;
-  color: #202124;
-  flex-flow: row nowrap;
-  justify-content: center;
-  position: relative;
-  height: 2.1875em; /* 35px converted to em */
-  margin: 0 -0.125em; /* 2px converted to em */
-  width: 100%;
-}
-
 .note:hover {
   border: 0.0625em solid #dadce0; /* 1px converted to em */
   box-shadow: #abb7b9 0 0.0625em 0.125em 0; /* 1px 2px converted to em */
-}
-
-.note:hover .icons {
-  visibility: visible;
-}
-
-.note:hover .check-circle {
-  visibility: visible;
-}
-
-.note .icons, .note .check-circle {
-  visibility: hidden;
-}
-
-.small-icon {
-  color: black;
-  font-size: 1.1rem;
-}
-
-.material-icons-outlined {
-  padding: 0.625em;
-}
-
-.hover:hover {
-  background: #f1f3f4;
-  color: black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip-text {
-  position: absolute;
-  left: 0;
-  top: 100%;
-  font-size: 0.78rem;
-  background-color: #323232;
-  color: white;
-  opacity: 0.8;
-  padding: 0.3125em;
-  white-space: nowrap;
-  border-radius: 0.3125em;
-  visibility: hidden;
-  z-index: 5004;
-}
-
-.tooltip:hover .tooltip-text {
-  visibility: visible;
-}
-
-.dropdown-menu {
-  background-color: #fff;
-  min-width: 10.4875em; /* 7.8vw converted to em */
-  min-height: 2.16em; /* 13.5vh converted to em */
-  border-width: 0;
-  box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
-  position: absolute;
-  -webkit-border-radius: 0.25em; /* 4px converted to em */
-  border-radius: 0.25em; /* 4px converted to em */
-  z-index: 5003;
-  padding: 0.375em 0; /* 6px converted to em */
-  opacity: 1;
-  left: 7.25em; /* 356px converted to em */
-  top: 8.5em; /* 277px converted to em */
 }
 
 
@@ -358,13 +239,6 @@ textarea {
   vertical-align: top;
   list-style-type: none;
   overflow: hidden;
-}
-
-.icon {
-  width: 2.125em; /* 34px converted to em */
-  height: 2.125em; /* 34px converted to em */
-  display: inline-block;
-  margin: 0 0.3em; /* 8px converted to em */
 }
 
 .note-label {
@@ -451,20 +325,6 @@ textarea {
 
 }
 
-.small-cross-icon {
-  background-size: 14px 14px;
-  height: 1em;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: 1.125em;
-  position: relative;
-  right: -0.25em;
-  top: 0.1em;
-  color: black !important;
-
-}
-
 .small-cross-icon:hover {
   cursor: pointer;
   color: #202124 !important;
@@ -472,6 +332,13 @@ textarea {
   opacity: 1 !important;
   visibility: visible !important;
   background-color: lightgray !important;
-  z-index: 10000000;
+  z-index: 1000;
 
+}
+.icons-area{
+  width:26.3125em;
+  height: 2.125em;
+  position: relative;
+  top:-1em;
+  margin-right: 1em;
 }

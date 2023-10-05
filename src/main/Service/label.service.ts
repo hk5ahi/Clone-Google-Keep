@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Label } from '../Data Types/Label';
 import { Note } from "../Data Types/Note";
 import { NoteService } from "./note.service";
+import { AppConstants } from "../Constants/app-constant";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,6 @@ export class LabelService {
 
     private labelListSubject: BehaviorSubject<Label[]> = new BehaviorSubject<Label[]>([]);
     labelList$ = this.labelListSubject.asObservable();
-    private STORAGE_KEY_LABELS = 'labels';
 
     constructor(private noteService: NoteService) {
         this.loadLabelsFromLocalStorage();
@@ -27,7 +27,7 @@ export class LabelService {
     }
 
     addLabel(label: string, note?: Note) {
-        if (label !== "") {
+        if (label) {
             const newLabel: Label = {
                 id: this.labelList.length + 1,
                 text: label,
@@ -47,14 +47,13 @@ export class LabelService {
     }
 
     private loadLabelsFromLocalStorage(): void {
-        const storedLabels = localStorage.getItem(this.STORAGE_KEY_LABELS);
+        const storedLabels = localStorage.getItem(AppConstants.STORAGE_KEY_LABELS);
         if (storedLabels) {
             this.labelListSubject.next(JSON.parse(storedLabels));
         }
     }
-
     private saveLabelsToLocalStorage(): void {
-        localStorage.setItem(this.STORAGE_KEY_LABELS, JSON.stringify(this.labelListSubject.getValue()));
+        localStorage.setItem(AppConstants.STORAGE_KEY_LABELS, JSON.stringify(this.labelListSubject.getValue()));
     }
 
 }
