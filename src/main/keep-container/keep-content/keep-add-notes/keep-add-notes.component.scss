@@ -10,7 +10,7 @@
   padding: 3px 0;
 }
 
-.second-form {
+.add-form {
   background: #fff;
   max-width: 37.375em; /* 598px / 16px = 37.375em */
   margin: 2em auto; /* 32px / 16px = 2em */
@@ -19,7 +19,8 @@
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
   position: relative;
   right: -6.6%;
-  max-height: 8.8em;
+  height: 100%;
+  max-height: 500px;
 }
 
 .form-container form {
@@ -30,14 +31,21 @@
   color: #5f6368;
 }
 
+.add-content-container {
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .note-title {
   border: none;
   font-size: 1rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: 0.625em; /* 10px / 16px = 0.625em */
+
   width: 100%;
-  margin-right: 0.625em; /* 10px / 16px = 0.625em */
+
   padding-bottom: 0.7em !important;
 }
 
@@ -46,11 +54,9 @@
   font-size: 1rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: 0.625em; /* 10px / 16px = 0.625em */
-  width: 100%;
-  margin-right: 0.625em; /* 10px / 16px = 0.625em */
-  resize: none;
   overflow: hidden;
+  width: 100%;
+  resize: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
   color: rgb(42, 36, 42);
@@ -146,10 +152,52 @@ input:focus, textarea:focus {
   font-size: 0.875em; /* 14px / 16px = 0.875em */
   font-family: Roboto, arial, sans-serif;
 }
-.icons-area{
-  width:19.8125em;
+
+.icons-area {
+  width: 19.8125em;
   height: 2.125em;
   position: relative;
-  top:-1em;
+  top: -1em;
   margin-right: 1em;
+}
+
+.note-text::placeholder {
+  color: black;
+
+}
+
+.add-content-container::-webkit-scrollbar {
+  height: 1em;
+  overflow: visible;
+  width: 1em;
+}
+
+.add-content-container::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
+}
+
+.add-content-container::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.add-content-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .2);
+  background-clip: padding-box;
+  border: solid transparent;
+  border-width: 1px 1px 1px 6px;
+  min-height: 28px;
+  padding: 100px 0 0;
+  -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+}
+
+.add-content-container::-webkit-scrollbar-track {
+  background-clip: padding-box;
+  border: solid transparent;
+  border-width: 0 0 0 4px;
+}
+
+.add-content-container::-webkit-scrollbar-thumb:hover {
+  background-color: #969595;
 }

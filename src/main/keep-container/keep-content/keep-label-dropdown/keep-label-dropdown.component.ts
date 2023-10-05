@@ -52,7 +52,8 @@ export class KeepLabelDropdownComponent implements OnDestroy {
 
   getDynamicHeight(): string {
     const numberOfLabels = this.labels.length;
-    const totalHeight = (numberOfLabels * AppConstants.heightPerLabel) + AppConstants.additionalHeight;
+    const totalHeight = (numberOfLabels * AppConstants.heightPerLabel) + AppConstants.additionalHeight ;
+
     return `${totalHeight}px`;
   }
 

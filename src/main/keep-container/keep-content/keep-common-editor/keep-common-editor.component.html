@@ -17,7 +17,7 @@
                               [searchLabelText]="searchLabelText" [selectedNote]="selectedNote"></app-keep-footer-note>
       </div>
       <app-keep-dropdown-menu (closeModal)="closeEditor()" [OpenDialogue]="true"
-                              [note]="data.Note" [selectedNote]="data.Note"></app-keep-dropdown-menu>
+                              [note]="data.Note" ></app-keep-dropdown-menu>
       <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
                                [note]="data.Note"
                                [searchLabelText]="searchLabelText"

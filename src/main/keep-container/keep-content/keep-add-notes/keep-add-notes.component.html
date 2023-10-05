@@ -8,17 +8,19 @@
   </form>
 </div>
 <div *ngIf="!showFirstForm" class="form-container active-form">
-  <form #secondForm class="second-form">
-    <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
-           placeholder="Title"
-           type="text"/>
-    <textarea
-      (input)="adjustTextareaHeight($event)"
-      [(ngModel)]="noteMessage"
-      class="note-text"
-      name="noteMessage"
-      placeholder="Take a note..."
-    ></textarea>
+  <form #secondForm class="add-form">
+    <div class="add-content-container">
+      <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
+             placeholder="Title"
+             type="text"/>
+      <textarea
+        (input)="adjustTextareaHeight($event)"
+        [(ngModel)]="noteMessage"
+        class="note-text"
+        name="noteMessage"
+        placeholder="Take a note..."
+      ></textarea>
+    </div>
     <div class="form-actions">
       <div class="icons-area">
         <app-keep-footer-note [calledFromAddNote]="true" [noteMessage]="noteMessage"

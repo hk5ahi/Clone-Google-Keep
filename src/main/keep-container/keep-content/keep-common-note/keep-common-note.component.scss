@@ -18,6 +18,8 @@
 .note-text {
   padding-bottom: 0;
   margin-bottom: 1em;
+  overflow: hidden;
+  max-height: 350px;
 }
 
 .close-btn:hover {
@@ -76,6 +78,7 @@ input:focus {
   border-radius: 0.5em;
   position: relative;
   word-wrap: break-word;
+  max-height: 500px;
 
 }
 

@@ -30,6 +30,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
   private labelListSubscription!: Subscription;
   private prevNotesLength = 0;
 
+
   constructor(public dialog: MatDialog, private noteService: NoteService) {
     this.notes$ = this.noteService.getNotes();
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
@@ -51,6 +52,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     });
 
   }
+
 
   onNotesLengthChange(): void {
 

@@ -23,11 +23,13 @@ export class KeepDropdownMenuComponent implements OnInit, OnDestroy {
   private labelListSubscription!: Subscription;
   private notesSubscription!: Subscription;
 
+
   constructor(private noteService: NoteService, private labelService: LabelService) {
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
       this.labels = labels;
     });
     this.notes$ = this.noteService.getNotes();
+
   }
 
   ngOnInit(): void {
@@ -39,10 +41,6 @@ export class KeepDropdownMenuComponent implements OnInit, OnDestroy {
     this.labelListSubscription = this.labelService.labelList$.subscribe((labels: Label[]) => {
       this.labels = labels;
     });
-    return note.labels.length > 0;
-  }
-
-  isLabelsExist(note: Note): boolean {
     return note.labels.length > 0;
   }
 
