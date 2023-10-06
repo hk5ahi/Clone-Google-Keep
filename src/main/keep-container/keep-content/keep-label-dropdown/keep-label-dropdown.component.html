@@ -15,7 +15,7 @@
           </span>
   </div>
 
-  <div (click)="addLabel(searchLabelText,note)" *ngIf="(searchLabelText!='' && !searchLabels(searchLabelText))"
+  <div (click)="addLabel(searchLabelText,note)" *ngIf="(searchLabelText && !searchLabels(searchLabelText))"
        class="add-label-area">
     <div class="label-add">
       <div class="plus-icon">

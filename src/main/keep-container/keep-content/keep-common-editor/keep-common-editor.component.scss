@@ -1,7 +1,7 @@
 .form-container .active-form {
 
   min-width: 39.5em !important;
-  min-height: 7.5625em !important;
+  min-height: 17.5625em !important;
   background-color: transparent;
   border: none;
   -webkit-box-shadow: none;
@@ -12,26 +12,25 @@
   z-index: 4001;
   left: 40.25em;
   top: 8.6em;
-  max-height: 474px !important;
 
 }
 
-.second-form::-webkit-scrollbar {
+.add-content-container::-webkit-scrollbar {
   height: 1em;
   overflow: visible;
   width: 1em;
 }
 
-.second-form::-webkit-scrollbar-button {
+.add-content-container::-webkit-scrollbar-button {
   height: 0;
   width: 0;
 }
 
-.second-form::-webkit-scrollbar-corner {
+.add-content-container::-webkit-scrollbar-corner {
   background: transparent;
 }
 
-.second-form::-webkit-scrollbar-thumb {
+.add-content-container::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, .2);
   background-clip: padding-box;
   border: solid transparent;
@@ -42,16 +41,15 @@
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
 }
 
-.second-form::-webkit-scrollbar-track {
+.add-content-container::-webkit-scrollbar-track {
   background-clip: padding-box;
   border: solid transparent;
   border-width: 0 0 0 4px;
 }
 
-.second-form::-webkit-scrollbar-thumb:hover {
+.add-content-container::-webkit-scrollbar-thumb:hover {
   background-color: #969595;
 }
-
 
 .form input {
   font-size: medium;
@@ -66,10 +64,10 @@
   padding: 1em;
   z-index: 4001;
   min-width: 39.5em !important;
-  min-height: 18.7em !important;
+  min-height: 36em !important;
   position: relative;
   left: -1em;
-  top: -10em;
+  top: -4em;
 }
 
 .form-container form {
@@ -91,35 +89,52 @@
   box-shadow: 0 0.125em 0.25em 0 rgba(60, 64, 67, 0.3), 0 0.25em 0.75em 0 rgba(60, 64, 67, 0.15); /* 1px = 0.0625em */
   border: 0.0625em solid #e0e1e0; /* 1px = 0.0625em */
   border-radius: 0.5em; /* 8px / 16px = 0.5em */
-
+  max-height: 862px !important;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .note-title {
   border: none;
-  font-size: 1.2rem; /* 16px */
   height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: -0.44em; /* 10px / 16px = 0.625em */
+  margin-left: -0.75em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
   margin-top: -0.2em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.75rem;
 }
 
 .note-text {
   border: none;
-  font-size: 0.85rem; /* 16px */
-  height: 100%;
   padding: 0.625em; /* 10px / 16px = 0.625em */
-  margin-left: -0.44em; /* 10px / 16px = 0.625em */
   width: 100%;
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
+  margin-left: -0.68em; /* 10px / 16px = 0.625em */
   margin-top: -0.4em;
+  height: 100%;
+  letter-spacing: .00625em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.add-content-container {
+  width: 100%;
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: -1.25em;
 }
 
 .form-actions {
   display: flex;
 }
-
 
 .active-form form {
   display: flex;
@@ -158,7 +173,6 @@
   background-color: #e0e2e5;
 }
 
-
 input:focus {
   outline: none;
 }
@@ -194,7 +208,6 @@ textarea {
   cursor: pointer;
 }
 
-
 .empty-note {
   min-height: 6.5em !important;
 
@@ -204,7 +217,6 @@ textarea {
   }
 }
 
-
 .notes {
   display: flex;
   justify-content: start;
@@ -213,13 +225,11 @@ textarea {
   margin-right: 17%; /* Add space at the end */
 }
 
-
 .note .check-circle {
   position: absolute;
   left: -0.625em;
   top: -0.6em;
 }
-
 
 .icons-container {
   position: relative;
@@ -231,7 +241,6 @@ textarea {
   border: 0.0625em solid #dadce0; /* 1px converted to em */
   box-shadow: #abb7b9 0 0.0625em 0.125em 0; /* 1px 2px converted to em */
 }
-
 
 .item {
   padding: 0.4375em 0.75em; /* 7px 12px converted to em */
@@ -288,11 +297,9 @@ textarea {
 .small-cross-icon:hover {
   cursor: pointer;
   background: #ebebec;
-
   border-radius: 50%;
   opacity: 1 !important;
   visibility: visible !important;
-
 }
 
 .note-label {
@@ -322,7 +329,6 @@ textarea {
     position: relative;
     top: 2em !important;
   }
-
 }
 
 .small-cross-icon:hover {
@@ -333,12 +339,12 @@ textarea {
   visibility: visible !important;
   background-color: lightgray !important;
   z-index: 1000;
-
 }
-.icons-area{
-  width:26.3125em;
+
+.icons-area {
+  width: 26.3125em;
   height: 2.125em;
   position: relative;
-  top:-1em;
+  top: -1em;
   margin-right: 1em;
 }

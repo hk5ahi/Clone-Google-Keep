@@ -42,6 +42,7 @@ export class KeepNotesComponent implements OnInit, OnDestroy {
     );
   }
 
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.notesSubscription) {
       this.notesSubscription.unsubscribe();

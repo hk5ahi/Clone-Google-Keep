@@ -1,63 +1,62 @@
 <nav>
-    <div class="logo-area">
-        <div class="tooltip">
-            <span class="material-icons-outlined hover menu">menu</span>
-            <span class="tooltip-text">Main Menu</span>
-        </div>
-        <div *ngIf="isNotes() |async" class="Keep">
-            <img alt=""
-                 aria-hidden="true"
-                 class="logo"
-                 src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
-                 srcset="
+  <div class="logo-area">
+    <div class="tooltip">
+      <span class="material-icons-outlined hover menu">menu</span>
+      <span class="tooltip-text">Main Menu</span>
+    </div>
+    <div *ngIf="isNotes() |async" class="Keep">
+      <img alt=""
+           aria-hidden="true"
+           class="logo"
+           src="https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png"
+           srcset="
             https://www.gstatic.com/images/branding/product/1x/keep_2020q4_48dp.png 1x,
             https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png 2x "/>
-            <span class="logo-text ">Keep</span>
-        </div>
+      <span class="logo-text ">Keep</span>
     </div>
-    <div *ngIf="isArchive() |async">
-        <p class="archive">Archive</p>
+    <div *ngIf="isArchive() |async" class="archive-area">
+      <p class="archive">Archive</p>
     </div>
-    <section class="search-box">
-        <div class="tooltip search-icon">
-            <span class="material-icons-outlined">search</span>
-            <span class="tooltip-text">Search</span>
+  </div>
+  <section [ngClass]="{'move-search':isArchive() |async}" class="search-box">
+    <div class="tooltip small-search-icon">
+      <span class="material-icons-outlined">search</span>
+      <span class="tooltip-text">Search</span>
 
-        </div>
-        <input (ngModelChange)="onSearchDataChange($event)" [(ngModel)]="searchData" class="search-input" placeholder="Search"
-               type="text"/>
-
-
-        <div *ngIf="searchDataExist()" class="cancel-box tooltip">
-
-            <img (click)="clearData()" alt="Cancel Svg" class="cancel material-icons-outlined hover"
-                 src="assets/svg/cancel.svg">
-            <span class="tooltip-text">Clear Search</span>
-        </div>
-    </section>
-    <div class="settings-area">
-        <div class="tooltip search-icon right">
-            <span class="material-icons-outlined hover">refresh</span>
-            <span class="tooltip-text">Refresh</span>
-        </div>
-        <div class="tooltip search-icon right">
-            <span class="material-icons-outlined hover">view_agenda</span>
-            <span class="tooltip-text">List View</span>
-        </div>
-        <div class="tooltip search-icon right">
-            <span class="material-icons-outlined hover">settings</span>
-            <span class="tooltip-text">Settings</span>
-        </div>
     </div>
-    <div class="profile-actions-area">
-        <div class="tooltip search-icon">
-            <span class="material-icons-outlined hover">apps</span>
-            <span class="tooltip-text">Apps</span>
-        </div>
-        <div class="tooltip search-icon account">
-            <span class="material-icons-outlined hover">account_circle</span>
-            <span class="tooltip-text">Account</span>
-        </div>
+    <input (ngModelChange)="onSearchDataChange($event)" [(ngModel)]="searchData" class="search-input"
+           placeholder="Search"
+           type="text"/>
+    <div *ngIf="searchDataExist()" class="cancel-box tooltip">
+
+      <img (click)="clearData()" alt="Cancel Svg" class="cancel material-icons-outlined hover"
+           src="assets/svg/cancel.svg">
+      <span class="tooltip-text">Clear Search</span>
     </div>
+  </section>
+  <div class="settings-area">
+    <div class="tooltip search-icon right">
+      <span class="material-icons-outlined hover">refresh</span>
+      <span class="tooltip-text">Refresh</span>
+    </div>
+    <div class="tooltip search-icon right">
+      <span class="material-icons-outlined hover">view_agenda</span>
+      <span class="tooltip-text">List View</span>
+    </div>
+    <div class="tooltip search-icon right">
+      <span class="material-icons-outlined hover">settings</span>
+      <span class="tooltip-text">Settings</span>
+    </div>
+  </div>
+  <div class="profile-actions-area">
+    <div class="tooltip search-icon">
+      <span class="material-icons-outlined hover">apps</span>
+      <span class="tooltip-text">Apps</span>
+    </div>
+    <div class="tooltip search-icon account">
+      <span class="material-icons-outlined hover">account_circle</span>
+      <span class="tooltip-text">Account</span>
+    </div>
+  </div>
 </nav>
 

@@ -72,7 +72,7 @@ nav {
 
 .search-icon {
 
-  margin-left: 0.4em;
+  margin-left: 0.1em;
 }
 
 .search-input {
@@ -103,15 +103,21 @@ nav {
   align-items: center;
 }
 
-.archive {
+.move-search {
+  margin-left: 2.7em;
+}
 
+.archive-area {
+  width: 9.125em !important;
+}
+
+.archive {
 
   font-weight: 400;
   letter-spacing: 0.25px;
   margin-bottom: 2px;
   opacity: 1;
   overflow: hidden;
-  padding-left: 16px;
   position: relative;
   text-overflow: ellipsis;
   vertical-align: middle;
@@ -124,7 +130,7 @@ nav {
   font-size: 1.25em;
   line-height: 3em;
   color: #3c4043;
-  margin-left: -11em;
+  margin-left: 0.3em;
 }
 
 .archive:hover {
@@ -154,7 +160,7 @@ nav {
 
 .right {
   position: relative;
-  left: 50%;
+  left: 117%;
 }
 
 .material-icons-outlined {

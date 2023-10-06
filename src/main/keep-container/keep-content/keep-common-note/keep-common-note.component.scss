@@ -15,11 +15,23 @@
   margin-right: 0.625em; /* 10px / 16px = 0.625em */
 }
 
+.note-move {
+
+  left: 1.2em;
+  top: 0.2em;
+}
+
 .note-text {
   padding-bottom: 0;
   margin-bottom: 1em;
   overflow: hidden;
-  max-height: 350px;
+  max-height: 19em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  margin-top: -0.6em;
 }
 
 .close-btn:hover {
@@ -78,7 +90,7 @@ input:focus {
   border-radius: 0.5em;
   position: relative;
   word-wrap: break-word;
-  max-height: 500px;
+
 
 }
 
@@ -118,6 +130,15 @@ input:focus {
 .note .text, .title {
   width: 100%;
   margin: 0.625em 1.125em 0.5em 0.7em; /* 10px 18px 18px 15px converted to em */
+}
+
+.title {
+  letter-spacing: .00625em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding-top: 6px;
 }
 
 .note .note-footer {
@@ -199,6 +220,8 @@ input:focus {
 
 .icons-area {
   visibility: hidden;
+  position: relative;
+  top: 0.1em;
 }
 
 .note:hover .icons-area {

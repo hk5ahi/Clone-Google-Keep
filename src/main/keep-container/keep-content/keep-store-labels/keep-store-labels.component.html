@@ -1,7 +1,8 @@
-<div *ngIf="isLabelsExist()" [ngClass]="{ 'note-labels-modal': ModalOpen}" class="note-labels">
+<div *ngIf="isLabelsExist()" [ngClass]="{ 'note-labels-modal': ModalOpen,'centre-labels':!ModalOpen}"
+     class="note-labels">
 
-  <div (mouseenter)="toggleCrossIcon(label, true)" (mouseleave)="toggleCrossIcon(label, false)"
-       *ngFor="let label of getLabels()"
+  <div (click)="stopEvent($event)" (mouseenter)="toggleCrossIcon(label, true)"
+       (mouseleave)="toggleCrossIcon(label, false)" *ngFor="let label of getLabels()"
        class="note-label">
     <div>{{label.text}}</div>
     <div *ngIf="label.showCrossIcon" class="tooltip">

@@ -1,5 +1,5 @@
 export interface Label {
-    id: number;
-    text: string;
-    showCrossIcon: boolean;
+  id: number;
+  text: string;
+  showCrossIcon: boolean;
 }

@@ -56,6 +56,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
 
   }
 
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.searchDataSubscription) {
       this.searchDataSubscription.unsubscribe();

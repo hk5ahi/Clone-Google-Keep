@@ -3,22 +3,31 @@
   justify-content: space-evenly;
   min-width: 3.465em !important;
   min-height: 1.85em !important;
-
   margin-right: 0.5em;
+  text-align: center;
+  padding: 0 0.7em;
   background-color: #ebebeb;
   border-radius: 0.9em;
+  margin-top: 0.4em;
   font-size: small;
-      align-items: center;
+  align-items: center;
+  width: auto;
 
 }
-.labels-text{
-  width: 3.5em;
+
+.labels-text {
   height: 1.0625em;
   margin-left: 2px;
 }
+
+.centre-labels {
+  max-width: 14.875em;
+}
+
 .note-labels {
-  width: 14.875em;
+
   min-height: 2.5em;
+  flex-wrap: wrap;
   padding: 5px 10px;
   display: flex;
   align-items: center;
@@ -40,11 +49,9 @@
 .small-cross-icon {
   height: 0.85em;
   width: 1em;
-  margin:unset;
-  right: 0.2em;
-  color: black !important;
-  //make the icon smaller
-  font-size: 1rem !important;
+  position: relative;
+  right: -0.15em;
+  top: 0.1em;
 }
 
 .small-cross-icon:hover {
@@ -54,8 +61,13 @@
   opacity: 1 !important;
   visibility: visible !important;
   background-color: lightgray !important;
-  z-index: 10000000;
+  z-index: 5004;
 
+  .note-label {
+    display: flex;
+    justify-content: flex-start;
+
+  }
 }
 
 .note-label-more {
@@ -72,6 +84,7 @@
   border-radius: 0.2em;
   font-size: small;
   cursor: default;
+  margin-top: 0.4em;
 }
 
 .small-icon {

@@ -27,6 +27,7 @@ export class LabelService {
     }
 
     addLabel(label: string, note?: Note) {
+      // if label is not empty string or null like '' refactored it from label!=='' to label
         if (label) {
             const newLabel: Label = {
                 id: this.labelList.length + 1,

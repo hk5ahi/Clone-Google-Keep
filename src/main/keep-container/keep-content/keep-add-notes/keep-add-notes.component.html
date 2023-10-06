@@ -1,15 +1,38 @@
-<div class="form-container">
+<div #form class="form-container">
   <form #firstForm
         *ngIf="showFirstForm"
-        class="first-form">
-    <input class="note-text" placeholder="Take a note..." type="text"/>
-    <div class="form-actions">
+        class="form">
+    <div>
+      <input [ngClass]="{'note-text-first-form':showFirstForm}" class="note-text" placeholder="Take a note..."
+             type="text"/>
+      <div class="form-actions">
+      </div>
+    </div>
+    <div class="icons">
+      <div class="tooltip">
+        <img (click)="stopEvent($event)"
+             alt="New List"
+             class="icon material-icons-outlined hover" src="assets/svg/newList.svg">
+        <span class="tooltip-text">New list</span>
+      </div>
+      <div class="tooltip">
+        <img (click)="stopEvent($event)"
+             alt="New Note With Drawing"
+             class="icon material-icons-outlined hover" src="assets/svg/drawing.svg">
+        <span class="tooltip-text">New note with drawing</span>
+      </div>
+      <div class="tooltip">
+        <img (click)="stopEvent($event)"
+             alt="New Note With Image"
+             class="icon material-icons-outlined hover" src="assets/svg/Add-image.svg">
+        <span class="tooltip-text">New note with image</span>
+      </div>
     </div>
   </form>
 </div>
 <div *ngIf="!showFirstForm" class="form-container active-form">
   <form #secondForm class="add-form">
-    <div class="add-content-container">
+    <div [ngClass]="{'scrollbar':showScrollbar()}" class="add-content-container">
       <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
              placeholder="Title"
              type="text"/>
@@ -23,15 +46,18 @@
     </div>
     <div class="form-actions">
       <div class="icons-area">
-        <app-keep-footer-note [calledFromAddNote]="true" [noteMessage]="noteMessage"
+        <app-keep-footer-note (addAndArchiveClicked)="handleAddAndArchive($event)" [calledFromAddNote]="true"
+                              [noteMessage]="noteMessage"
                               [showDropdownMenu]="showDropdownMenu"
                               [title]="title"></app-keep-footer-note>
       </div>
-      <button (click)="toggleForms()" class="close-btn icon">Close</button>
+      <div class="close-btn-area">
+        <button (click)="toggleForms()" class="close-btn button-icon">Close</button>
+      </div>
     </div>
   </form>
 </div>
-<div *ngIf="getDropdownValue()" class="dropdown-menu">
+<div #dropdown *ngIf="getDropdownValue()" [ngClass]="{'dropdown-menu-bottom':showScrollbar()}" class="dropdown-menu">
   <ul>
     <li class="item"><a class="text">Add label</a></li>
   </ul>

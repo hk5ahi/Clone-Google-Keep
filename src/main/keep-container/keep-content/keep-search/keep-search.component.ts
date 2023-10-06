@@ -36,6 +36,7 @@ export class KeepSearchComponent implements OnInit, OnDestroy {
     return this.noteService.filteredNotes.length > 0;
   }
 
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.notesSubscription) {
       this.notesSubscription.unsubscribe();

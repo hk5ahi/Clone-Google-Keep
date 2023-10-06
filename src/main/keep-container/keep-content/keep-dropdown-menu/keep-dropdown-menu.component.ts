@@ -58,16 +58,21 @@ export class KeepDropdownMenuComponent implements OnInit, OnDestroy {
     note.showLabelDropdown = !note.showLabelDropdown;
   }
 
+  showDropDown() {
+    return (!this.OpenDialogue && this.note.showDropdown && !this.selectedNote) || (this.note.showDropdown && this.OpenDialogue)
+  }
+  // Changed the variable names to make it more readable.
   private subscribeToNotesAndHandleArray(notes$: Observable<any>): void {
     this.notesSubscription = notes$.subscribe((receivedNotes) => {
       if (Array.isArray(receivedNotes)) {
-        this.notes$ = new Observable((observer) => {
-          observer.next(receivedNotes);
-          observer.complete();
+        this.notes$ = new Observable((notesObserver) => {
+          notesObserver.next(receivedNotes);
+          notesObserver.complete();
         });
       }
     });
   }
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.labelListSubscription) {
       this.labelListSubscription.unsubscribe();

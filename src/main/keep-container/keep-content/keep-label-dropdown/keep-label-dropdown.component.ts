@@ -52,7 +52,8 @@ export class KeepLabelDropdownComponent implements OnDestroy {
 
   getDynamicHeight(): string {
     const numberOfLabels = this.labels.length;
-    const totalHeight = (numberOfLabels * AppConstants.heightPerLabel) + AppConstants.additionalHeight ;
+    // Fetch the total height of the label dropdown from AppConstants
+    const totalHeight = (numberOfLabels * AppConstants.heightPerLabel) + AppConstants.additionalHeight;
 
     return `${totalHeight}px`;
   }
@@ -61,6 +62,7 @@ export class KeepLabelDropdownComponent implements OnDestroy {
     return this.labelService.searchLabels(searchText);
   }
 
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.labelListSubscription) {
       this.labelListSubscription.unsubscribe();

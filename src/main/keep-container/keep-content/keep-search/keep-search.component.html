@@ -4,7 +4,7 @@
   <div class="text-archive">Archive</div>
 </div>
 <app-keep-common-note [isArchiveNotePresent]="true" [isSearch]="true"></app-keep-common-note>
-
+<!--Refactored ngIf condition-->
 <div *ngIf="!isMatchedNotes() && searchValue " class="box">
   <div class="message">No matching results.</div>
 </div>

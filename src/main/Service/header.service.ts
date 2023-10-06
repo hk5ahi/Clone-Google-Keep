@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class HeaderService {
 
-    private isNotesSubject = new BehaviorSubject<boolean>(true);
-    isNotes$ = this.isNotesSubject.asObservable();
-    private isArchiveSubject = new BehaviorSubject<boolean>(false);
-    isArchive$ = this.isArchiveSubject.asObservable();
+  private isNotesSubject = new BehaviorSubject<boolean>(true);
+  isNotes$ = this.isNotesSubject.asObservable();
+  private isArchiveSubject = new BehaviorSubject<boolean>(false);
+  isArchive$ = this.isArchiveSubject.asObservable();
 
-    updateIsNotes() {
-        this.isNotesSubject.next(true);
-        this.isArchiveSubject.next(false);
-    }
+  updateIsNotes() {
+    this.isNotesSubject.next(true);
+    this.isArchiveSubject.next(false);
+  }
 
-    updateIsArchive() {
-        this.isNotesSubject.next(false);
-        this.isArchiveSubject.next(true);
-    }
+  updateIsArchive() {
+    this.isNotesSubject.next(false);
+    this.isArchiveSubject.next(true);
+  }
 }

@@ -6,7 +6,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { KeepCommonEditorComponent } from "../keep-common-editor/keep-common-editor.component";
 import { Label } from "../../../Data Types/Label";
 
-
 @Component({
 
   selector: 'app-keep-common-note',
@@ -25,10 +24,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
   dialogBoxOpen: boolean = false;
   labels: Label[] = [];
   searchLabelText: string = '';
-  notesLength: number = 0;
-  animationState: boolean = false;
   private labelListSubscription!: Subscription;
-  private prevNotesLength = 0;
 
 
   constructor(public dialog: MatDialog, private noteService: NoteService) {
@@ -40,25 +36,6 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToSearchData();
-    this.animationState = false;
-    this.notes$.subscribe(notes => {
-      // Now, you can check the length of the array
-      this.notesLength = notes.length;
-      if (this.notesLength !== this.prevNotesLength) {
-        this.prevNotesLength = this.notesLength;
-        // Trigger your animation logic here
-        this.onNotesLengthChange();
-      }
-    });
-
-  }
-
-
-  onNotesLengthChange(): void {
-
-    if (this.notesLength > 1) {
-      this.animationState = true;
-    }
   }
 
   isCommonNote(note: Note): boolean {
@@ -135,6 +112,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
       this.searchValue = searchData;
     });
   }
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.labelListSubscription) {
       this.labelListSubscription.unsubscribe();

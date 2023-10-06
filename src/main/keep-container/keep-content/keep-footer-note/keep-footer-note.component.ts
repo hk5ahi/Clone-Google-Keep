@@ -23,6 +23,7 @@ export class KeepFooterNoteComponent {
   @Input() calledFromNote: boolean = false;
   @Input() calledFromEditorNote: boolean = false;
   @Output() closeModal = new EventEmitter<boolean>();
+  @Output() addAndArchiveClicked: EventEmitter<boolean> = new EventEmitter();
   notes$: Observable<Note[]>;
 
   constructor(private noteService: NoteService, private footerService: FooterService) {
@@ -69,9 +70,11 @@ export class KeepFooterNoteComponent {
   addAndArchiveNote(title: string, message: string) {
 
     this.noteService.addAndArchive(title, message);
+    this.addAndArchiveClicked.emit(true);
     this.title = '';
     this.noteMessage = '';
     this.footerService.setShowFirstForm(true);
+
   };
 
   toggleDropdownMenu() {

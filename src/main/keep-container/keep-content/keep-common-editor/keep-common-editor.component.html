@@ -1,14 +1,16 @@
 <div #formContainer class="form-container active-form ">
   <form class="second-form">
-    <input [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title" type="text"/>
-    <textarea
-      (input)="adjustTextareaHeight($event)"
-      [(ngModel)]="data.Note.content"
-      class="note-text"
-      name="noteMessage"
-      placeholder="Note"
+    <div class="add-content-container">
+      <input [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title" type="text"/>
+      <textarea #noteText
+                (ngModelChange)="adjustNoteTextHeight()"
+                [(ngModel)]="data.Note.content"
+                class="note-text"
+                name="noteMessage"
+                placeholder="Note"
 
-    ></textarea>
+      ></textarea>
+    </div>
     <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
     <div class="form-actions">
 
@@ -17,7 +19,7 @@
                               [searchLabelText]="searchLabelText" [selectedNote]="selectedNote"></app-keep-footer-note>
       </div>
       <app-keep-dropdown-menu (closeModal)="closeEditor()" [OpenDialogue]="true"
-                              [note]="data.Note" ></app-keep-dropdown-menu>
+                              [note]="data.Note"></app-keep-dropdown-menu>
       <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
                                [note]="data.Note"
                                [searchLabelText]="searchLabelText"

@@ -38,6 +38,7 @@
   font-size: 0.875em;
   padding: 0 0.75em;
   margin-top: 1.5px;
+  color: black;
 
 }
 
@@ -80,7 +81,7 @@
 .add-label-area, .show-labels {
   border-top: 0.1px solid #dadce0;
   width: 14.0625em;
-  height: 1.875em;
+  height: auto;
   cursor: pointer;
   display: block;
   outline: none;
@@ -89,14 +90,13 @@
 }
 
 .space {
-  height: 12px;
+  height: 0.75em;
 }
 
 .labels-container {
 
-  max-height: 250px; /* Set your desired max height */
+  max-height: 15.625em; /* Set your desired max height */
   overflow-x: hidden;
-  overflow-y: hidden;
   padding: 6px 0;
   position: relative;
   width: 100%; /* Considering padding of .label-Dropdown */
@@ -124,8 +124,8 @@
   background-clip: padding-box;
   border: solid transparent;
   border-width: 1px 1px 1px 6px;
-  min-height: 28px;
-  padding: 100px 0 0;
+  min-height: 1.75em;
+  padding: 6.25em 0 0;
   -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
 }
@@ -158,7 +158,8 @@
 
 .label-search-text {
   min-width: 3.5em;
-  min-height: 1.0625em;
+  height: 1.0625em;
+  max-height: 5em;
   display: inline-block;
   margin-left: 7px;
   max-width: 10em;
@@ -227,8 +228,8 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 24.15em; /* 356px converted to em */
-  top: 12.7em; /* 277px converted to em */
+  left: 19.15em; /* 356px converted to em */
+  top: 13.1em; /* 277px converted to em */
 }
 
 .label-selected {
@@ -244,6 +245,6 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 24.25em !important; /* 356px converted to em */
-  top: 13.7em !important; /* 277px converted to em */
+  left: 18.25em !important; /* 356px converted to em */
+  top: 15.5em !important; /* 277px converted to em */
 }

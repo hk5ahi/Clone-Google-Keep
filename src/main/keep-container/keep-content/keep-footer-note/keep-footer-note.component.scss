@@ -9,10 +9,10 @@
   justify-content: space-between;
   margin-top: 1.5em;
   box-sizing: border-box;
-  opacity: 0.71;
+
 }
 
-.icons:hover {
+.icon:hover {
   opacity: 1;
 }
 
@@ -25,8 +25,12 @@
   color: black;
   font-size: 1.1rem;
   align-items: center;
+  opacity: 0.71;
+  margin-right: 0.8em;
+}
 
-
+.redo {
+  transform: scaleX(-1);
 }
 
 
@@ -68,5 +72,9 @@
   border-radius: 0.3125em;
   visibility: hidden;
   z-index: 5004;
+}
+
+.tooltip-text-up {
+  top: -50% !important;
 }
 

@@ -101,6 +101,8 @@ export class NoteService {
   }
 
   addNote(title: string, message: string, isArchived: boolean = false) {
+    // if title is  empty string or null  refactored it from title==='' to !title
+    // if message is  empty string or null  refactored it from message==='' to !message
     if (!title && !message) {
       return;
     }

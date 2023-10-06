@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } fro
 import { NoteService } from "../../../Service/note.service";
 import { FooterService } from "../../../Service/footer.service";
 import { Subscription } from "rxjs";
-
+import { AppConstants } from "../../../Constants/app-constant";
 
 @Component({
   selector: 'app-keep-add-notes',
@@ -14,11 +14,14 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   @ViewChild('titleInput', {static: false}) titleInput!: ElementRef;
   @ViewChild('secondForm') secondFormElement!: ElementRef;
   @ViewChild('firstForm') firstFormElement!: ElementRef;
+  @ViewChild('form') FormElement!: ElementRef;
+  @ViewChild('dropdown') DropDownElement!: ElementRef;
   private showFirstFormSubscription!: Subscription;
   showFirstForm!: boolean;
   showDropdownMenu: boolean = false;
   title: string = '';
   noteMessage: string = '';
+  addAndArchiveClicked!: boolean;
 
 
   constructor(private noteService: NoteService, private footerService: FooterService) {
@@ -30,7 +33,6 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.showFirstForm = true;
   }
-
   getDropdownValue() {
     return this.footerService.getDropdownValue();
   }
@@ -43,13 +45,15 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   }
 
   addNote() {
+    // if title and noteMessage is not empty string or null refactored it from title!='' to title and noteMessage!='' to noteMessage
     if (this.title || this.noteMessage) {
       this.noteService.addNote(this.title, this.noteMessage);
       this.title = '';
       this.noteMessage = '';
     }
   }
-
+  // Purpose: To close the second form when clicked outside the form.
+  // Refactored and remove the unnecessary code like clickCounter
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const isClickInsideFirstForm = this.isClickInsideElement(this.firstFormElement, event);
@@ -68,7 +72,7 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
       }
     }
 
-    if (this.showFirstForm) {
+    if (this.showFirstForm && !this.addAndArchiveClicked) {
       this.addNote();
     }
   }
@@ -89,11 +93,28 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   private isClickInsideElement(element: ElementRef | undefined, event: MouseEvent): boolean {
     return element?.nativeElement?.contains(event.target) || false;
   }
+  showScrollbar(): boolean {
+    const container = this.secondFormElement?.nativeElement?.querySelector('.note-text');
+    if (container) {
+      const maxHeight = window.innerHeight - container.getBoundingClientRect().top; // Adjust as needed
+      container.style.maxHeight = `${maxHeight}px`;
+      const actualHeight = container.clientHeight;
 
+      return actualHeight > AppConstants.maxHeightOFNoteText;
+    }
+    return false; // Return false by default if container is not found
+  }
+  stopEvent(event: MouseEvent) {
+    event.stopPropagation();
+  }
+  handleAddAndArchive(value: boolean) {
+    this.addAndArchiveClicked = value;
+  }
+
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.showFirstFormSubscription) {
       this.showFirstFormSubscription.unsubscribe();
     }
   }
-
 }

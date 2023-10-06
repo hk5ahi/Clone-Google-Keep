@@ -1,11 +1,9 @@
-<div *ngIf="(!OpenDialogue && note.showDropdown && !selectedNote ) || (note.showDropdown && OpenDialogue)  "
+<div *ngIf="showDropDown()  "
      [ngClass]="{
        'dropdown-menu': !OpenDialogue,
        'dropdown-menu-up': hasLabels(note),
        'dropdown-menu-selected': OpenDialogue,
         'dropdown-menu-selected-up': OpenDialogue && hasLabels(note),
-
-
      }">
   <ul>
     <li class="item"><a (click)="deleteNote($event,note.id)" class="text">Delete Note</a></li>

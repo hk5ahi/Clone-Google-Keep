@@ -38,4 +38,7 @@ export class KeepStoreLabelsComponent {
     }
   }
 
+  stopEvent(event: MouseEvent) {
+    event.stopPropagation();
+  }
 }
