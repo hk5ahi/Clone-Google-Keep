@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Note } from "../Data Types/Note";
-import { Label } from "../Data Types/Label";
-import { AppConstants } from "../Constants/app-constant";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Note} from "../Data Types/Note";
+import {Label} from "../Data Types/Label";
+import {AppConstants} from "../Constants/app-constant";
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class NoteService {
     return this.searchDataSubject.asObservable();
   }
 
-  closeDropdownsExceptThisNote(clickedNote: Note): void {
+  closeDropdownsExceptThisNote(clickedNote?: Note): void {
     this.notes.forEach((note) => {
       if ((note.showDropdown || note.showLabelDropdown) && note !== clickedNote) {
         note.showDropdown = false;
@@ -35,6 +35,7 @@ export class NoteService {
   }
 
   isNotesSimpleAndArchive(): boolean {
+
     return this.filteredNotes.some((note) => note.isArchived) &&
       this.filteredNotes.some((note) => !note.isArchived);
   }
@@ -154,6 +155,10 @@ export class NoteService {
 
     if (noteIndexToDelete >= 0) {
       this.notes.splice(noteIndexToDelete, 1);
+      const filteredNoteIndexToDelete = this.filteredNotes.findIndex((note) => note.id === id);
+      if (filteredNoteIndexToDelete >= 0) {
+        this.filteredNotes.splice(filteredNoteIndexToDelete, 1);
+      }
       this.notesSubject.next(this.notes);
       this.saveNotesToLocalStorage();
     }

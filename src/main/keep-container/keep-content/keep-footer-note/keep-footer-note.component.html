@@ -1,3 +1,4 @@
+
 <div class="icons">
   <div class="tooltip">
     <img (click)="stopEvent($event)"
@@ -81,9 +82,8 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="calledFromAddNote">
-    <div (click)="toggleDropdownMenu()" class="tooltip">
-      <img (click)="archiveNote(note.id)"
-           [ngClass]="{'icon-note':calledFromNote,'icon-add-note':calledFromAddNote || calledFromEditorNote}"
+    <div  class="tooltip">
+      <img (click)="toggleDropdownMenu()"
            alt="More"
            class="icon hover material-icons-outlined" src="assets/svg/more.svg">
       <span [ngClass]="{'tooltip-text-up':calledFromEditorNote}" class="tooltip-text">More</span>
@@ -108,6 +108,13 @@
       <span [ngClass]="{'tooltip-text-up':calledFromEditorNote}" class="tooltip-text">Redo</span>
     </div>
   </ng-container>
+
 </div>
+<ng-container *ngIf="!calledFromAddNote">
+<app-keep-dropdown-menu [OpenDialogue]="calledFromEditorNote" [isArchiveNotePresent]="isArchiveNotePresent"
+                        [note]="note"
+                        [searchLabelText]="searchLabelText"
+                        [selectedNote]="selectedNote" (closeModal)="closeEditor()"></app-keep-dropdown-menu>
+</ng-container>
 
 

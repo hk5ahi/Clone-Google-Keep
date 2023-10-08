@@ -1,11 +1,11 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, Renderer2, ViewChild} from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Label } from "../../../Data Types/Label";
 import { LabelService } from "../../../Service/label.service";
 import { NoteService } from "../../../Service/note.service";
 import { Subscription } from "rxjs";
 import { AppConstants } from "../../../Constants/app-constant";
-
+import {FooterService} from "../../../Service/footer.service";
 
 @Component({
   selector: 'app-keep-label-dropdown',
@@ -14,17 +14,22 @@ import { AppConstants } from "../../../Constants/app-constant";
 })
 export class KeepLabelDropdownComponent implements OnDestroy {
 
+  @ViewChild('labelSearchText') labelSearchText!: ElementRef;
+  @ViewChild('labelArea') labelArea!: ElementRef;
   @Input() note!: Note;
   @Input() searchLabelText: string = '';
-  @Input() labelDropdown: boolean = false;
-  @Input() DialogBoxOpen: boolean = false;
+  @Input() labelDropdown: boolean=false;
+  @Input() DialogBoxOpen!: boolean;
   @Input() selectedNote!: Note | null; // Initialize as null
   labels: Label[] = [];
   private labelListSubscription!: Subscription;
 
-  constructor(private labelService: LabelService, private noteService: NoteService) {
+  constructor(private labelService: LabelService, private noteService: NoteService,private footerService:FooterService,private renderer: Renderer2) {
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
       this.labels = labels;
+      this.footerService.searchLabel$.subscribe((searchLabelText) => {
+        this.searchLabelText = searchLabelText;
+      });
     });
   }
 
@@ -54,8 +59,25 @@ export class KeepLabelDropdownComponent implements OnDestroy {
     const numberOfLabels = this.labels.length;
     // Fetch the total height of the label dropdown from AppConstants
     const totalHeight = (numberOfLabels * AppConstants.heightPerLabel) + AppConstants.additionalHeight;
-
     return `${totalHeight}px`;
+  }
+  adjustSearchHeight() {
+
+    // Get the native element of the Search Area
+    const searchAreaElement = this.labelSearchText?.nativeElement;
+    const labelAreaNativeElement = this.labelArea?.nativeElement;
+
+    if (searchAreaElement) {
+      // Check if the content overflows (i.e., it wraps to a new line)
+      const contentOverflows = searchAreaElement.scrollHeight > searchAreaElement.clientHeight;
+
+      // Calculate the desired height based on content overflow
+      const desiredHeight = contentOverflows
+        ? searchAreaElement.scrollHeight + AppConstants.oneEM  // Increase height by 1em (16px)
+        : searchAreaElement.clientHeight;
+      // Set the height of the element
+      this.renderer.setStyle(labelAreaNativeElement, 'height', `${desiredHeight}px`);
+    }
   }
 
   searchLabels(searchText: string): boolean {
@@ -68,4 +90,6 @@ export class KeepLabelDropdownComponent implements OnDestroy {
       this.labelListSubscription.unsubscribe();
     }
   }
+
+
 }

@@ -9,13 +9,17 @@ export class FooterService {
 
   private showFirstFormSubject = new BehaviorSubject<boolean>(false);
   showFirstForm$ = this.showFirstFormSubject.asObservable();
-
+  private searchLabelSubject = new BehaviorSubject<string>(''); // Initial value is an empty string
+  searchLabel$: Observable<string> = this.searchLabelSubject.asObservable();
   toggleDropdownMenu() {
     this.showDropdownMenuSubject.next(!this.showDropdownMenuSubject.value);
   }
 
   setDropdownMenu(value: boolean) {
     this.showDropdownMenuSubject.next(value);
+  }
+  setSearchLabel(searchLabelText: string): void {
+    this.searchLabelSubject.next(searchLabelText);
   }
 
   setShowFirstForm(value: boolean) {

@@ -15,15 +15,9 @@
     <div class="form-actions">
 
       <div class="icons-area">
-        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [note]="data.Note"
-                              [searchLabelText]="searchLabelText" [selectedNote]="selectedNote"></app-keep-footer-note>
+        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [calledFromNote]="false" [note]="data.Note"
+                              [searchLabelText]="searchLabelText" [selectedNote]="selectedNote" ></app-keep-footer-note>
       </div>
-      <app-keep-dropdown-menu (closeModal)="closeEditor()" [OpenDialogue]="true"
-                              [note]="data.Note"></app-keep-dropdown-menu>
-      <app-keep-label-dropdown [DialogBoxOpen]="true" [labelDropdown]="data.Note.showLabelDropdown"
-                               [note]="data.Note"
-                               [searchLabelText]="searchLabelText"
-                               [selectedNote]="data.Note"></app-keep-label-dropdown>
       <button (click)="closeEditor()" class="close-btn">Close</button>
     </div>
   </form>

@@ -12,8 +12,10 @@
   z-index: 4001;
   left: 40.25em;
   top: 8.6em;
+  overflow: visible;
 
 }
+
 
 .add-content-container::-webkit-scrollbar {
   height: 1em;
@@ -141,6 +143,7 @@
   flex-direction: column;
   width: 100%;
   padding: 0.625em;
+  overflow: initial;
 }
 
 .active-form form .form-actions .icons {

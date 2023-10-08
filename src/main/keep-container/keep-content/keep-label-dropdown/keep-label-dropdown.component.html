@@ -9,19 +9,19 @@
   class="label-Dropdown">
   <div class="label-text">Label note</div>
   <div class="container-input">
-    <input [(ngModel)]="searchLabelText" class="input" placeholder="Enter label name">
+    <input [(ngModel)]="searchLabelText" class="input" placeholder="Enter label name" (ngModelChange)="adjustSearchHeight()">
     <span class="small-search-icon">
             <img alt="search" src="assets/svg/small-search.svg">
           </span>
   </div>
 
   <div (click)="addLabel(searchLabelText,note)" *ngIf="(searchLabelText && !searchLabels(searchLabelText))"
-       class="add-label-area">
+       class="add-label-area" #labelArea>
     <div class="label-add">
       <div class="plus-icon">
         <img alt="Small Plus Icon" src="assets/svg/small-plus.svg">
       </div>
-      <div class="label-search-text">Create "<span class="bold">{{searchLabelText}}</span> "</div>
+      <div class="label-search-text" #labelSearchText>Create "<span class="bold">{{searchLabelText}}</span> "</div>
     </div>
   </div>
 

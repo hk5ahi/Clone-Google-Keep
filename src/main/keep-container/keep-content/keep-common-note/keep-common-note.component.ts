@@ -5,6 +5,7 @@ import { NoteService } from "../../../Service/note.service";
 import { MatDialog } from "@angular/material/dialog";
 import { KeepCommonEditorComponent } from "../keep-common-editor/keep-common-editor.component";
 import { Label } from "../../../Data Types/Label";
+import {FooterService} from "../../../Service/footer.service";
 
 @Component({
 
@@ -27,7 +28,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
   private labelListSubscription!: Subscription;
 
 
-  constructor(public dialog: MatDialog, private noteService: NoteService) {
+  constructor(public dialog: MatDialog, private noteService: NoteService,private footerService:FooterService) {
     this.notes$ = this.noteService.getNotes();
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
       this.labels = labels;
@@ -102,6 +103,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
           note.showDropdown = false;
         } else if (note.showLabelDropdown) {
           note.showLabelDropdown = false;
+          this.footerService.setSearchLabel('');
         }
       });
     });

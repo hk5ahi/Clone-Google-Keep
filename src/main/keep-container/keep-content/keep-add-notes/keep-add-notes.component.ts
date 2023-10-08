@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { NoteService } from "../../../Service/note.service";
 import { FooterService } from "../../../Service/footer.service";
 import { Subscription } from "rxjs";
@@ -15,7 +15,6 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   @ViewChild('secondForm') secondFormElement!: ElementRef;
   @ViewChild('firstForm') firstFormElement!: ElementRef;
   @ViewChild('form') FormElement!: ElementRef;
-  @ViewChild('dropdown') DropDownElement!: ElementRef;
   private showFirstFormSubscription!: Subscription;
   showFirstForm!: boolean;
   showDropdownMenu: boolean = false;
@@ -34,6 +33,7 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
     this.showFirstForm = true;
   }
   getDropdownValue() {
+
     return this.footerService.getDropdownValue();
   }
 

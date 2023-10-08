@@ -1,4 +1,5 @@
-<div *ngIf="showDropDown()  "
+
+<div *ngIf="showDropDown() "
      [ngClass]="{
        'dropdown-menu': !OpenDialogue,
        'dropdown-menu-up': hasLabels(note),
@@ -15,3 +16,9 @@
     </ng-container>
   </ul>
 </div>
+
+<app-keep-label-dropdown [DialogBoxOpen]="OpenDialogue" [note]="note"
+                         [labelDropdown]="note.showLabelDropdown"
+                         [searchLabelText]="searchLabelText"
+                         [selectedNote]="selectedNote"></app-keep-label-dropdown>
+

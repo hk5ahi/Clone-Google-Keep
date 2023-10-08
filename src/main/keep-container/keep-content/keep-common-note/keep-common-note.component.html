@@ -32,20 +32,14 @@
         </ng-container>
 
         <app-keep-store-labels [ModalOpen]="false" [note]="note"></app-keep-store-labels>
-        <div class="icons-area">
-          <app-keep-footer-note [calledFromNote]="true" [isArchiveNotePresent]="isArchiveNotePresent"
+        <div class="icons-area" [ngClass]="{'not-hover':note.showDropdown || note.showLabelDropdown}">
+          <app-keep-footer-note [calledFromNote]="true" [calledFromEditorNote]="false" [isArchiveNotePresent]="isArchiveNotePresent"
                                 [note]="note" [searchLabelText]="searchLabelText"
                                 [selectedNote]="selectedNote"></app-keep-footer-note>
         </div>
       </div>
     </div>
-    <app-keep-dropdown-menu [OpenDialogue]="false" [isArchiveNotePresent]="isArchiveNotePresent"
-                            [note]="note"
-                            [selectedNote]="selectedNote"></app-keep-dropdown-menu>
-    <app-keep-label-dropdown [DialogBoxOpen]="false" [labelDropdown]="note.showLabelDropdown"
-                             [note]="note"
-                             [searchLabelText]="searchLabelText"
-                             [selectedNote]="selectedNote"></app-keep-label-dropdown>
+
   </div>
 </div>
 

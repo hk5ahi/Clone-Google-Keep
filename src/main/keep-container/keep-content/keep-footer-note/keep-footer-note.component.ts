@@ -17,17 +17,18 @@ export class KeepFooterNoteComponent {
   @Input() noteMessage!: string;
   @Input() selectedNote!: Note | null;
   @Input() showFirstForm!: boolean;
-  @Input() showDropdownMenu!: boolean;
   @Input() searchLabelText!: string;
   @Input() calledFromAddNote: boolean = false;
-  @Input() calledFromNote: boolean = false;
-  @Input() calledFromEditorNote: boolean = false;
+  @Input() calledFromNote!: boolean;
+  @Input() calledFromEditorNote!: boolean;
   @Output() closeModal = new EventEmitter<boolean>();
   @Output() addAndArchiveClicked: EventEmitter<boolean> = new EventEmitter();
   notes$: Observable<Note[]>;
 
+
   constructor(private noteService: NoteService, private footerService: FooterService) {
     this.notes$ = this.noteService.getNotes();
+
   }
 
   isLabelsExist(note: Note): boolean {
@@ -45,14 +46,12 @@ export class KeepFooterNoteComponent {
   handleMoreIconClick(event: MouseEvent, note: Note) {
 
     this.noteService.closeDropdownsExceptThisNote(note);
-
     note.showDropdown = !note.showDropdown;
     if (note.showLabelDropdown) {
       note.showLabelDropdown = !note.showLabelDropdown;
-      this.searchLabelText = '';
+      this.footerService.setSearchLabel('');
     }
     event.stopPropagation();
-
   }
 
   stopEvent(event: MouseEvent) {
@@ -78,7 +77,11 @@ export class KeepFooterNoteComponent {
   };
 
   toggleDropdownMenu() {
+
     this.footerService.toggleDropdownMenu();
   }
 
+  closeEditor() {
+    this.closeModal.emit(true);
+  }
 }

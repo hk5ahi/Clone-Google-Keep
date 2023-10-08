@@ -222,9 +222,15 @@ input:focus {
   visibility: hidden;
   position: relative;
   top: 0.1em;
+  height: 2.125em;
 }
 
 .note:hover .icons-area {
   visibility: visible;
 }
+.not-hover {
+  visibility: visible;
+}
+
+
 

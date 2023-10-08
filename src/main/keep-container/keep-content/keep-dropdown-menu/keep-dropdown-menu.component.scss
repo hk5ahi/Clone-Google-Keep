@@ -48,19 +48,18 @@
 
 .dropdown-menu-selected {
   background-color: #fff;
-  min-width: 8.4875em; /* 7.8vw converted to em */
+  min-width: 8.6em; /* 7.8vw converted to em */
   min-height: 2.16em; /* 13.5vh converted to em */
   border-width: 0;
   box-shadow: 0 0.0625em 0.125em 0 rgba(60, 64, 67, 0.302), 0 0.125em 0.375em 0.125em rgba(60, 64, 67, 0.149);
   position: absolute;
   -webkit-border-radius: 0.25em; /* 4px converted to em */
   border-radius: 0.25em; /* 4px converted to em */
-  z-index: 5003;
+  z-index: 5006;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
   left: 18.6em; /* 356px converted to em */
   top: 13.5em !important; /* 277px converted to em */
-  overflow-y: hidden;
 
   .dropdown-menu {
     visibility: hidden;

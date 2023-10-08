@@ -6,4 +6,5 @@ export const AppConstants = {
   additionalHeight: 35.5,
   heightPerLabel: 29,
   maxHeightOFNoteText: 400,
+  oneEM: 16,
 };

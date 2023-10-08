@@ -47,8 +47,8 @@
     <div class="form-actions">
       <div class="icons-area">
         <app-keep-footer-note (addAndArchiveClicked)="handleAddAndArchive($event)" [calledFromAddNote]="true"
+                              [calledFromEditorNote]="false" [calledFromNote]="false"
                               [noteMessage]="noteMessage"
-                              [showDropdownMenu]="showDropdownMenu"
                               [title]="title"></app-keep-footer-note>
       </div>
       <div class="close-btn-area">
@@ -57,7 +57,7 @@
     </div>
   </form>
 </div>
-<div #dropdown *ngIf="getDropdownValue()" [ngClass]="{'dropdown-menu-bottom':showScrollbar()}" class="dropdown-menu">
+<div  *ngIf="getDropdownValue()" [ngClass]="{'dropdown-menu-bottom':showScrollbar()}" class="dropdown-menu">
   <ul>
     <li class="item"><a class="text">Add label</a></li>
   </ul>
