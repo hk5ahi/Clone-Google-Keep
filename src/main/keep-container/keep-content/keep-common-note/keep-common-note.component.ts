@@ -5,7 +5,7 @@ import { NoteService } from "../../../Service/note.service";
 import { MatDialog } from "@angular/material/dialog";
 import { KeepCommonEditorComponent } from "../keep-common-editor/keep-common-editor.component";
 import { Label } from "../../../Data Types/Label";
-import {FooterService} from "../../../Service/footer.service";
+import { FooterService } from "../../../Service/footer.service";
 
 @Component({
 
@@ -28,7 +28,7 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
   private labelListSubscription!: Subscription;
 
 
-  constructor(public dialog: MatDialog, private noteService: NoteService,private footerService:FooterService) {
+  constructor(public dialog: MatDialog, private noteService: NoteService, private footerService: FooterService) {
     this.notes$ = this.noteService.getNotes();
     this.labelListSubscription = this.noteService.getLabels().subscribe((labels: Label[]) => {
       this.labels = labels;
@@ -51,6 +51,10 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     note.showLabelDropdown = false;
     note.showDropdown = false;
     this.openDialog();
+  }
+
+  showEmptyNoteText(note: Note): boolean {
+    return !note.title.trim() && !note.content.trim() && note.labels.length == 0
   }
 
   formattedContent(content: string): string {
@@ -96,6 +100,13 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
+  ngOnDestroy(): void {
+    if (this.labelListSubscription) {
+      this.labelListSubscription.unsubscribe();
+    }
+  }
+
   private closeDropdowns(): void {
     this.notes$.forEach((notes) => {
       notes.forEach((note) => {
@@ -113,12 +124,6 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     this.noteService.getSearchedData().subscribe((searchData) => {
       this.searchValue = searchData;
     });
-  }
-  // Purpose: Unsubscribe the subscription to avoid memory leak.
-  ngOnDestroy(): void {
-    if (this.labelListSubscription) {
-      this.labelListSubscription.unsubscribe();
-    }
   }
 }
 

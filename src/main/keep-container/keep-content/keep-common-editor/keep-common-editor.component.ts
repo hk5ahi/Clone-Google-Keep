@@ -5,6 +5,7 @@ import { NoteService } from "../../../Service/note.service";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Label } from "../../../Data Types/Label";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { AppConstants } from "../../../Constants/app-constant";
 
 
 @Component({
@@ -26,12 +27,15 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
   @Input() selectedNote!: Note | null;
   @ViewChild('formContainer') formContainer!: ElementRef;
   @ViewChild('noteText') noteText!: ElementRef;
+  @ViewChild('noteTitle') noteTitle!: ElementRef;
+  @ViewChild('secondForm') secondForm!: ElementRef;
   notes$: Observable<Note[]>;
   labels: Label[] = [];
   searchLabelText: string = '';
   private labelListSubscription!: Subscription;
   private notesSubscription!: Subscription;
   private dialogRefSubscription!: Subscription;
+  private lastContent!: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     Note: Note,
@@ -43,6 +47,7 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.notes$ = this.noteService.getNotes();
+
     this.notesSubscription = this.notes$.subscribe((notes) => {
       if (Array.isArray(notes)) {
         this.notes$ = new Observable((observer) => {
@@ -51,13 +56,45 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
         });
       }
     });
+
     this.dialogRef.afterOpened().subscribe(() => {
+      this.lastContent = this.data.Note.content;
       this.adjustNoteTextHeight();
+
+      // Set focus with a delay of 100 milliseconds
+      setTimeout(() => {
+        this.noteText.nativeElement.focus();
+
+      }, 1);
     });
-    this.dialogRefSubscription = this.dialogRef.afterClosed().subscribe(() => {
+
+    this.dialogRef.afterClosed().subscribe(() => {
       this.data.Note.showLabelDropdown = false;
       this.data.Note.showDropdown = false;
+      this.noteService.updateNote(this.data.Note);
     });
+  }
+
+  calculateDynamicMinHeight(): { minHeight: string; top: string } {
+    const formContainerHeight = this.formContainer?.nativeElement?.offsetHeight;
+
+    if (!this.data.Note.showDropdown && !this.data.Note.showLabelDropdown) {
+      return {
+        minHeight: (AppConstants.modalDialoguesHeight.noMenu + formContainerHeight / 16) + 'em',
+        top: AppConstants.modalDialoguesTopPosition.noMenu + 'em'
+      };
+    } else if (this.data.Note.showDropdown && !this.data.Note.showLabelDropdown) {
+      return {
+        minHeight: (AppConstants.modalDialoguesHeight.onlyMenu + formContainerHeight / 16) + 'em',
+        top: AppConstants.modalDialoguesTopPosition.onlyMenu + 'em'
+      };
+    } else {
+      return {
+
+        minHeight: (AppConstants.modalDialoguesHeight.onlyLabel + formContainerHeight / 16) + 'em',
+        top: AppConstants.modalDialoguesTopPosition.onlyLabel + 'em'
+      };
+    }
   }
 
   saveNoteChanges() {
@@ -66,12 +103,22 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
 
   adjustNoteTextHeight() {
     const noteTextElement = this.noteText.nativeElement;
-    // Reset the height to auto before calculating the new height
+    const newContent = this.data.Note.content;
+
+    // Set a default height when there's no content
+    const defaultHeight = AppConstants.defaultNoteHeight;
+    // Reset to 'auto' to get the correct scrollHeight
     noteTextElement.style.height = 'auto';
-    // Calculate the new height based on the scrollHeight
-    const newHeight = noteTextElement.scrollHeight;
-    // Set the new height
+    // Set the height directly to the scrollHeight
+    const newHeight = Math.max(noteTextElement.scrollHeight, defaultHeight);
+    // Use MIN_HEIGHT as a minimum
     noteTextElement.style.height = `${newHeight}px`;
+    // Update lastContent
+    this.lastContent = newContent;
+    // Set a default height when there's no content
+    if (!newContent) {
+      noteTextElement.style.height = `${defaultHeight}px`;
+    }
   }
 
   closeEditor() {
@@ -79,6 +126,10 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
     this.selectedNote = null;
     this.data.dialogBoxOpen = false;
     this.dialogRef.close();
+  }
+
+  checkFormHeight() {
+    return this.formContainer?.nativeElement.offsetHeight >= 543;
   }
 
   // Purpose: Unsubscribe the subscription to avoid memory leak.

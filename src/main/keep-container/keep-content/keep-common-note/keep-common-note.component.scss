@@ -22,18 +22,20 @@
 }
 
 .note-text {
-  padding-bottom: 0;
-  margin-bottom: 1em;
   overflow: hidden;
-  max-height: 19em;
+  display: -webkit-box;
+  -webkit-line-clamp: 12; /* Adjust the number of lines to show */
+  -webkit-box-orient: vertical;
   font-family: "Google Sans", Roboto, Arial, sans-serif;
-  font-size: 1.125rem;
+  font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.5rem;
   margin-top: -0.6em;
-  margin-left: 0 !important; /* 10px / 16px = 0.625em */
+  margin-left: 3px !important;
+  max-height: 21.5em;
 }
+
 
 .close-btn:hover {
   background: ghostwhite;

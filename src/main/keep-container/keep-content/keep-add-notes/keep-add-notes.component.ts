@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NoteService } from "../../../Service/note.service";
 import { FooterService } from "../../../Service/footer.service";
 import { Subscription } from "rxjs";
@@ -15,6 +15,7 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
   @ViewChild('secondForm') secondFormElement!: ElementRef;
   @ViewChild('firstForm') firstFormElement!: ElementRef;
   @ViewChild('form') FormElement!: ElementRef;
+  @ViewChild('textInput') textInput!: ElementRef;
   private showFirstFormSubscription!: Subscription;
   showFirstForm!: boolean;
   showDropdownMenu: boolean = false;
@@ -31,12 +32,19 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.showFirstForm = true;
+
+
   }
   getDropdownValue() {
 
     return this.footerService.getDropdownValue();
   }
 
+  setFocus() {
+    setTimeout(() => {
+      this.textInput.nativeElement.focus();
+    }, 1);
+  }
   toggleForms() {
 
     this.showFirstForm = !this.showFirstForm; // Open the first form
@@ -85,7 +93,7 @@ export class KeepAddNotesComponent implements OnInit,OnDestroy {
 
   focusTextarea(event: Event) {
     event.preventDefault();
-    this.titleInput.nativeElement.blur();
+    this.titleInput?.nativeElement.blur();
     const textarea = document.querySelector('.note-text') as HTMLTextAreaElement;
     textarea.focus();
   }

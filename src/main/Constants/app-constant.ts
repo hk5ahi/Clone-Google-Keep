@@ -7,4 +7,15 @@ export const AppConstants = {
   heightPerLabel: 35,
   maxHeightOFNoteText: 400,
   oneEM: 16,
+  defaultNoteHeight: 46,
+  modalDialoguesHeight: {
+    noMenu: 12.1875,
+    onlyLabel: 40.2,
+    onlyMenu: 19.5,
+  },
+  modalDialoguesTopPosition: {
+    noMenu: -0.5,
+    onlyLabel: 10,
+    onlyMenu: 3.15,
+  }
 };

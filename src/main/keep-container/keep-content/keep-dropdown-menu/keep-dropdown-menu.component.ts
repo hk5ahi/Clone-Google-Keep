@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Label } from "../../../Data Types/Label";
 import { Observable, of, Subscription } from "rxjs";
@@ -15,10 +15,10 @@ import { LabelService } from "../../../Service/label.service";
 export class KeepDropdownMenuComponent implements OnInit, OnDestroy {
   @Input() note!: Note;
   @Input() selectedNote!: Note | null;
-  @Input() OpenDialogue: boolean=false;
+  @Input() OpenDialogue: boolean = false;
   @Input() isArchiveNotePresent!: boolean;
   @Output() closeModal = new EventEmitter<boolean>();
-  @Input()searchLabelText!: string;
+  @Input() searchLabelText!: string;
   notes$: Observable<Note[]>;
   labels: Label[] = [];
   private labelListSubscription!: Subscription;
@@ -55,17 +55,16 @@ export class KeepDropdownMenuComponent implements OnInit, OnDestroy {
 
   showLabelDropdown(event: Event, note: Note) {
     event.stopPropagation();
-    if(this.note) {
+    if (this.note) {
       note.showDropdown = !note.showDropdown;
       note.showLabelDropdown = !note.showLabelDropdown;
     }
   }
 
   showDropDown() {
-    if(this.note) {
+    if (this.note) {
       return (!this.OpenDialogue && this.note.showDropdown) || (this.note.showDropdown && this.OpenDialogue);
-    }
-    else{
+    } else {
       return false;
     }
   }

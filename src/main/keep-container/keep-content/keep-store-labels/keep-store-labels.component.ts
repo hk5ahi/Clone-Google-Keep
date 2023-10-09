@@ -11,12 +11,26 @@ import { NoteService } from "../../../Service/note.service";
 export class KeepStoreLabelsComponent {
   @Input() note!: Note;
   @Input() ModalOpen!: boolean;
+  labelText!: string;
 
   constructor(private noteService: NoteService) {
   }
 
   toggleCrossIcon(label: Label, isMouseEnter: boolean) {
     label.showCrossIcon = isMouseEnter;
+
+    if (isMouseEnter) {
+      this.labelText = label.text;
+      const threshold = 4;
+
+      if (label.text.length >= 4 && label.text.length <= 6) {
+        label.text = label.text.substring(0, 2) + "...";
+      } else if (label.text.length > 6) {
+        label.text = label.text.substring(0, label.text.length - threshold) + "...";
+      }
+    } else {
+      label.text = this.labelText;
+    }
   }
 
   removeLabel(note: Note, label: Label, event: Event) {

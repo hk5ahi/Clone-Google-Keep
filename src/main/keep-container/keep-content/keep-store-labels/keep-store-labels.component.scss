@@ -15,6 +15,20 @@
 
 }
 
+.note-label:hover .note-label-text {
+  text-align: left;
+  position: relative;
+  left: -3px;
+
+}
+
+.note-label:hover .small-cross-icon {
+  text-align: right;
+  position: relative;
+  right: -6px;
+
+}
+
 .labels-text {
   height: 1.0625em;
   margin-left: 2px;
@@ -121,3 +135,4 @@
 .tooltip:hover .tooltip-text {
   visibility: visible;
 }
+

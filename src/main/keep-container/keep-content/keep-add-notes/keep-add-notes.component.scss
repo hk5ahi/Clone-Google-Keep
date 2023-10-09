@@ -22,7 +22,7 @@
 
 .add-content-container {
   width: 100%;
-  max-height: 634px;
+  max-height: 39.625em;
   overflow-y: hidden;
   overflow-x: hidden;
 }
@@ -39,9 +39,11 @@
   padding: 0.625em; /* 10px / 16px = 0.625em */
   width: 100%;
   padding-bottom: 3em !important;
+  overflow: hidden;
 
 }
-.note-title-font{
+
+.note-title-font {
   font-weight: 500;
 }
 
@@ -64,7 +66,7 @@
 .add-form .note-text {
   margin-bottom: -0.3em;
   position: relative;
-  top:-2em;
+  top: -2em;
 }
 
 .note-text-first-form {
@@ -186,8 +188,8 @@ input:focus, textarea:focus {
   background-clip: padding-box;
   border: solid transparent;
   border-width: 1px 1px 1px 6px;
-  min-height: 28px;
-  padding: 100px 0 0;
+  min-height: 1.75em;
+  padding: 6.25em 0 0;
   -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
   box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
 }
@@ -284,10 +286,11 @@ input:focus, textarea:focus {
   height: 2.875em !important;
 
 }
-.note-text-font{
-  color: rgba(0,0,0,0.702);
+
+.note-text-font {
+  color: rgba(0, 0, 0, 0.702);
   letter-spacing: .01785714em;
-  font-family: "Google Sans",Roboto,Arial,sans-serif !important;
+  font-family: "Google Sans", Roboto, Arial, sans-serif !important;
   font-size: .875rem;
   line-height: 0.75rem;
 }
