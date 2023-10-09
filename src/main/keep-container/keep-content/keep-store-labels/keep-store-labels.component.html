@@ -17,7 +17,7 @@
       <div (mouseenter)="toggleCrossIcon(note.labels[2], true)"
            (mouseleave)="toggleCrossIcon(note.labels[2], false)"
            *ngIf="note.labels.length === 3" class="note-label">
-        <div class="labels-text">{{note.labels[2].text}}</div>
+        <div>{{note.labels[2].text}}</div>
         <div *ngIf="note.labels[2].showCrossIcon" class="tooltip">
           <img (click)="removeLabel(note,note.labels[2],$event)" alt="cross"
                class="small-icon small-cross-icon" src="assets/svg/small-cross.svg">

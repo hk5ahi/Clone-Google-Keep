@@ -15,8 +15,9 @@
     <div class="form-actions">
 
       <div class="icons-area">
-        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [calledFromNote]="false" [note]="data.Note"
-                              [searchLabelText]="searchLabelText" [selectedNote]="selectedNote" ></app-keep-footer-note>
+        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [calledFromNote]="false"
+                              [note]="data.Note"
+                              [searchLabelText]="searchLabelText" [selectedNote]="selectedNote"></app-keep-footer-note>
       </div>
       <button (click)="closeEditor()" class="close-btn">Close</button>
     </div>

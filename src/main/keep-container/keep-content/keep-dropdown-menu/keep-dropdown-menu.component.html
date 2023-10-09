@@ -1,4 +1,3 @@
-
 <div *ngIf="showDropDown() "
      [ngClass]="{
        'dropdown-menu': !OpenDialogue,
@@ -17,8 +16,8 @@
   </ul>
 </div>
 
-<app-keep-label-dropdown [DialogBoxOpen]="OpenDialogue" [note]="note"
-                         [labelDropdown]="note.showLabelDropdown"
+<app-keep-label-dropdown [DialogBoxOpen]="OpenDialogue" [labelDropdown]="note.showLabelDropdown"
+                         [note]="note"
                          [searchLabelText]="searchLabelText"
                          [selectedNote]="selectedNote"></app-keep-label-dropdown>
 

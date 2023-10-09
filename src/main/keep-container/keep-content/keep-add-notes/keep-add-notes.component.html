@@ -34,11 +34,12 @@
   <form #secondForm class="add-form">
     <div [ngClass]="{'scrollbar':showScrollbar()}" class="add-content-container">
       <input #titleInput (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" class="note-title" name="title"
-             placeholder="Title"
+             placeholder="Title" [ngClass]="{'note-title-font':!showFirstForm && title}"
              type="text"/>
       <textarea
         (input)="adjustTextareaHeight($event)"
         [(ngModel)]="noteMessage"
+        [ngClass]="{'note-text-font':!showFirstForm && !noteMessage}"
         class="note-text"
         name="noteMessage"
         placeholder="Take a note..."
@@ -57,7 +58,7 @@
     </div>
   </form>
 </div>
-<div  *ngIf="getDropdownValue()" [ngClass]="{'dropdown-menu-bottom':showScrollbar()}" class="dropdown-menu">
+<div *ngIf="getDropdownValue()" [ngClass]="{'dropdown-menu-bottom':showScrollbar()}" class="dropdown-menu">
   <ul>
     <li class="item"><a class="text">Add label</a></li>
   </ul>

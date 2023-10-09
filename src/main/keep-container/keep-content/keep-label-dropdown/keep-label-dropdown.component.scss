@@ -20,14 +20,14 @@
   z-index: 5003;
   padding: 0.6875em 0 0; /* 6px converted to em */
   opacity: 1;
-  left: 14.25em; /* 356px converted to em */
-  top: -1.2em; /* 277px converted to em */
+  left: 13.25em; /* 356px converted to em */
+  top: -0.5em; /* 277px converted to em */
   min-height: 4.75em !important;
 
 }
 
 .dropdown-menu-up, .label-Dropdown-menu-up {
-  top: -1.5em !important;
+  top: -0.5em !important;
 }
 
 .label-text {
@@ -155,6 +155,7 @@
   height: 1.125em;
   opacity: 0.54;
   width: 1.125em;
+  color: #202124;
 }
 
 .label-search-text {
@@ -167,6 +168,7 @@
   vertical-align: top;
   word-wrap: break-word;
   font-size: small;
+  color: #202124;
 }
 
 
@@ -186,6 +188,7 @@
   outline: none;
   padding: 5px 10px 3px;
   position: relative;
+  color: #202124;
 
 }
 
@@ -193,7 +196,7 @@
   width: 1.2em;
   height: 1.2em;
   display: inline-block;
-  opacity: 0.8;
+  opacity: 0.85;
   position: relative;
   top: -0.2em;
   right: 0.8em;
@@ -229,8 +232,8 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 19.15em; /* 356px converted to em */
-  top: 13.1em; /* 277px converted to em */
+  left: 16.6em; /* 356px converted to em */
+  top: 3.1em; /* 277px converted to em */
 }
 
 .label-selected {
@@ -246,6 +249,6 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 18.25em !important; /* 356px converted to em */
-  top: 15.5em !important; /* 277px converted to em */
+  left: 16.25em !important; /* 356px converted to em */
+  top: 3.2em !important; /* 277px converted to em */
 }

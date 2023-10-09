@@ -32,6 +32,7 @@
   letter-spacing: 0;
   line-height: 1.5rem;
   margin-top: -0.6em;
+  margin-left: 0 !important; /* 10px / 16px = 0.625em */
 }
 
 .close-btn:hover {
@@ -90,8 +91,6 @@ input:focus {
   border-radius: 0.5em;
   position: relative;
   word-wrap: break-word;
-
-
 }
 
 .note-animation {
@@ -125,6 +124,7 @@ input:focus {
   position: relative;
   top: -0.8em;
   right: 0.05em;
+  color: #202124 !important;
 }
 
 .note .text, .title {
@@ -228,6 +228,7 @@ input:focus {
 .note:hover .icons-area {
   visibility: visible;
 }
+
 .not-hover {
   visibility: visible;
 }

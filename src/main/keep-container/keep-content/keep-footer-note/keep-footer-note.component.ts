@@ -35,7 +35,8 @@ export class KeepFooterNoteComponent {
     return note.labels.length > 0;
   }
 
-  archiveNote(id: number) {
+  archiveNote(id: number,event: MouseEvent) {
+    event.stopPropagation();
     this.notes$ = of(this.noteService.archiveNote(id)).pipe(switchMap(() => {
       return this.noteService.getNotes();
     }));

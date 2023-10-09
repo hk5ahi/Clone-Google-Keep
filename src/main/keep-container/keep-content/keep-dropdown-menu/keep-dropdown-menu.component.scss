@@ -10,12 +10,12 @@
   z-index: 5003;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 14.25em; /* 356px converted to em */
-  top: -1.2em; /* 277px converted to em */
+  left: 13.25em; /* 356px converted to em */
+  top: -0.5em; /* 277px converted to em */
 }
 
 .dropdown-menu-up {
-  top: -1.5em !important;
+  top: -0.5em !important;
 }
 
 .dropdown-menu-selected-up {
@@ -58,8 +58,8 @@
   z-index: 5006;
   padding: 0.375em 0; /* 6px converted to em */
   opacity: 1;
-  left: 18.6em; /* 356px converted to em */
-  top: 13.5em !important; /* 277px converted to em */
+  left: 16.6em; /* 356px converted to em */
+  top: 3.2em !important; /* 277px converted to em */
 
   .dropdown-menu {
     visibility: hidden;

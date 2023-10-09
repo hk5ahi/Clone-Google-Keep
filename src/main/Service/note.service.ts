@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Note} from "../Data Types/Note";
-import {Label} from "../Data Types/Label";
-import {AppConstants} from "../Constants/app-constant";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Note } from "../Data Types/Note";
+import { Label } from "../Data Types/Label";
+import { AppConstants } from "../Constants/app-constant";
 
 @Injectable({
   providedIn: 'root',
@@ -104,7 +104,7 @@ export class NoteService {
   addNote(title: string, message: string, isArchived: boolean = false) {
     // if title is  empty string or null  refactored it from title==='' to !title
     // if message is  empty string or null  refactored it from message==='' to !message
-    if (!title && !message) {
+    if (!title.trim() && !message.trim()) {
       return;
     }
 
