@@ -1,29 +1,28 @@
-<div [ngClass]="{'bottom':data.Note.showLabelDropdown,'up':checkFormHeight()}"
-     [style]="calculateDynamicMinHeight()" class="mat-mdc-dialog-container mdc-dialog__surface">
-  <div #formContainer class="form-container active-form ">
-    <form #secondForm class="second-form">
-      <div class="add-content-container">
-      <textarea #noteTitle [(ngModel)]="data.Note.title" class="note-title" name="title" placeholder="Title"
+<div #formContainer class="form-container active-form ">
+  <form #secondForm class="second-form">
+    <div class="add-content-container">
+      <textarea #noteTitle (input)="adjustNoteTitleHeight()" [(ngModel)]="data.Note.title" class="note-title"
+                name="title" placeholder="Title"
                 type="text"></textarea>
-        <textarea #noteText
-                  (input)="adjustNoteTextHeight()"
-                  [(ngModel)]="data.Note.content"
-                  class="note-text"
-                  name="noteMessage"
-                  placeholder="Note"
-        ></textarea>
-      </div>
-      <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
-      <div class="form-actions">
+      <textarea #noteText
+                (input)="adjustNoteTextHeight()"
+                [(ngModel)]="data.Note.content"
+                class="note-text"
+                name="noteMessage"
+                placeholder="Note"
+      ></textarea>
+    </div>
+    <app-keep-store-labels [ModalOpen]="true" [note]="data.Note"></app-keep-store-labels>
+    <div class="form-actions">
 
-        <div class="icons-area">
-          <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [calledFromNote]="false"
-                                [note]="data.Note"
-                                [searchLabelText]="searchLabelText"
-                                [selectedNote]="selectedNote"></app-keep-footer-note>
-        </div>
-        <button (click)="closeEditor()" class="close-btn">Close</button>
+      <div class="icons-area">
+        <app-keep-footer-note (closeModal)="closeEditor()" [calledFromEditorNote]="true" [calledFromNote]="false"
+                              [note]="data.Note"
+                              [searchLabelText]="searchLabelText"
+                              [selectedNote]="selectedNote"></app-keep-footer-note>
       </div>
-    </form>
-  </div>
+      <button (click)="closeEditor()" class="close-btn">Close</button>
+    </div>
+  </form>
 </div>
+

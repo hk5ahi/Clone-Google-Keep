@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Note } from "../../../Data Types/Note";
 import { Observable, Subscription } from "rxjs";
 import { NoteService } from "../../../Service/note.service";
@@ -35,7 +35,8 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
   private labelListSubscription!: Subscription;
   private notesSubscription!: Subscription;
   private dialogRefSubscription!: Subscription;
-  private lastContent!: string;
+  private lastNoteTitle!: string;
+  private dialogRefOpened: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {
     Note: Note,
@@ -56,15 +57,14 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
         });
       }
     });
-
     this.dialogRef.afterOpened().subscribe(() => {
-      this.lastContent = this.data.Note.content;
+      this.lastNoteTitle = this.data.Note.title;
       this.adjustNoteTextHeight();
-
+      this.adjustNoteTitleHeight();
+      this.dialogRefOpened = true;
       // Set focus with a delay of 100 milliseconds
       setTimeout(() => {
         this.noteText.nativeElement.focus();
-
       }, 1);
     });
 
@@ -75,25 +75,11 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  calculateDynamicMinHeight(): { minHeight: string; top: string } {
-    const formContainerHeight = this.formContainer?.nativeElement?.offsetHeight;
-
-    if (!this.data.Note.showDropdown && !this.data.Note.showLabelDropdown) {
-      return {
-        minHeight: (AppConstants.modalDialoguesHeight.noMenu + formContainerHeight / 16) + 'em',
-        top: AppConstants.modalDialoguesTopPosition.noMenu + 'em'
-      };
-    } else if (this.data.Note.showDropdown && !this.data.Note.showLabelDropdown) {
-      return {
-        minHeight: (AppConstants.modalDialoguesHeight.onlyMenu + formContainerHeight / 16) + 'em',
-        top: AppConstants.modalDialoguesTopPosition.onlyMenu + 'em'
-      };
-    } else {
-      return {
-
-        minHeight: (AppConstants.modalDialoguesHeight.onlyLabel + formContainerHeight / 16) + 'em',
-        top: AppConstants.modalDialoguesTopPosition.onlyLabel + 'em'
-      };
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: Event) {
+    // Check if the target of the click is outside the secondForm
+    if (this.dialogRefOpened && !this.formContainer.nativeElement.contains(event.target)) {
+      this.closeEditor();
     }
   }
 
@@ -101,20 +87,44 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
     this.selectedNote = this.noteService.updateNote(this.data.Note);
   }
 
+  adjustNoteTitleHeight() {
+    const noteTitleElement = this.noteTitle.nativeElement;
+    const newContent = this.data.Note.title;
+    // Set a default height when there's no content
+    const defaultHeight = AppConstants.defaultNoteTitleHeight;
+    // Reset to 'auto' to get the correct scrollHeight
+    if (noteTitleElement.style.height !== '56px') {
+      noteTitleElement.style.height = 'auto';
+    }
+
+    // Set the height directly to the scrollHeight
+    const newHeight = Math.max(noteTitleElement.scrollHeight, defaultHeight);
+
+    noteTitleElement.style.height = `${newHeight}px`;
+    // Set a default height when there's no content
+    if (newContent === this.lastNoteTitle && noteTitleElement.scrollHeight - AppConstants.hiddenHeight <= defaultHeight) {
+
+      noteTitleElement.style.height = `${defaultHeight}px`;
+    }
+    this.lastNoteTitle = newContent;
+    if (!newContent) {
+      noteTitleElement.style.height = `${defaultHeight}px`;
+    }
+  }
+
   adjustNoteTextHeight() {
     const noteTextElement = this.noteText.nativeElement;
     const newContent = this.data.Note.content;
 
     // Set a default height when there's no content
-    const defaultHeight = AppConstants.defaultNoteHeight;
+    const defaultHeight = AppConstants.defaultNoteTextHeight
     // Reset to 'auto' to get the correct scrollHeight
     noteTextElement.style.height = 'auto';
     // Set the height directly to the scrollHeight
     const newHeight = Math.max(noteTextElement.scrollHeight, defaultHeight);
     // Use MIN_HEIGHT as a minimum
     noteTextElement.style.height = `${newHeight}px`;
-    // Update lastContent
-    this.lastContent = newContent;
+
     // Set a default height when there's no content
     if (!newContent) {
       noteTextElement.style.height = `${defaultHeight}px`;
@@ -126,10 +136,6 @@ export class KeepCommonEditorComponent implements OnInit, OnDestroy {
     this.selectedNote = null;
     this.data.dialogBoxOpen = false;
     this.dialogRef.close();
-  }
-
-  checkFormHeight() {
-    return this.formContainer?.nativeElement.offsetHeight >= 543;
   }
 
   // Purpose: Unsubscribe the subscription to avoid memory leak.

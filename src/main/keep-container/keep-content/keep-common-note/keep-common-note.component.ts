@@ -6,6 +6,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { KeepCommonEditorComponent } from "../keep-common-editor/keep-common-editor.component";
 import { Label } from "../../../Data Types/Label";
 import { FooterService } from "../../../Service/footer.service";
+import { AppConstants } from "../../../Constants/app-constant";
 
 @Component({
 
@@ -19,12 +20,14 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
   @Input() isArchiveNotePresent: boolean = false;
   @Input() isSearch!: boolean;
   @ViewChild('notes') notes!: ElementRef;
+  @ViewChild('noteTitle') noteTitle!: ElementRef;
   notes$: Observable<Note[]>;
   selectedNote: Note | null = null; // Initialize as null
   searchValue: string = '';
   dialogBoxOpen: boolean = false;
   labels: Label[] = [];
   searchLabelText: string = '';
+  moveNoteText: boolean = false;
   private labelListSubscription!: Subscription;
 
 
@@ -100,13 +103,6 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Purpose: Unsubscribe the subscription to avoid memory leak.
-  ngOnDestroy(): void {
-    if (this.labelListSubscription) {
-      this.labelListSubscription.unsubscribe();
-    }
-  }
-
   private closeDropdowns(): void {
     this.notes$.forEach((notes) => {
       notes.forEach((note) => {
@@ -120,10 +116,25 @@ export class KeepCommonNoteComponent implements OnInit, OnDestroy {
     });
   }
 
+  checkMultiLine(noteTitleElement: HTMLDivElement) {
+    const element = noteTitleElement;
+    element.style.height = 'auto';
+
+    const isMultiLine = element.scrollHeight !== AppConstants.heightOfNoteTitle;
+    this.moveNoteText = !isMultiLine;
+
+    return isMultiLine;
+  }
   private subscribeToSearchData(): void {
     this.noteService.getSearchedData().subscribe((searchData) => {
       this.searchValue = searchData;
     });
+  }
+  // Purpose: Unsubscribe the subscription to avoid memory leak.
+  ngOnDestroy(): void {
+    if (this.labelListSubscription) {
+      this.labelListSubscription.unsubscribe();
+    }
   }
 }
 

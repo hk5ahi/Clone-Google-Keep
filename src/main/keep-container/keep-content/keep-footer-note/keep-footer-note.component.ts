@@ -35,7 +35,7 @@ export class KeepFooterNoteComponent {
     return note.labels.length > 0;
   }
 
-  archiveNote(id: number,event: MouseEvent) {
+  archiveNote(id: number, event: MouseEvent) {
     event.stopPropagation();
     this.notes$ = of(this.noteService.archiveNote(id)).pipe(switchMap(() => {
       return this.noteService.getNotes();
@@ -68,17 +68,14 @@ export class KeepFooterNoteComponent {
   }
 
   addAndArchiveNote(title: string, message: string) {
-
     this.noteService.addAndArchive(title, message);
     this.addAndArchiveClicked.emit(true);
     this.title = '';
     this.noteMessage = '';
     this.footerService.setShowFirstForm(true);
-
   };
 
   toggleDropdownMenu() {
-
     this.footerService.toggleDropdownMenu();
   }
 

@@ -5,17 +5,19 @@ export const AppConstants = {
   STORAGE_KEY_LABELS: 'labels',
   additionalHeight: 38,
   heightPerLabel: 35,
+  heightOfNoteTitle: 30,
   maxHeightOFNoteText: 400,
   oneEM: 16,
-  defaultNoteHeight: 46,
-  modalDialoguesHeight: {
-    noMenu: 12.1875,
-    onlyLabel: 40.2,
-    onlyMenu: 19.5,
-  },
-  modalDialoguesTopPosition: {
-    noMenu: -0.5,
-    onlyLabel: 10,
-    onlyMenu: 3.15,
-  }
+  defaultNoteTextHeight: 46,
+  defaultNoteTitleHeight: 56,
+  hiddenHeight: 28,
+  labelCharacterLimit: 4,
+  maximumLabelCharacterLimit: 6,
+  minimumNoteTextHeight: 46,
+  minimumNoteTitleHeight: 58,
+  addTop: 17,
+  addNoteTextHeight: 46,
+  addNoteTitleHeight: 56,
+  addNoteTop: 40,
+
 };

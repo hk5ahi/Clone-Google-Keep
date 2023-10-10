@@ -32,7 +32,7 @@
   letter-spacing: 0;
   line-height: 1.5rem;
   margin-top: -0.6em;
-  margin-left: 3px !important;
+  margin-left: -2px !important;
   max-height: 21.5em;
 }
 
@@ -85,7 +85,7 @@ input:focus {
 
 .note {
   background: white;
-  min-width: 15em;
+  max-width: 15em;
   margin: 0.625em;
   margin-top: 1.2em !important;
   min-height: 8.125em;
@@ -141,6 +141,14 @@ input:focus {
   font-weight: 500;
   line-height: 1.5rem;
   padding-top: 6px;
+  text-align: left;
+  word-break: break-word;
+  margin-left: 0.875em;
+
+}
+
+.move-right {
+  margin-left: 5.8px !important;
 }
 
 .note .note-footer {

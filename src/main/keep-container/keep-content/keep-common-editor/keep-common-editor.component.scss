@@ -13,9 +13,7 @@
   left: 40.25em;
   top: 8.6em;
   overflow: visible;
-
 }
-
 
 .add-content-container::-webkit-scrollbar {
   height: 1em;
@@ -68,17 +66,11 @@
   min-width: 41.5em !important;
   position: relative;
   left: 0.5em;
-  top: -7em;
+  top: 0;
   overflow: hidden;
+  min-height: 39em;
 }
 
-.bottom {
-  top: 13.5em !important;
-}
-
-.up {
-  top: 6em !important;
-}
 
 .form-container form {
   display: flex;

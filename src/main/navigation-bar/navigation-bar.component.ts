@@ -37,7 +37,6 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
     return !!this.searchData;
   }
 
-
   clearData() {
     this.searchData = '';
     const inputElement = this.el.nativeElement.querySelector('input');
@@ -53,9 +52,7 @@ export class NavigationBarComponent implements OnInit, OnDestroy {
       this.router.navigate(['search']);
     }
     this.noteService.notesExist(newValue);
-
   }
-
   // Purpose: Unsubscribe the subscription to avoid memory leak.
   ngOnDestroy(): void {
     if (this.searchDataSubscription) {

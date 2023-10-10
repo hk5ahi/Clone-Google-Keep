@@ -4,7 +4,7 @@
         *ngIf="showFirstForm"
         class="form">
     <div>
-      <input [ngClass]="{'note-text-first-form':showFirstForm}" class="note-text" placeholder="Take a note..."
+      <input [ngClass]="{'note-text-first-form':showFirstForm}" class="add-note-text" placeholder="Take a note..."
              type="text"/>
       <div class="form-actions">
       </div>
@@ -34,14 +34,15 @@
 <div *ngIf="!showFirstForm" class="form-container active-form">
   <form #secondForm class="add-form">
     <div [ngClass]="{'scrollbar':showScrollbar()}" class="add-content-container">
-      <textarea #titleInput (keydown.enter)="focusTextarea($event)"
-                [(ngModel)]="title" [ngClass]="{'note-title-font':!showFirstForm && title}" class="note-title"
-                maxlength="1000" name="title"
-                placeholder="Title" type="text"></textarea>
+      <textarea #titleInput (input)="adjustTitleHeight($event)"
+                (keydown.enter)="focusTextarea($event)" [(ngModel)]="title" [ngClass]="{'note-title-font':!showFirstForm && title}"
+                [style.height]="46"
+                class="note-title" maxlength="1000"
+                name="title" placeholder="Title" type="text"></textarea>
 
       <textarea
         #textInput
-        (input)="adjustTextareaHeight($event)"
+        (input)="adjustTextHeight($event)"
         [(ngModel)]="noteMessage"
         [ngClass]="{'note-text-font':!showFirstForm && !noteMessage}"
         autofocus

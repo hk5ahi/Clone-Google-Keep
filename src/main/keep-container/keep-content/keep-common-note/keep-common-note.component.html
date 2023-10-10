@@ -20,16 +20,17 @@
         <ng-container>
           <ng-container *ngIf="isSearch">
             <div [style.display]="'block'" class="title">
-              <span [innerHTML]="highlightSearchTerm(note.title, searchValue) | safeHtml"></span>
+              <span [innerHTML]="formattedContent(note.title)"></span>
             </div>
             <div [ngClass]="{ 'note-text-up': !note.title.trim()}" [style.display]="'block'" class="text">
               <div [innerHTML]="formattedContent(note.content)"></div>
             </div>
           </ng-container>
           <ng-container *ngIf="!isSearch">
-            <div class="title">{{note.title }}</div>
+            <div #noteTitle [innerHTML]="convertNewlinesToBreaks(note.title)" [ngClass]="{ 'move-right': checkMultiLine(noteTitle)}"
+                 class="title"></div>
             <div [innerHTML]="convertNewlinesToBreaks(note.content)"
-                 [ngClass]="{ 'note-text-up': !note.title.trim()}"
+                 [ngClass]="{ 'note-text-up': !note.title.trim(), 'move-right': moveNoteText}"
                  class="note-text"></div>
           </ng-container>
         </ng-container>
