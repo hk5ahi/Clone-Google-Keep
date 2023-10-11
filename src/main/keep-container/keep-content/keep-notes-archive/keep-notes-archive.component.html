@@ -1,0 +1,10 @@
+<app-keep-common-note [isArchiveNotePresent]="true" [isSearch]="false"></app-keep-common-note>
+
+<div *ngIf="(!(hasNotes() | async)) || !(checkArchive() | async)" class="box">
+  <img alt="SVG Image Description"
+       class="archive-icon"
+       src="assets/svg/archive.svg">
+  <!--  created separate svg instead of direct path-->
+  <div class="message">Your archived notes appear here</div>
+</div>
+

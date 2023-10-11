@@ -1,0 +1,23 @@
+<div *ngIf="showDropDown() "
+     [ngClass]="{
+       'dropdown-menu': !OpenDialogue,
+       'dropdown-menu-up': hasLabels(note),
+       'dropdown-menu-selected': OpenDialogue,
+        'dropdown-menu-selected-up': OpenDialogue && hasLabels(note),
+     }">
+  <ul>
+    <li class="item"><a (click)="deleteNote($event,note.id)" class="text">Delete Note</a></li>
+    <ng-container *ngIf="!hasLabels(note)">
+      <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Add label</a></li>
+    </ng-container>
+    <ng-container *ngIf="hasLabels(note)">
+      <li class="item"><a (click)="showLabelDropdown($event,note)" class="text">Change labels</a></li>
+    </ng-container>
+  </ul>
+</div>
+
+<app-keep-label-dropdown [DialogBoxOpen]="OpenDialogue" [labelDropdown]="note.showLabelDropdown"
+                         [note]="note"
+                         [searchLabelText]="searchLabelText"
+                         [selectedNote]="selectedNote"></app-keep-label-dropdown>
+

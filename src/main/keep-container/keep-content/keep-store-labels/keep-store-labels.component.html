@@ -1,0 +1,30 @@
+<div *ngIf="isLabelsExist()" [ngClass]="{ 'note-labels-modal': ModalOpen,'centre-labels':!ModalOpen}"
+     class="note-labels">
+
+  <div (click)="stopEvent($event)" (mouseenter)="toggleCrossIcon(label, true)"
+       (mouseleave)="toggleCrossIcon(label, false)" *ngFor="let label of getLabels()"
+       class="note-label">
+    <div class="note-label-text">{{label.text}}</div>
+    <div *ngIf="label.showCrossIcon" class="tooltip">
+      <img (click)="removeLabel(note, label, $event)" alt="cross"
+           class="small-icon small-cross-icon" src="assets/svg/small-cross.svg">
+      <span class="tooltip-text">Remove label</span>
+    </div>
+  </div>
+
+  <div *ngIf="!ModalOpen">
+    <div *ngIf="note.labels.length > 2">
+      <div (click)="stopEvent($event)"
+           (mouseenter)="toggleCrossIcon(note.labels[2], true)"
+           (mouseleave)="toggleCrossIcon(note.labels[2], false)" *ngIf="note.labels.length === 3" class="note-label">
+        <div>{{note.labels[2].text}}</div>
+        <div *ngIf="note.labels[2].showCrossIcon" class="tooltip">
+          <img (click)="removeLabel(note,note.labels[2],$event)" alt="cross"
+               class="small-icon small-cross-icon" src="assets/svg/small-cross.svg">
+          <span class="tooltip-text">Remove label</span>
+        </div>
+      </div>
+      <div *ngIf="note.labels.length > 3" class="note-label-more">+{{note.labels.length - 2}}</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.text-archive {
+  display: block !important;
+  flex-direction: column;
+  color: #5f6368;
+  letter-spacing: 0.07272727em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  text-transform: uppercase;
+  margin-top: 3.4%;
+  margin-left: 18.8%;
+}
+
+.message {
+  color: #202124;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 0.875em;
+  text-align: center;
+  width: 105%;
+  margin-top: 3.2%;
+}
+
+.box {
+  min-width: 0;
+  width: 100%;
+}
+
+

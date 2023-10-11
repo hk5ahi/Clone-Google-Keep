@@ -1,0 +1,48 @@
+<div *ngIf="(notes$ | async) as notes" class="notes grey-background">
+  <div #notes *ngFor="let note of notes$ |async">
+
+    <div (click)="selectNoteForEditing(note)"
+         *ngIf="isCommonNote(note)"
+         [ngClass]="{
+       'empty-note': !note.title.trim() || !note.content.trim(),
+       'hide-note': selectedNote === note,
+       'note-move': isArchiveNotePresent || isSearch
+     }"
+         class="note">
+      <div>
+        <span class="material-icons check-circle">check_circle</span>
+
+        <ng-container *ngIf="showEmptyNoteText(note)">
+          <div class="full-empty">Empty note</div>
+        </ng-container>
+
+
+        <ng-container>
+          <ng-container *ngIf="isSearch">
+            <div [style.display]="'block'" class="title">
+              <span [innerHTML]="formattedContent(note.title)"></span>
+            </div>
+            <div [ngClass]="{ 'note-text-up': !note.title.trim()}" [style.display]="'block'" class="text">
+              <div [innerHTML]="formattedContent(note.content)"></div>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!isSearch">
+            <div #noteTitle [innerHTML]="convertNewlinesToBreaks(note.title)" [ngClass]="{ 'move-right': checkMultiLine(noteTitle)}"
+                 class="title"></div>
+            <div [innerHTML]="convertNewlinesToBreaks(note.content)"
+                 [ngClass]="{ 'note-text-up': !note.title.trim(), 'move-right': moveNoteText}"
+                 class="note-text"></div>
+          </ng-container>
+        </ng-container>
+
+        <app-keep-store-labels [ModalOpen]="false" [note]="note"></app-keep-store-labels>
+        <div [ngClass]="{'not-hover':note.showDropdown || note.showLabelDropdown}" class="icons-area">
+          <app-keep-footer-note [calledFromEditorNote]="false" [calledFromNote]="true"
+                                [isArchiveNotePresent]="isArchiveNotePresent"
+                                [note]="note" [searchLabelText]="searchLabelText"
+                                [selectedNote]="selectedNote"></app-keep-footer-note>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

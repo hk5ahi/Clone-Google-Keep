@@ -1,0 +1,239 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4em; /* 64px / 16px */
+  border-bottom: 0.0625em solid #dadce0;
+  padding: 0.5em;
+  margin: -0.15em 0.625em;
+  color: #5f6368;
+  width: 100%;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.search-icon :hover {
+  background-color: #e3e3e3;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip:hover {
+  background-color: #e3e3e3;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cancel-box {
+  min-width: 2.5em;
+  min-height: 1.7em;
+  margin: 0.375em;
+  display: flex;
+  justify-content: center;
+
+}
+
+.cancel {
+
+  border-radius: 50%;
+  width: 2.3em;
+  height: 2em;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  min-width: 50em;
+  background-color: #f1f3f4;
+  min-height: 3.15em;
+  margin-left: 6em;
+  border-radius: 0.5625em;
+  background-clip: padding-box;
+  border: solid transparent;
+  direction: ltr;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 0.9375em;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  height: 3em;
+  border-width: 0 0 0 4px;
+  position: relative;
+  right: 10%;
+}
+
+.search-icon {
+
+  margin-left: 0.1em;
+}
+
+.search-input {
+
+  background: transparent;
+  border: none;
+  font: normal 1em Google Sans, Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-variant-ligatures: none;
+  font-variant-ligatures: none;
+  height: 2.875em;
+  outline: none;
+  padding-right: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-box:focus-within {
+  background-color: white;
+  box-shadow: 0 0 0 0 rgba(60, 64, 67, 0.3), 0.01em 0 0.01em 0.05em rgba(60, 64, 67, 0.15);
+  border-radius: 9px;
+
+}
+
+.Keep {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.move-search {
+  margin-left: 2.5em;
+}
+
+.archive-area {
+  width: 9.125em !important;
+}
+
+.archive {
+
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  margin-bottom: 2px;
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  top: 2px;
+  white-space: nowrap;
+  -webkit-flex: 1 1 auto;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+  font-family: Google Sans, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.25em;
+  line-height: 3em;
+  color: #3c4043;
+  margin-left: 0.3em;
+}
+
+.archive:hover {
+  cursor: context-menu;
+
+}
+
+.tooltip-text {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  font-size: 0.75em; /* 0.78px / 16px */
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em; /* 5px / 16px */
+  white-space: nowrap;
+  border-radius: 0.3125em; /* 5px / 16px */
+  visibility: hidden;
+  z-index: 1;
+}
+
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+.right {
+  position: relative;
+  left: 132%;
+}
+
+.logo {
+  width: 2.75em;
+  height: 2.5em;
+  margin: 0 0 4px;
+  padding: 0 4px 0 0;
+}
+
+.material-icons-outlined {
+  padding: 0.5em;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.375em;
+}
+
+.search-area {
+  background: #f1f3f4;
+  width: 43.25em; /* 692px / 16px */
+  height: 3em; /* 48px / 16px */
+  border-radius: 0.5em; /* 8px / 16px */
+  display: flex;
+  align-items: center;
+
+}
+
+.account {
+  position: relative;
+  right: 10%;
+}
+
+.search-area input {
+  border: none;
+  background: #f1f3f4;
+  height: 100%;
+  width: 95%;
+  font-size: 1rem;
+  margin-left: 0.625em; /* 10px / 16px */
+  border-radius: 0.5em;
+  padding: 0.5em; /* 8px / 16px */
+}
+
+.search-area input:focus {
+
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-left: none;
+}
+
+.settings-area {
+  position: relative;
+
+}
+
+.tooltip search-icon:focus {
+  background: white !important;
+  font-size: x-large;
+}
+
+input:focus {
+  outline: none;
+}
+
+.search-area span {
+  margin-left: 0.625em;
+}
+
+.profile-actions-area, .settings-area {
+  display: flex;
+}

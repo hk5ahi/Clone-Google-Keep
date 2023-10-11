@@ -1,0 +1,247 @@
+
+.item:hover {
+  background-color: #b5bdbd;
+  border-radius: 0.0625em; /* 1px converted to em */
+  cursor: pointer;
+}
+
+.note-title, .note-text {
+  border: none;
+  font-size: 1rem; /* 16px */
+  height: 100%;
+  padding: 0.625em; /* 10px / 16px = 0.625em */
+  margin-left: 0.1em; /* 10px / 16px = 0.625em */
+  width: 100%;
+  margin-right: 0.625em; /* 10px / 16px = 0.625em */
+}
+
+.note-move {
+
+  left: 1.2em;
+  top: 0.2em;
+}
+
+.note-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 12; /* Adjust the number of lines to show */
+  -webkit-box-orient: vertical;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5rem;
+  margin-top: -0.6em;
+  margin-left: -2px !important;
+  max-height: 21.5em;
+}
+
+
+.close-btn:hover {
+  background: ghostwhite;
+}
+
+input:focus {
+  outline: none;
+}
+
+.empty-note {
+  min-height: 6.875em !important;
+
+  .dropdown-menu, .label-Dropdown {
+    left: 12.3em !important;
+    top: 6em !important;
+  }
+}
+
+.label-text {
+  width: 3.5em;
+  height: 1.0625em;
+}
+
+
+.add-label-area:hover {
+  background-color: #f1f3f4;
+
+}
+
+.text {
+  border: 1px solid transparent;
+  letter-spacing: .01428571em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  padding: 5px 10px 5px 2px;
+}
+
+.notes {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-left: 16.5%; /* Add space at the start */
+  margin-right: 0.5%; /* Add space at the end */
+}
+
+.note {
+  background: white;
+  max-width: 15em;
+  margin: 0.625em;
+  margin-top: 1.2em !important;
+  min-height: 8.125em;
+  border: 0.0625em solid #e0e1e0;
+  border-radius: 0.5em;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.note-animation {
+  transition: transform 0.3s ease-in-out;
+  animation: fadeInAnimation ease 500ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0.95;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hide-note {
+  opacity: 0 !important;
+}
+
+
+.note.ng-deleted {
+  animation: slideLeft 0.3s ease-in-out, fadeOut 0.3s ease-in-out;
+}
+
+.note-text-up {
+  position: relative;
+  top: -0.8em;
+  right: 0.05em;
+  color: #202124 !important;
+}
+
+.note .text, .title {
+  width: 100%;
+  margin: 0.625em 1.125em 0.5em 0.7em; /* 10px 18px 18px 15px converted to em */
+}
+
+.title {
+  letter-spacing: .00625em;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding-top: 6px;
+  text-align: left;
+  word-break: break-word;
+  margin-left: 0.875em;
+
+}
+
+.move-right {
+  margin-left: 5.8px !important;
+}
+
+.note .note-footer {
+  display: flex;
+  margin-top: 0.9375em; /* 15px converted to em */
+  padding: 0;
+  justify-content: center;
+}
+
+.note-footer .material-icons-outlined {
+  color: #5f6368;
+}
+
+.note .check-circle {
+  position: absolute;
+  left: -0.625em;
+  top: -0.6em;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  border-radius: 0.1875em; /* 3px / 16px = 0.1875em */
+  padding: 0.3125em 0.6875em; /* 5px / 16px = 0.3125em, 11px / 16px = 0.6875em */
+  cursor: pointer;
+  font-size: 1rem; /* 16px */
+}
+
+.full-empty {
+  color: #5f6368;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.75rem;
+  padding: 1.875em 0.9375em 0 0.9375em;
+
+}
+
+.icons-container {
+  position: relative;
+  display: flex;
+  align-items: start;
+}
+
+.note:hover {
+  border: 0.0625em solid #dadce0; /* 1px converted to em */
+  box-shadow: #abb7b9 0 0.0625em 0.125em 0; /* 1px 2px converted to em */
+}
+
+.note:hover .icons {
+  visibility: visible;
+}
+
+.note:hover .check-circle {
+  visibility: visible;
+}
+
+.note .icons, .note .check-circle {
+  visibility: hidden;
+}
+
+.label-text {
+
+  height: 2.25em;
+  width: inherit;
+  cursor: default;
+  font-size: 0.875em;
+  padding: 0 0.75em;
+  margin: 3.5px;
+}
+
+.icon {
+  width: 2.125em; /* 34px converted to em */
+  height: 2.125em; /* 34px converted to em */
+  display: inline-block;
+  margin: 0.65em -0.1em; /* 8px converted to em */
+}
+
+.icons-area {
+  visibility: hidden;
+  position: relative;
+  top: 0.1em;
+  height: 2.125em;
+}
+
+.note:hover .icons-area {
+  visibility: visible;
+}
+
+.not-hover {
+  visibility: visible;
+}
+
+
+

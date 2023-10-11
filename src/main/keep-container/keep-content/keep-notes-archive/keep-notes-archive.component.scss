@@ -1,0 +1,33 @@
+.message {
+  color: #5f6368;
+  cursor: default;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.43rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.75rem;
+}
+
+.box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 20vh;
+  position: relative;
+  right: -6.9%;
+}
+
+.archive-icon {
+  -webkit-background-size: 7.5em 7.5em; /* 120px 120px converted to em */
+  background-size: 7.5em 7.5em; /* 120px 120px converted to em */
+  height: 7.5em; /* 120px converted to em */
+  margin: 1.25em; /* 20px converted to 1.25em */
+  opacity: 0.1;
+  width: 7.5em; /* 120px converted to em */
+
+}

@@ -1,0 +1,142 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 4em;
+  display: flex;
+  flex-direction: column;
+  color: #5f6368;
+  width: 5em;
+  overflow-x: hidden;
+  margin-top: 0.35em;
+}
+
+.sidebar .sidebar-item {
+  margin-left: 1.125em;
+  padding: 0.1875em 0;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-item .sidebar-text {
+  color: black;
+  font-size: 0.9rem;
+  margin-left: 1.25em;
+  width: 15.625em;
+}
+
+.sidebar-item:nth-child(1) {
+  margin-top: 0.3125em;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 17.5em;
+  transition: width 0.08s;
+
+
+  &.close {
+    width: 3em;
+  }
+
+  .menu {
+    position: relative;
+    left: -10%;
+  }
+
+  .item {
+    box-sizing: border-box;
+    border: 0.0625em solid transparent;
+    border-radius: 0 1.5625em 1.5625em 0;
+    color: black;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01785714em;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    width: 100%;
+    height: 3.3em;
+    overflow: hidden;
+    cursor: pointer;
+    padding-left: 1.95em;
+    padding-bottom: 1em;
+    transition: all 0.08s;
+
+    .text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-left: 2em;
+      text-align: center;
+      width: 71px !important;
+    }
+
+    &:hover:not(.background-color):not(.active) {
+      background-color: #eeeeee;
+    }
+  }
+}
+
+.background-color {
+  background-color: #FEEFC3;
+
+  .picture {
+    opacity: 1;
+  }
+}
+
+input:focus {
+  border-bottom: 0.0625em solid #5f6368;
+}
+
+input::placeholder {
+  color: #e8eaed;
+  opacity: 0.5;
+}
+
+.footer {
+  border-top: 1px solid #5f6368;
+  padding: 0.9375em 0.625em;
+  text-align: right;
+
+  div {
+    box-sizing: border-box;
+    color: #dadce0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: .01785714em;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    height: 2.25em;
+    padding: 0.5em 1.5em;
+    border-radius: 0.25em;
+    display: inline-block;
+  }
+
+  div:hover {
+    background-color: rgba(154, 160, 166, 0.039);
+    cursor: pointer;
+  }
+
+}
+
+.tooltip-text {
+  text-align: center;
+  margin-left: 2em;
+  font-size: medium;
+  width: 4.4em !important;
+
+}
+
+.picture {
+  color: black;
+  position: relative;
+  top: 6px;
+  right: -2px;
+  opacity: 0.71;
+}

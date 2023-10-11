@@ -1,0 +1,138 @@
+.note-label {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 3.465em !important;
+  min-height: 1.85em !important;
+  margin-right: 0.5em;
+  text-align: center;
+  padding: 0 0.7em;
+  background-color: #ebebeb;
+  border-radius: 0.9em;
+  margin-top: 0.4em;
+  font-size: small;
+  align-items: center;
+  width: auto;
+
+}
+
+.note-label:hover .note-label-text {
+  text-align: left;
+  position: relative;
+  left: -3px;
+
+}
+
+.note-label:hover .small-cross-icon {
+  text-align: right;
+  position: relative;
+  right: -6px;
+
+}
+
+.labels-text {
+  height: 1.0625em;
+  margin-left: 2px;
+}
+
+.centre-labels {
+  max-width: 14.875em;
+}
+
+.note-labels {
+
+  min-height: 2.5em;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: -1.5em;
+
+  .icons {
+    position: relative;
+    top: 2em !important;
+  }
+
+}
+
+.note-labels-modal {
+  width: 37.375em !important;
+  margin-bottom: -0.5em !important;
+}
+
+.small-cross-icon {
+  height: 0.85em;
+  width: 1em;
+  position: relative;
+  right: -0.15em;
+  top: 0.1em;
+}
+
+.small-cross-icon:hover {
+  cursor: pointer;
+  color: #202124 !important;
+  border-radius: 50% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background-color: lightgray !important;
+  z-index: 5004;
+
+  .note-label {
+    display: flex;
+    justify-content: flex-start;
+
+  }
+}
+
+.note-label-more {
+  display: -webkit-box;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  height: 18px;
+  -webkit-justify-content: center;
+  min-width: 1.8em;
+  min-height: 1.5em;
+  padding: 3px 5px;
+  margin-right: 0.5em;
+  background-color: #ebebeb;
+  border-radius: 0.2em;
+  font-size: small;
+  cursor: default;
+  margin-top: 0.4em;
+}
+
+.small-icon {
+  color: black;
+  font-size: 1.1rem;
+}
+
+.hover:hover {
+  background: #f1f3f4;
+  color: black;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-text {
+  position: absolute;
+  left: -150%;
+  top: 115%;
+  font-size: 0.78rem;
+  background-color: #323232;
+  color: white;
+  opacity: 0.8;
+  padding: 0.3125em;
+  white-space: nowrap;
+  border-radius: 0.3125em;
+  visibility: hidden;
+  z-index: 5004;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+

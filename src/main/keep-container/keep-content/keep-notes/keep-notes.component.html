@@ -1,0 +1,9 @@
+<app-keep-common-note [isArchiveNotePresent]="false" [isSearch]="false"></app-keep-common-note>
+
+<div *ngIf="(!(hasNotes() | async)) || (isArchiveNotes() | async)" class="box">
+  <img alt="SVG Image Description"
+       class="bulb"
+       src="assets/svg/bulb.svg">
+  <div class="message">Notes you add appear here</div>
+</div>
+

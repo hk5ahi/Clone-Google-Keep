@@ -1,0 +1,19 @@
+<div class="sidebar">
+  <div>
+    <div (click)="updateIsNotes()" [ngClass]="{'background-color':isNoteSelected}" class="item" routerLink="/home">
+      <div class="tooltip" routerLink="/archive">
+        <img alt="Notes Icon" class="picture" height="24" src="assets/svg/lamp.svg" width="24">
+        <span class="tooltip-text">Notes</span>
+      </div>
+    </div>
+    <!--  created separate svg instead of direct path-->
+    <div (click)="updateIsArchive()" [ngClass]="{'background-color':isArchiveSelected}" class="item"
+         routerLink="/archive">
+      <div class="tooltip">
+        <img alt="Archive Icon" class="picture" height="24" src="assets/svg/archive.svg" width="24">
+        <span class="tooltip-text">Archive</span>
+      </div>
+    </div>
+    <!--  created separate svg instead of direct path-->
+  </div>
+</div>
