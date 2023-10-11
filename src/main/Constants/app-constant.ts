@@ -19,5 +19,4 @@ export const AppConstants = {
   addNoteTextHeight: 46,
   addNoteTitleHeight: 56,
   addNoteTop: 40,
-
 };
